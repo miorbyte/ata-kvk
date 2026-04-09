@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezi-ATP | Pengira Amanah Tugas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(226, 232, 240, 0.8); }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto">
+        <div class="mb-8">
+            <h1 class="text-2xl font-semibold text-slate-800">Ezi-ATP</h1>
+            <p class="text-slate-500 text-sm">Sistem Pengiraan Amanah Tugas Pensyarah Automatik</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 mb-6 shadow-sm">
+            <h2 class="text-lg font-semibold mb-4 text-blue-600">1. Amanah Tugas Syarahan (Hakiki)</h2>
+            <div id="akademik-list" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                    <input type="text" placeholder="Kod Kursus" class="p-2 border rounded-lg text-sm">
+                    <input type="number" placeholder="Jam Teori" class="jam-teori p-2 border rounded-lg text-sm" oninput="hitungSemua()">
+                    <input type="number" placeholder="Jam Amali" class="jam-amali p-2 border rounded-lg text-sm" oninput="hitungSemua()">
+                </div>
+            </div>
+            <button onclick="tambahBarisAkademik()" class="mt-4 text-sm text-blue-500 hover:underline">+ Tambah Kursus</button>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 mb-6 shadow-sm">
+            <h2 class="text-lg font-semibold mb-4 text-purple-600">2. Tugas-Tugas Lain</h2>
+            <div id="sampingan-list" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-b pb-4">
+                    <input type="text" placeholder="Unit/Jawatankuasa" class="p-2 border rounded-lg text-sm">
+                    <select class="jawatan-select p-2 border rounded-lg text-sm" onchange="hitungSemua()">
+                        <option value="0">Pilih Jawatan</option>
+                        <option value="9">Ketua Jabatan (9)</option>
+                        <option value="7">Ketua Unit Vok/Warden (7)</option>
+                        <option value="5">Ketua Unit/Peg. Aset (5)</option>
+                        <option value="4">Penyelaras/Mentor (4)</option>
+                        <option value="3">Setiausaha/Pen. Warden (3)</option>
+                        <option value="2">Bendahari/Pen. S/U (2)</option>
+                        <option value="1">Ahli Jawatankuasa/AJK (1)</option>
+                    </select>
+                </div>
+            </div>
+            <button onclick="tambahBarisSampingan()" class="mt-4 text-sm text-purple-500 hover:underline">+ Tambah Tugas</button>
+        </div>
+
+        <div class="sticky bottom-6 glass-card rounded-2xl p-6 shadow-xl border-t-4 border-blue-500">
+            <div class="flex justify-between items-center">
+                <div>
+                    <p class="text-xs text-slate-400 uppercase tracking-wider font-bold">Jumlah ATP Keseluruhan</p>
+                    <h3 id="total-atp" class="text-4xl font-bold text-slate-800">0.0</h3>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-slate-500">Had Maksimum: 50.0 [cite: 10]</p>
+                    <p id="status-msg" class="text-xs font-semibold"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function tambahBarisAkademik() {
+            const html = `<div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-b pb-4">
+                <input type="text" placeholder="Kod Kursus" class="p-2 border rounded-lg text-sm">
+                <input type="number" placeholder="Jam Teori" class="jam-teori p-2 border rounded-lg text-sm" oninput="hitungSemua()">
+                <input type="number" placeholder="Jam Amali" class="jam-amali p-2 border rounded-lg text-sm" oninput="hitungSemua()">
+            </div>`;
+            document.getElementById('akademik-list').insertAdjacentHTML('beforeend', html);
+        }
+
+        function tambahBarisSampingan() {
+            const html = `<div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-b pb-4">
+                <input type="text" placeholder="Unit/Jawatankuasa" class="p-2 border rounded-lg text-sm">
+                <select class="jawatan-select p-2 border rounded-lg text-sm" onchange="hitungSemua()">
+                    <option value="0">Pilih Jawatan</option>
+                    <option value="9">Ketua Jabatan (9)</option>
+                    <option value="7">Ketua Unit Vok/Warden (7)</option>
+                    <option value="5">Ketua Unit/Peg. Aset (5)</option>
+                    <option value="4">Penyelaras/Mentor (4)</option>
+                    <option value="3">Setiausaha/Pen. Warden (3)</option>
+                    <option value="2">Bendahari/Pen. S/U (2)</option>
+                    <option value="1">Ahli Jawatankuasa/AJK (1)</option>
+                </select>
+            </div>`;
+            document.getElementById('sampingan-list').insertAdjacentHTML('beforeend', html);
+        }
+
+        function hitungSemua() {
+            let totalAkademik = 0;
+            let totalSampingan = 0;
+
+            // Kira Akademik: (Teori + Amali) * 1.5 
+            const teoriInputs = document.querySelectorAll('.jam-teori');
+            const amaliInputs = document.querySelectorAll('.jam-amali');
+            
+            for (let i = 0; i < teoriInputs.length; i++) {
+                let t = parseFloat(teoriInputs[i].value) || 0;
+                let a = parseFloat(amaliInputs[i].value) || 0;
+                totalAkademik += (t + a) * 1.5;
+            }
+
+            // Kira Sampingan: Berdasarkan dropdown [cite: 3]
+            const jawatanSelects = document.querySelectorAll('.jawatan-select');
+            jawatanSelects.forEach(select => {
+                totalSampingan += parseFloat(select.value) || 0;
+            });
+
+            const jumlahBesar = totalAkademik + totalSampingan;
+            document.getElementById('total-atp').innerText = jumlahBesar.toFixed(1);
+
+            // Status had
+            const msg = document.getElementById('status-msg');
+            if (jumlahBesar > 50) {
+                msg.innerText = "MELEBIHI HAD";
+                msg.className = "text-xs font-semibold text-red-500";
+            } else {
+                msg.innerText = "DALAM HAD";
+                msg.className = "text-xs font-semibold text-green-500";
+            }
+        }
+    </script>
+</body>
+</html>
