@@ -3,195 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ezi-ATP | Dark Edition</title>
+    <title>Ezi-ATP | Gold & Dark Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f1f5f9; }
-        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(71, 85, 105, 0.3); }
-        input, select { background-color: #1e293b !important; color: #f1f5f9 !important; border: 1px solid #334155 !important; }
+        
+        /* Gaya Khas Emas Gelap & Kotak Putih */
+        .gold-title { color: #b8860b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .input-box { background-color: #ffffff !important; color: #000000 !important; border: 2px solid #334155; font-weight: 500; }
+        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(184, 134, 11, 0.3); }
         
         @media print {
             body { background-color: white; color: black; }
             .no-print, button { display: none !important; }
-            .glass-card { border: 1px solid #ccc; background: none; box-shadow: none; }
-            input, select { border: none !important; background: none !important; color: black !important; -webkit-appearance: none; }
-            .sticky { position: static !important; }
+            .gold-title { color: black; border-bottom: 1px solid black; }
+            .input-box { border: 1px solid #000 !important; }
+            .glass-card { border: none; background: none; }
         }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
-    <div class="max-w-4xl mx-auto">
-        <div class="flex justify-between items-start mb-8 no-print">
+    <div class="max-w-5xl mx-auto">
+        <div class="flex justify-between items-center mb-10 no-print">
             <div>
-                <h1 class="text-2xl font-semibold text-blue-400">Ezi-ATP</h1>
-                <p class="text-slate-400 text-sm">Sistem Pengiraan Amanah Tugas Automatik</p>
+                <h1 class="text-3xl font-bold text-white">Miorbyte <span style="color: #b8860b;">Ezi-ATP</span></h1>
+                <p class="text-slate-400 text-sm">Pengiraan Amanah Tugas Pensyarah & Tugas Sampingan</p>
             </div>
-            <div class="space-x-2">
-                <button onclick="saveToWeb()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition">Simpan Data</button>
-                <button onclick="window.print()" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm transition">Cetak PDF</button>
-            </div>
-        </div>
-
-        <div class="glass-card rounded-2xl p-6 mb-6 shadow-sm">
-            <h2 class="text-lg font-semibold mb-4 text-blue-400 border-b border-slate-700 pb-2">Maklumat Pensyarah</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-xs text-slate-400 mb-1 uppercase">Nama Penuh</label>
-                    <input type="text" id="nama" class="w-full p-2 rounded-lg text-sm" placeholder="Contoh: NOOR AZIRA BT HAMZAH [cite: 5, 12]">
-                </div>
-                <div>
-                    <label class="block text-xs text-slate-400 mb-1 uppercase">Jabatan</label>
-                    <input type="text" id="jabatan" class="w-full p-2 rounded-lg text-sm" placeholder="Contoh: PERNIAGAAN [cite: 5, 13]">
-                </div>
-                <div>
-                    <label class="block text-xs text-slate-400 mb-1 uppercase">Semester/Tahun</label>
-                    <input type="text" id="semester" class="w-full p-2 rounded-lg text-sm" placeholder="Contoh: JAN-DISEMBER 2025 [cite: 8]">
-                </div>
-                <div>
-                    <label class="block text-xs text-slate-400 mb-1 uppercase">Unit</label>
-                    <input type="text" id="unit" class="w-full p-2 rounded-lg text-sm" placeholder="Contoh: PENGURUSAN PERNIAGAAN [cite: 8]">
-                </div>
+            <div class="flex gap-3">
+                <button onclick="saveData()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-full text-sm font-semibold transition">Simpan</button>
+                <button onclick="window.print()" class="bg-slate-100 hover:bg-white text-slate-900 px-5 py-2 rounded-full text-sm font-semibold transition">Cetak</button>
             </div>
         </div>
 
-        <div class="glass-card rounded-2xl p-6 mb-6 shadow-sm">
-            <h2 class="text-lg font-semibold mb-4 text-emerald-400 border-b border-slate-700 pb-2">Amanah Tugas Syarahan (Hakiki)</h2>
+        <div class="glass-card rounded-3xl p-8 mb-8 shadow-2xl">
+            <h2 class="gold-title text-sm mb-6 flex items-center"><span class="mr-2">●</span> Maklumat Pensyarah</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="gold-title text-[11px] mb-2 block">Nama Penuh</label>
+                    <input type="text" id="nama" class="input-box w-full p-3 rounded-xl shadow-inner" placeholder="NOOR AZIRA BT HAMZAH">
+                </div>
+                <div>
+                    <label class="gold-title text-[11px] mb-2 block">Jabatan / Program</label>
+                    <input type="text" id="jabatan" class="input-box w-full p-3 rounded-xl shadow-inner" placeholder="PERNIAGAAN">
+                </div>
+                <div>
+                    <label class="gold-title text-[11px] mb-2 block">Sesi / Semester</label>
+                    <input type="text" id="semester" class="input-box w-full p-3 rounded-xl shadow-inner" placeholder="JAN-DISEMBER 2025">
+                </div>
+                <div>
+                    <label class="gold-title text-[11px] mb-2 block">Unit Khusus</label>
+                    <input type="text" id="unit" class="input-box w-full p-3 rounded-xl shadow-inner" placeholder="PENGURUSAN PERNIAGAAN">
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 mb-8 shadow-2xl">
+            <h2 class="gold-title text-sm mb-6 flex items-center"><span class="mr-2">●</span> Amanah Tugas Syarahan (Hakiki)</h2>
             <div id="akademik-list" class="space-y-4">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pb-4 items-end border-b border-slate-800">
-                    <div class="col-span-2 md:col-span-1">
-                        <label class="text-[10px] text-slate-500 uppercase">Kod/Nama Kursus</label>
-                        <input type="text" class="kursus-nama w-full p-2 rounded-lg text-sm">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pb-6 border-b border-slate-700">
+                    <div class="md:col-span-2">
+                        <label class="gold-title text-[10px] mb-1 block">Kod & Nama Kursus</label>
+                        <input type="text" class="input-box w-full p-3 rounded-xl" placeholder="Contoh: CBF 4114">
                     </div>
                     <div>
-                        <label class="text-[10px] text-slate-500 uppercase">Jam Teori </label>
-                        <input type="number" class="jam-teori w-full p-2 rounded-lg text-sm" oninput="hitungSemua()">
+                        <label class="gold-title text-[10px] mb-1 block">Jam Teori</label>
+                        <input type="number" class="jam-teori input-box w-full p-3 rounded-xl text-center" oninput="hitungTotal()" placeholder="0">
                     </div>
                     <div>
-                        <label class="text-[10px] text-slate-500 uppercase">Jam Amali </label>
-                        <input type="number" class="jam-amali w-full p-2 rounded-lg text-sm" oninput="hitungSemua()">
+                        <label class="gold-title text-[10px] mb-1 block">Jam Amali</label>
+                        <input type="number" class="jam-amali input-box w-full p-3 rounded-xl text-center" oninput="hitungTotal()" placeholder="0">
                     </div>
                 </div>
             </div>
-            <button onclick="tambahBarisAkademik()" class="mt-4 text-sm text-emerald-400 hover:text-emerald-300 no-print">+ Tambah Kursus</button>
+            <button onclick="tambahAkademik()" class="mt-6 text-sm font-bold text-blue-400 hover:text-blue-300 no-print">+ TAMBAH KURSUS</button>
         </div>
 
-        <div class="glass-card rounded-2xl p-6 mb-6 shadow-sm">
-            <h2 class="text-lg font-semibold mb-4 text-amber-400 border-b border-slate-700 pb-2">Tugas-Tugas Lain [cite: 1, 9]</h2>
+        <div class="glass-card rounded-3xl p-8 mb-8 shadow-2xl">
+            <h2 class="gold-title text-sm mb-6 flex items-center"><span class="mr-2">●</span> Tugas-Tugas Lain</h2>
             <div id="sampingan-list" class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pb-4 border-b border-slate-800">
-                    <input type="text" placeholder="Unit/Jawatankuasa" class="tugas-nama p-2 rounded-lg text-sm">
-                    <select class="jawatan-select p-2 rounded-lg text-sm" onchange="hitungSemua()">
-                        <option value="0">Pilih Jawatan [cite: 3]</option>
-                        <option value="9">Ketua Jabatan (9 ATP)</option>
-                        <option value="7">Ketua Unit Vok/Warden (7 ATP)</option>
-                        <option value="5">Ketua Unit/Peg. Aset (5 ATP)</option>
-                        <option value="4">Penyelaras/Mentor (4 ATP)</option>
-                        <option value="3">Setiausaha/Pen. Warden (3 ATP)</option>
-                        <option value="2">Bendahari/Pen. S/U (2 ATP)</option>
-                        <option value="1">Ahli Jawatankuasa/AJK (1 ATP)</option>
-                    </select>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pb-6 border-b border-slate-700">
+                    <div>
+                        <label class="gold-title text-[10px] mb-1 block">Unit / Jawatankuasa</label>
+                        <input type="text" class="input-box w-full p-3 rounded-xl" placeholder="Nama Jawatankuasa">
+                    </div>
+                    <div>
+                        <label class="gold-title text-[10px] mb-1 block">Jawatan (Mata Kredit)</label>
+                        <select class="jawatan-select input-box w-full p-3 rounded-xl" onchange="hitungTotal()">
+                            <option value="0">Sila Pilih</option>
+                            <option value="9">Ketua Jabatan (9)</option>
+                            <option value="7">Ketua Unit Vok/Warden (7)</option>
+                            <option value="5">Ketua Unit/Peg. Aset (5)</option>
+                            <option value="4">Penyelaras/Mentor (4)</option>
+                            <option value="3">Setiausaha (3)</option>
+                            <option value="2">Bendahari/Pen. S/U (2)</option>
+                            <option value="1">Ahli Jawatankuasa/AJK (1)</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <button onclick="tambahBarisSampingan()" class="mt-4 text-sm text-amber-400 hover:text-amber-300 no-print">+ Tambah Tugas</button>
+            <button onclick="tambahSampingan()" class="mt-6 text-sm font-bold text-amber-500 hover:text-amber-400 no-print">+ TAMBAH JAWATANKUASA</button>
         </div>
 
-        <div class="sticky bottom-6 glass-card rounded-2xl p-6 shadow-2xl border-t-4 border-blue-500">
-            <div class="flex justify-between items-center">
-                <div>
-                    <p class="text-xs text-slate-400 uppercase tracking-wider font-bold">Jumlah ATP Keseluruhan [cite: 10]</p>
-                    <h3 id="total-atp" class="text-4xl font-bold text-white">0.0</h3>
+        <div class="sticky bottom-6 glass-card rounded-3xl p-8 shadow-2xl border-l-8 border-gold" style="border-left-color: #b8860b;">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-center md:text-left">
+                    <p class="gold-title text-xs">Jumlah Keseluruhan ATP</p>
+                    <h3 id="display-total" class="text-6xl font-black text-white">0.0</h3>
                 </div>
-                <div class="text-right">
-                    <p class="text-sm text-slate-400 italic">Had Maksimum: 50.0 [cite: 10]</p>
-                    <p id="status-msg" class="text-xs font-semibold mt-1"></p>
+                <div class="text-center md:text-right">
+                    <div id="status-pill" class="px-6 py-2 rounded-full text-xs font-black uppercase mb-2 bg-slate-800 tracking-widest">
+                        Menunggu Input
+                    </div>
+                    <p class="text-slate-400 text-[10px]">Had Maksimum: 50.0 Jam Seminggu</p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Memuatkan data yang disimpan semasa page refresh
-        window.onload = function() {
-            if(localStorage.getItem('atpData')) {
-                const data = JSON.parse(localStorage.getItem('atpData'));
-                document.getElementById('nama').value = data.nama || '';
-                document.getElementById('jabatan').value = data.jabatan || '';
-                document.getElementById('semester').value = data.semester || '';
-                document.getElementById('unit').value = data.unit || '';
-                // Anda boleh menambah logik untuk load baris dinamik jika perlu
-                hitungSemua();
-            }
-        };
+        function tambahAkademik() {
+            const row = `<div class="grid grid-cols-1 md:grid-cols-4 gap-4 pb-6 border-b border-slate-700 mt-4 animate-pulse">
+                <div class="md:col-span-2"><input type="text" class="input-box w-full p-3 rounded-xl"></div>
+                <div><input type="number" class="jam-teori input-box w-full p-3 rounded-xl text-center" oninput="hitungTotal()"></div>
+                <div><input type="number" class="jam-amali input-box w-full p-3 rounded-xl text-center" oninput="hitungTotal()"></div>
+            </div>`;
+            document.getElementById('akademik-list').insertAdjacentHTML('beforeend', row);
+        }
 
-        function saveToWeb() {
-            const data = {
+        function tambahSampingan() {
+            const row = `<div class="grid grid-cols-1 md:grid-cols-2 gap-4 pb-6 border-b border-slate-700 mt-4 animate-pulse">
+                <input type="text" class="input-box w-full p-3 rounded-xl">
+                <select class="jawatan-select input-box w-full p-3 rounded-xl" onchange="hitungTotal()">
+                    <option value="0">Sila Pilih</option>
+                    <option value="9">Ketua Jabatan (9)</option>
+                    <option value="7">Ketua Unit Vok/Warden (7)</option>
+                    <option value="5">Ketua Unit/Peg. Aset (5)</option>
+                    <option value="4">Penyelaras/Mentor (4)</option>
+                    <option value="3">Setiausaha (3)</option>
+                    <option value="2">Bendahari/Pen. S/U (2)</option>
+                    <option value="1">Ahli Jawatankuasa/AJK (1)</option>
+                </select>
+            </div>`;
+            document.getElementById('sampingan-list').insertAdjacentHTML('beforeend', row);
+        }
+
+        function hitungTotal() {
+            let akademikTotal = 0;
+            let sampinganTotal = 0;
+
+            // Formula: (Teori + Amali) * 1.5 
+            const teori = document.querySelectorAll('.jam-teori');
+            const amali = document.querySelectorAll('.jam-amali');
+            teori.forEach((t, i) => {
+                let valT = parseFloat(t.value) || 0;
+                let valA = parseFloat(amali[i].value) || 0;
+                akademikTotal += (valT + valA) * 1.5;
+            });
+
+            // Mata Kredit Sampingan [cite: 3, 9]
+            document.querySelectorAll('.jawatan-select').forEach(sel => {
+                sampinganTotal += parseFloat(sel.value) || 0;
+            });
+
+            const grandTotal = akademikTotal + sampinganTotal;
+            document.getElementById('display-total').innerText = grandTotal.toFixed(1);
+
+            const pill = document.getElementById('status-pill');
+            if (grandTotal > 50) {
+                pill.innerText = "Amaran: Melebihi Had";
+                pill.className = "px-6 py-2 rounded-full text-xs font-black uppercase mb-2 bg-red-600 text-white tracking-widest";
+            } else if (grandTotal > 0) {
+                pill.innerText = "Status: Optimum";
+                pill.className = "px-6 py-2 rounded-full text-xs font-black uppercase mb-2 bg-emerald-600 text-white tracking-widest";
+            }
+        }
+
+        function saveData() {
+            const profile = {
                 nama: document.getElementById('nama').value,
                 jabatan: document.getElementById('jabatan').value,
                 semester: document.getElementById('semester').value,
                 unit: document.getElementById('unit').value
             };
-            localStorage.setItem('atpData', JSON.stringify(data));
-            alert("Maklumat staf telah disimpan dalam pelayar!");
+            localStorage.setItem('profileEziATP', JSON.stringify(profile));
+            alert("Maklumat profil berjaya disimpan!");
         }
 
-        function tambahBarisAkademik() {
-            const html = `<div class="grid grid-cols-2 md:grid-cols-4 gap-4 pb-4 items-end border-b border-slate-800">
-                <div class="col-span-2 md:col-span-1"><input type="text" class="kursus-nama w-full p-2 rounded-lg text-sm"></div>
-                <div><input type="number" class="jam-teori w-full p-2 rounded-lg text-sm" oninput="hitungSemua()"></div>
-                <div><input type="number" class="jam-amali w-full p-2 rounded-lg text-sm" oninput="hitungSemua()"></div>
-            </div>`;
-            document.getElementById('akademik-list').insertAdjacentHTML('beforeend', html);
-        }
-
-        function tambahBarisSampingan() {
-            const html = `<div class="grid grid-cols-1 md:grid-cols-2 gap-4 pb-4 border-b border-slate-800">
-                <input type="text" placeholder="Unit/Jawatankuasa" class="tugas-nama p-2 rounded-lg text-sm">
-                <select class="jawatan-select p-2 rounded-lg text-sm" onchange="hitungSemua()">
-                    <option value="0">Pilih Jawatan</option>
-                    <option value="9">Ketua Jabatan (9)</option>
-                    <option value="7">Ketua Unit Vok/Warden (7)</option>
-                    <option value="5">Ketua Unit/Peg. Aset (5)</option>
-                    <option value="4">Penyelaras/Mentor (4)</option>
-                    <option value="3">Setiausaha/Pen. Warden (3)</option>
-                    <option value="2">Bendahari/Pen. S/U (2)</option>
-                    <option value="1">Ahli Jawatankuasa/AJK (1)</option>
-                </select>
-            </div>`;
-            document.getElementById('sampingan-list').insertAdjacentHTML('beforeend', html);
-        }
-
-        function hitungSemua() {
-            let totalAkademik = 0;
-            let totalSampingan = 0;
-
-            // Logik: (Teori + Amali) * 1.5 
-            const teoriInputs = document.querySelectorAll('.jam-teori');
-            const amaliInputs = document.querySelectorAll('.jam-amali');
-            for (let i = 0; i < teoriInputs.length; i++) {
-                let t = parseFloat(teoriInputs[i].value) || 0;
-                let a = parseFloat(amaliInputs[i].value) || 0;
-                totalAkademik += (t + a) * 1.5;
+        window.onload = () => {
+            const saved = localStorage.getItem('profileEziATP');
+            if(saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('nama').value = data.nama || '';
+                document.getElementById('jabatan').value = data.jabatan || '';
+                document.getElementById('semester').value = data.semester || '';
+                document.getElementById('unit').value = data.unit || '';
             }
-
-            // Logik: Nilai tetap jawatan [cite: 3, 9]
-            document.querySelectorAll('.jawatan-select').forEach(select => {
-                totalSampingan += parseFloat(select.value) || 0;
-            });
-
-            const jumlahBesar = totalAkademik + totalSampingan;
-            document.getElementById('total-atp').innerText = jumlahBesar.toFixed(1);
-
-            const msg = document.getElementById('status-msg');
-            if (jumlahBesar > 50) {
-                msg.innerText = "MELEBIHI HAD MAKSIMUM [cite: 10]";
-                msg.className = "text-xs font-semibold text-red-400 mt-1";
-            } else {
-                msg.innerText = "BEBAN TUGAS OPTIMUM";
-                msg.className = "text-xs font-semibold text-emerald-400 mt-1";
-            }
-        }
+        };
     </script>
 </body>
 </html>
