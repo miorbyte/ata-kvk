@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miorbyte Ezi-ATP | Pengurusan Amanah Tugas</title>
+    <title>Miorbyte Ezi-ATP | Bright Gold Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f1f5f9; }
         
-        /* Tema Premium Gold & White */
-        .gold-title { color: #b8860b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-        .input-box { background-color: #ffffff !important; color: #000000 !important; border: 2px solid #334155; }
-        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(184, 134, 11, 0.3); }
+        /* Tema Bright Gold & White */
+        .gold-title { color: #FFD700; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; text-shadow: 0px 0px 8px rgba(255, 215, 0, 0.3); }
+        .input-box { background-color: #ffffff !important; color: #000000 !important; border: 2px solid #FFD700; font-weight: 600; }
+        .glass-card { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 215, 0, 0.4); box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5); }
         
         @media print {
             body { background-color: white; color: black; padding: 0; }
             .no-print { display: none !important; }
             .print-area { display: block !important; padding: 20px; color: black !important; }
-            .glass-card { border: none; background: none; backdrop-filter: none; padding: 0; margin-bottom: 20px; }
+            .glass-card { border: none; background: none; backdrop-filter: none; padding: 0; margin-bottom: 20px; box-shadow: none; }
             .input-box { border: none !important; padding: 0 !important; font-weight: bold; background: none !important; }
-            .gold-title { color: black; text-decoration: underline; font-size: 10pt; }
+            .gold-title { color: black; text-decoration: underline; font-size: 10pt; text-shadow: none; }
             table { width: 100%; border-collapse: collapse; margin-top: 10px; }
             th, td { border: 1px solid black; padding: 6px; text-align: left; font-size: 10pt; color: black !important; }
             .sticky { position: static !important; }
@@ -32,81 +32,78 @@
     <div class="max-w-6xl mx-auto print-area">
         <div class="no-print flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
             <div>
-                <h1 class="text-3xl font-extrabold text-white italic">Miorbyte <span style="color: #b8860b;">Ezi-ATP</span></h1>
+                <h1 class="text-3xl font-extrabold text-white italic">Miorbyte <span style="color: #FFD700;">Ezi-ATP</span></h1>
                 <p class="text-slate-400 text-sm tracking-widest uppercase">Sistem Amanah Tugas Pensyarah</p>
             </div>
             <div class="flex flex-wrap gap-2">
                 <button onclick="clearForm()" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-xs font-bold transition">BORANG BARU</button>
                 <button onclick="saveStaff()" class="bg-emerald-600 hover:bg-emerald-700 px-4 py-2 rounded-lg text-xs font-bold transition">SIMPAN REKOD</button>
                 <button onclick="showStaffList()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-xs font-bold transition">SENARAI STAF</button>
-                <button onclick="window.print()" class="bg-slate-100 text-slate-900 px-4 py-2 rounded-lg text-xs font-bold transition">CETAK PDF</button>
+                <button onclick="window.print()" class="bg-yellow-400 hover:bg-yellow-300 text-slate-900 px-4 py-2 rounded-lg text-xs font-bold transition shadow-lg shadow-yellow-400/20">CETAK PDF</button>
             </div>
         </div>
 
         <div id="main-interface">
-            <div class="glass-card rounded-3xl p-8 mb-6 shadow-2xl">
-                <h2 class="gold-title text-sm mb-6 flex items-center">MAKLUMAT AMANAH TUGAS PENSYARAH</h2>
+            <div class="glass-card rounded-3xl p-8 mb-6">
+                <h2 class="gold-title text-sm mb-6 flex items-center"><span class="mr-2 text-xl">✦</span> MAKLUMAT AMANAH TUGAS PENSYARAH</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div><label class="gold-title text-[10px] mb-1 block">NAMA</label><input type="text" id="nama" class="input-box w-full p-2 rounded-lg text-sm" placeholder="Nama Pensyarah"></div>
-                    <div><label class="gold-title text-[10px] mb-1 block">JABATAN</label><input type="text" id="jabatan" class="input-box w-full p-2 rounded-lg text-sm" placeholder="Jabatan"></div>
-                    <div><label class="gold-title text-[10px] mb-1 block">SESI/BULAN</label><input type="text" id="bulan" class="input-box w-full p-2 rounded-lg text-sm" placeholder="Contoh: Jan-Dis 2025"></div>
-                    <div><label class="gold-title text-[10px] mb-1 block">UNIT</label><input type="text" id="unit" class="input-box w-full p-2 rounded-lg text-sm" placeholder="Unit Khusus"></div>
+                    <div><label class="gold-title text-[10px] mb-1 block">NAMA</label><input type="text" id="nama" class="input-box w-full p-2 rounded-lg text-sm" placeholder="Contoh: NOOR AZIRA BT HAMZAH"></div>
+                    <div><label class="gold-title text-[10px] mb-1 block">JABATAN</label><input type="text" id="jabatan" class="input-box w-full p-2 rounded-lg text-sm" placeholder="Contoh: PERNIAGAAN"></div>
+                    <div><label class="gold-title text-[10px] mb-1 block">SESI/BULAN</label><input type="text" id="bulan" class="input-box w-full p-2 rounded-lg text-sm" placeholder="JAN-DISEMBER 2025"></div>
+                    <div><label class="gold-title text-[10px] mb-1 block">UNIT</label><input type="text" id="unit" class="input-box w-full p-2 rounded-lg text-sm" placeholder="PENGURUSAN PERNIAGAAN"></div>
                 </div>
             </div>
 
-            <div class="glass-card rounded-3xl p-8 mb-6 overflow-x-auto shadow-2xl">
+            <div class="glass-card rounded-3xl p-8 mb-6 overflow-x-auto">
                 <h2 class="gold-title text-sm mb-6">AMANAH TUGAS SYARAHAN (HAKIKI)</h2>
                 <table class="w-full text-sm">
                     <thead>
-                        <tr class="text-slate-400 border-b border-slate-700">
+                        <tr class="text-yellow-200 border-b border-slate-700">
                             <th class="py-2 text-left">KOD & NAMA KURSUS</th>
                             <th class="py-2 text-center">JAM TEORI</th>
                             <th class="py-2 text-center">JAM AMALI</th>
                             <th class="py-2 text-right">JUMLAH ATP</th>
                         </tr>
                     </thead>
-                    <tbody id="akademik-rows">
-                        </tbody>
+                    <tbody id="akademik-rows"></tbody>
                 </table>
-                <button onclick="addRowAkademik()" class="mt-4 text-xs font-bold text-blue-400 no-print hover:underline">+ TAMBAH KURSUS</button>
+                <button onclick="addRowAkademik()" class="mt-4 text-xs font-bold text-yellow-400 no-print hover:text-yellow-200 uppercase tracking-tighter tracking-widest">+ Tambah Kursus</button>
             </div>
 
-            <div class="glass-card rounded-3xl p-8 mb-6 overflow-x-auto shadow-2xl">
+            <div class="glass-card rounded-3xl p-8 mb-6 overflow-x-auto">
                 <h2 class="gold-title text-sm mb-6">TUGAS-TUGAS LAIN</h2>
                 <table class="w-full text-sm">
                     <thead>
-                        <tr class="text-slate-400 border-b border-slate-700">
+                        <tr class="text-yellow-200 border-b border-slate-700">
                             <th class="py-2 text-left">UNIT / JAWATANKUASA</th>
                             <th class="py-2 text-left">BIDANG TUGAS (MATA)</th>
                             <th class="py-2 text-center">JUMLAH ATP</th>
                         </tr>
                     </thead>
-                    <tbody id="sampingan-rows">
-                        </tbody>
+                    <tbody id="sampingan-rows"></tbody>
                 </table>
-                <button onclick="addRowSampingan()" class="mt-4 text-xs font-bold text-amber-500 no-print hover:underline">+ TAMBAH JAWATANKUASA</button>
+                <button onclick="addRowSampingan()" class="mt-4 text-xs font-bold text-yellow-400 no-print hover:text-yellow-200 uppercase tracking-widest">+ Tambah Jawatankuasa</button>
             </div>
 
-            <div class="sticky bottom-6 glass-card rounded-3xl p-8 flex justify-between items-center border-l-8 border-gold shadow-2xl" style="border-left-color: #b8860b;">
+            <div class="sticky bottom-6 glass-card rounded-3xl p-8 flex justify-between items-center border-l-8 border-yellow-400 shadow-2xl shadow-yellow-400/10">
                 <div>
                     <p class="gold-title text-[10px]">JUMLAH ATP KESELURUHAN (JAM/MINGGU)</p>
-                    <h3 id="grand-total" class="text-5xl font-black">0.0</h3>
+                    <h3 id="grand-total" class="text-6xl font-black text-white">0.0</h3>
                 </div>
                 <div class="text-right text-[10px] text-slate-400">
                     <p>HAD MAKSIMUM: 50 JAM</p>
-                    <div id="status-box" class="mt-2 px-3 py-1 rounded bg-slate-800 text-white font-bold uppercase tracking-widest">Sedia</div>
+                    <div id="status-box" class="mt-2 px-6 py-2 rounded-full bg-slate-800 text-yellow-400 border border-yellow-400 font-bold uppercase tracking-widest">Sedia</div>
                 </div>
             </div>
         </div>
 
         <div id="staff-modal" class="hidden fixed inset-0 bg-black bg-opacity-90 z-50 p-8 no-print">
-            <div class="max-w-4xl mx-auto bg-slate-800 rounded-3xl p-8 shadow-2xl">
+            <div class="max-w-4xl mx-auto bg-slate-800 rounded-3xl p-8 shadow-2xl border border-yellow-400/30">
                 <div class="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
-                    <h2 class="text-2xl font-bold text-blue-400 uppercase">Senarai Rekod Pensyarah</h2>
+                    <h2 class="text-2xl font-bold text-yellow-400 uppercase tracking-wider">Rekod Pensyarah</h2>
                     <button onclick="closeModal()" class="text-slate-400 hover:text-white font-bold">TUTUP</button>
                 </div>
-                <div id="staff-list-container" class="space-y-3 max-h-[60vh] overflow-y-auto pr-2">
-                    </div>
+                <div id="staff-list-container" class="space-y-3 max-h-[60vh] overflow-y-auto pr-2"></div>
             </div>
         </div>
     </div>
@@ -120,7 +117,7 @@
                     <td class="py-3"><input type="text" class="input-box w-full p-2 rounded text-xs c-name" value="${d.kod}"></td>
                     <td class="py-3"><input type="number" class="input-box w-20 p-2 rounded text-xs text-center t-val" value="${d.t}" oninput="calculate()"></td>
                     <td class="py-3"><input type="number" class="input-box w-20 p-2 rounded text-xs text-center a-val" value="${d.a}" oninput="calculate()"></td>
-                    <td class="py-3 text-right font-bold row-atp">0.0</td>
+                    <td class="py-3 text-right font-bold row-atp text-white">0.0</td>
                 </tr>`;
             document.getElementById('akademik-rows').insertAdjacentHTML('beforeend', html);
             calculate();
@@ -141,7 +138,7 @@
                             <option value="1" ${d.v==1?'selected':''}>Ahli Jawatankuasa / AJK (1)</option>
                         </select>
                     </td>
-                    <td class="py-3 text-center font-bold s-val">${d.v}</td>
+                    <td class="py-3 text-center font-bold s-val text-white">${d.v}</td>
                 </tr>`;
             document.getElementById('sampingan-rows').insertAdjacentHTML('beforeend', html);
             calculate();
@@ -149,29 +146,27 @@
 
         function calculate() {
             let grandTotal = 0;
-            // Kira Akademik: (T + A) * 1.5
             document.querySelectorAll('#akademik-rows tr').forEach(row => {
                 let t = parseFloat(row.querySelector('.t-val').value) || 0;
                 let a = parseFloat(row.querySelector('.a-val').value) || 0;
-                let res = (t + a) * 1.5;
+                let res = (t + a) * 1.5; // Menggunakan formula (Teori + Amali) * 1.5 [cite: 7]
                 row.querySelector('.row-atp').innerText = res.toFixed(1);
                 grandTotal += res;
             });
-            // Kira Sampingan
             document.querySelectorAll('#sampingan-rows tr').forEach(row => {
-                let val = parseFloat(row.querySelector('.s-select').value) || 0;
+                let val = parseFloat(row.querySelector('.s-select').value) || 0; // Menggunakan nilai mata jawatan [cite: 3]
                 row.querySelector('.s-val').innerText = val.toFixed(1);
                 grandTotal += val;
             });
             document.getElementById('grand-total').innerText = grandTotal.toFixed(1);
             
             const status = document.getElementById('status-box');
-            if(grandTotal > 50) {
+            if(grandTotal > 50) { // Berdasarkan had maksimum 50 jam [cite: 10]
                 status.innerText = "Melebihi Had";
-                status.className = "mt-2 px-3 py-1 rounded bg-red-600 text-white font-bold uppercase tracking-widest";
+                status.className = "mt-2 px-6 py-2 rounded-full bg-red-600 text-white font-bold uppercase tracking-widest shadow-lg shadow-red-600/30";
             } else {
                 status.innerText = "Optimum";
-                status.className = "mt-2 px-3 py-1 rounded bg-emerald-600 text-white font-bold uppercase tracking-widest";
+                status.className = "mt-2 px-6 py-2 rounded-full bg-emerald-600 text-white font-bold uppercase tracking-widest shadow-lg shadow-emerald-600/30";
             }
         }
 
@@ -205,14 +200,14 @@
             container.innerHTML = database.length === 0 ? '<p class="text-slate-500">Tiada rekod ditemui.</p>' : '';
             database.forEach(s => {
                 container.innerHTML += `
-                    <div class="flex justify-between items-center bg-slate-700 p-4 rounded-2xl hover:bg-slate-600 transition border border-slate-600">
+                    <div class="flex justify-between items-center bg-slate-700/50 p-4 rounded-2xl hover:bg-slate-600 transition border border-yellow-400/20">
                         <div>
-                            <p class="font-bold text-white text-lg">${s.nama}</p>
-                            <p class="text-xs text-slate-400 uppercase tracking-tighter">${s.jabatan} — ATP: ${s.total} JAM</p>
+                            <p class="font-bold text-yellow-400 text-lg">${s.nama}</p>
+                            <p class="text-xs text-slate-300 uppercase tracking-widest">${s.jabatan} — ATP: ${s.total} JAM</p>
                         </div>
                         <div class="flex gap-2">
-                            <button onclick="loadRecord(${s.id})" class="bg-blue-500 text-white text-[10px] px-4 py-2 rounded-lg font-bold">PAPAR</button>
-                            <button onclick="deleteRecord(${s.id})" class="bg-red-500 text-white text-[10px] px-4 py-2 rounded-lg font-bold">HAPUS</button>
+                            <button onclick="loadRecord(${s.id})" class="bg-yellow-400 text-slate-900 text-[10px] px-4 py-2 rounded-lg font-black uppercase">PAPAR</button>
+                            <button onclick="deleteRecord(${s.id})" class="bg-red-500 text-white text-[10px] px-4 py-2 rounded-lg font-bold uppercase">HAPUS</button>
                         </div>
                     </div>`;
             });
