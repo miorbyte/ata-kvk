@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miorbyte Ezi-ATP | Data Lengkap KV Kulim</title>
+    <title>Miorbyte Ezi-ATP | Data Lengkap 128 Staf</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
@@ -48,15 +48,15 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div>
                         <label class="gold-title text-[10px] mb-1 block">NAMA</label>
-                        <select id="nama" class="input-box w-full p-2 rounded-lg text-xs"></select>
+                        <select id="nama" class="input-box w-full p-2 rounded-lg text-[10px]"></select>
                     </div>
                     <div>
                         <label class="gold-title text-[10px] mb-1 block">JABATAN</label>
-                        <select id="jabatan" class="input-box w-full p-2 rounded-lg text-xs"></select>
+                        <select id="jabatan" class="input-box w-full p-2 rounded-lg text-[10px]"></select>
                     </div>
                     <div>
                         <label class="gold-title text-[10px] mb-1 block">UNIT</label>
-                        <select id="unit" class="input-box w-full p-2 rounded-lg text-xs"></select>
+                        <select id="unit" class="input-box w-full p-2 rounded-lg text-[10px]"></select>
                     </div>
                     <div>
                         <label class="gold-title text-[10px] mb-1 block">SESI/BULAN</label>
@@ -143,12 +143,14 @@
     </div>
 
     <script>
-        // DATA LENGKAP DARI FAIL ANDA
-        const senaraiNama = ["AINUN BADARIAH BINTI MOHD ISA", "ALIANA BINTI AZIZAN", "ALLIRANI A/P CHANDRAKESAN", "ALYANI NAZIRAH BINTI ABD RASHID", "AMALINA ZAWANI BINTI AHMAD SHABRI", "AMIR FAKHRI BIN ABDUL JAMIL", "AMRINA BINTI ABU BAKAR", "ANIS IZWANI BINTI MD RADZI", "ANIZAH BINTI AHMAD", "ARUNA A/P MUNIANDY", "AZHAR B AHMAD", "AZRUL BIN AHMAD", "FAIZA BINTI AHMAD PHUAT", "FAIZAH BINTI HASSAN", "FARIZA BINTI HUSSIN @ YUSOF", "FATIN FARHANA BT NORDIN", "HAKIMAH BINTI MHD YUSUF", "HALIMATON SADIAH BINTI MOHD ROSLI", "HALIMATULSAADIAH BINTI CHE ANI", "HAZIRA BT ABDUL LATIF", "HURAIAH BINTI YAHAYA", "INTAN ROHAIZAN BINTI AHMAD", "IZATUL ANIS BINTI MD RODI", "KAMESWARY A/P S.RAMASAMY", "KHAIRUL AZHAR BIN SHAMSULDIN", "KU NOR ATIKAH BINTI KU SHUIB", "LIM HUI KEAN", "MAZURA BINTI MAMAT", "MIOR MUHAMMAD MAHADHIR BIN ZAHARI", "MOHAMAD AMIR BIN MOHAMAD KHIR", "MOHAMAD RIDZUAN BIN SHUKOR", "MOHD AFANDY BIN OTHMAN", "MOHD FAIZAL BIN ABDUL HALIM", "MOHD FAIZAL BIN ABDULLAH", "MOHD NOOR BIN CHE COB", "MOHD SAIFUL BIN ABD RAHIM", "NOORAMERA BINTI ABU HASAN", "NOORZAIMAH BT MD ISA", "NOR AISHA BT. ALIAS", "NOR ASYITAH BINTI MOHAMAD NASROL", "NOR AZIZA BT OTHMAN", "NORA BINTI AB RAHMAN", "NORADAWIYAH BINTI AZMAN", "NORASHIDA BINTI KHALID", "NORFARAHIYAH BINTI ABDULLAH", "NORFATIMAH BINTI DOLLAH", "NORHAYATI BINTI ISHAK", "NORZIANA BT OTHMAN", "NUR AIESYAH BINTI ABDUL HALIM", "NUR AINAA AMIRAH BINTI MOHD YATIM", "NUR AMINAH BINTI ISMAIL", "NUR AZIZAH BINTI NOZORI", "NUR FAZLIYAH BINTI MOHD KHOZAM", "NUR MAHFUZAH BINTI AHMAD TAJUDDIN", "NUR ROSLINA BINTI RAMLI", "NURALIA BINTI KHALID", "NUR'ASHIKIN BT AHMAD", "NURHIYAH BINTI ABU BAKAR", "NURUL AMIRA BINTI YAAKOB", "NURUL FARRAHIN BINTI ABU", "NURUL IZATI BINTI MOHAMAD KHAIRI", "NURWAHIDAH BINTI MEOR AKIL JULNASIR", "PARAMASIVAN A/L MUNUSAMY", "PARTHIBEN A/L CHINNAN", "PUTERI FATEN NADIA BINTI ROZALI"];
+        // DATA LENGKAP 128 PENSYARAH DARI FAIL ANDA
+        const senaraiNama = ["AINUN BADARIAH BINTI MOHD ISA", "ALIANA BINTI AZIZAN", "ALLIRANI A/P CHANDRAKESAN", "ALYANI NAZIRAH BINTI ABD RASHID", "AMALINA ZAWANI BINTI AHMAD SHABRI", "AMIR FAKHRI BIN ABDUL JAMIL", "AMRINA BINTI ABU BAKAR", "ANIS IZWANI BINTI MD RADZI", "ANIZAH BINTI AHMAD", "ARUNA A/P MUNIANDY", "AZHAR B AHMAD", "AZRUL BIN AHMAD", "FAIZA BINTI AHMAD PHUAT", "FAIZAH BINTI HASSAN", "FARIZA BINTI HUSSIN @ YUSOF", "FATIN FARHANA BT NORDIN", "HAKIMAH BINTI MHD YUSUF", "HALIMATON SADIAH BINTI MOHD ROSLI", "HALIMATULSAADIAH BINTI CHE ANI", "HAZIRA BT ABDUL LATIF", "HURAIAH BINTI YAHAYA", "INTAN ROHAIZAN BINTI AHMAD", "IZATUL ANIS BINTI MD RODI", "KAMESWARY A/P S.RAMASAMY", "KHAIRUL AZHAR BIN SHAMSULDIN", "KU NOR ATIKAH BINTI KU SHUIB", "LIM HUI KEAN", "MAZURA BINTI MAMAT", "MIOR MUHAMMAD MAHADHIR BIN ZAHARI", "MOHAMAD AMIR BIN MOHAMAD KHIR", "MOHAMAD RIDZUAN BIN SAAID", "MOHAMAD SHAHRUL AMRI BIN RAMLI", "MOHAMMAD HUZAIRIE BIN SUHAIMI", "MOHD ABI ALKAM BIN BAHARUDIN", "MOHD ASRI BIN TAHA", "MOHD FAKRUL HAKIMI BIN ZAINAL ABIDIN", "MOHD FIKRI BIN HAJI AHMAD", "MOHD HAFIZ BIN FAKHRURAZI", "MOHD HAFIZ BIN SALLEH", "MOHD HANIF BIN ISMAIL", "MOHD IKHWAN BIN MOHD GHAZALI", "MOHD ILMI BIN IBRAHIM", "MOHD ISHAK BIN ABU BAKAR", "MOHD KHIDIR RUSTAM BIN ABDUL RAHMAN", "MOHD NASIR BIN MOHAMAD NORDIN", "MOHD NIZWAN BIN ABDULLAH", "MOHD SUHAIRI BIN MOHD ISA", "MOHD YUSUF BIN HASSAN", "MOHD ZULFAHMI BIN MOHD BADARUDIN", "MUHAMAD FAIZAL BIN DAHLAN", "MUHAMAD NAZDAN BIN ALI", "MUHAMAD SHAHRIL BIN MUHAMAD SAUPI", "MUHAMAD ZAKI BIN ABDULLAH", "MUHAMAD ZAMBRI BIN ZAINOL", "MUHAMMAD AFIQ BIN MOHD ALLIMI", "MUHAMMAD FAIZ BIN ROSLAN", "MUHAMMAD FARIZ BIN CHE NOH", "MUHAMMAD SYAUQI ASYRAF BIN AHMAD TAJUDIN", "MUHAMMAD TAKIYUDIN BIN SUKERI", "MUNIR BIN MOHAMAD NOOR", "NADZIRAH BINTI MOHD JAUAH", "NADZRIAH BINTI LONG @ ABDUL SAMAH", "NASHOBUDIN BIN BAKAR", "NAZATUN ISMANIZA BINTI NAYAN", "NOOR 'AINI BINTI KHALID", "NOOR AZIRA BINTI HAMZAH", "NOOR AZIZAH BINTI MOHD ARSHAD", "NOOR AZLIZA BINTI AHMAD", "NOOR FATIN BT JAAFAR", "NOOR HISHAM BIN MOHD YUSOFF", "NOOR SARAH BINTI ABD RAHIM", "NOORAMERA BINTI ABU HASAN", "NOORZAIMAH BT MD ISA", "NOR AISHA BT. ALIAS", "NOR ASYITAH BINTI MOHAMAD NASROL", "NOR AZIZA BT OTHMAN", "NORA BINTI AB RAHMAN", "NORADAWIYAH BINTI AZMAN", "NORASHIDA BINTI KHALID", "NORFARAHIYAH BINTI ABDULLAH", "NORFATIMAH BINTI DOLLAH", "NORHAYATI BINTI ISHAK", "NORZIANA BT OTHMAN", "NUR AIESYAH BINTI ABDUL HALIM", "NUR AINAA AMIRAH BINTI MOHD YATIM", "NUR AMINAH BINTI ISMAIL", "NUR AZIZAH BINTI NOZORI", "NUR FAZLIYAH BINTI MOHD KHOZAM", "NUR MAHFUZAH BINTI AHMAD TAJUDDIN", "NUR ROSLINA BINTI RAMLI", "NURALIA BINTI KHALID", "NUR'ASHIKIN BT AHMAD", "NURHIYAH BINTI ABU BAKAR", "NURUL AMIRA BINTI YAAKOB", "NURUL FARRAHIN BINTI ABU", "NURUL IZATI BINTI MOHAMAD KHAIRI", "NURWAHIDAH BINTI MEOR AKIL JULNASIR", "PARAMASIVAN A/L MUNUSAMY", "PARTHIBEN A/L CHINNAN", "PUTERI FATEN NADIA BINTI ROZIZI", "ROHAIZAD BIN REZUAN", "ROZANA BT JAMALUDIN", "ROZILA BT NAWANG", "ROZIYATON BIDAYAH BT IBRAHIM", "SALLEH BIN ISMAIL", "SAZALI BIN SAID", "SHAHRUL BIN SHAMSUDDIN", "SHAIFOL AZLI BIN ZAKARIA", "SHIR MOHD BIN NOORDIN", "SITI AISHAH BINTI ABDULLAH", "SITI 'AMIRAH BINTI BASIRUN", "SITI HAJA BINTI KASIM", "SITI HAJAR BT MAT", "SITI MUNIRAH BINTI ABDUL MALIK", "SITI NUR MADEEHAH BINTI ISMAWI", "SITI SALWA BINTI ABDULLAH", "SITI ZAINI BINTI ZAINOL ABIDIN", "SUZANA BINTI AHMAD", "SYAZWANI BINTI MOHD ZUKI", "SYUHADA BINTI MAN", "TARUDIN BIN ABDUL HAMID", "TENGKU ZAINALABIDIN BIN TENGKU AHMAD", "VIKNESHWERY A/P VELOO GOPAL", "WAN NI HALIMATUN SAADIAH BINTI MOHD NAZIN", "WAN SAMSUHAIMI BIN MUSA", "YA'AKUB BIN ISMAIL", "ZAINOL AKBAR BIN ZAINOL ABIDIN", "ZARANI BIN WAHAB"];
+        
         const senaraiJabatan = ["JABATAN PENDIDIKAN UMUM", "JABATAN MEKANIKAL", "JABATAN KEJURUTERAAN AWAM", "JABATAN ELEKTRIK & ELEKTRONIK", "JABATAN TEKNOLOGI MAKLUMAT", "JABATAN PERNIAGAAN"];
         const senaraiUnit = ["BAHASA", "KEMANUSIAAN", "SAINS & MATEMATIK", "TERAS UMUM", "PENGURUSAN PERNIAGAAN", "TEKNOLOGI AUTOMATIF", "TEKNOLOGI PENYEJUKAN & PENYAMANAN UDARA", "TEKNOLOGI KIMPALAN", "TEKNOLOGI PEMESINAN INDUSTRI", "TEKNOLOGI ELEKTRIK", "TEKNOLOGI ELEKTRONIK", "TEKNOLOGI PEMBINAAN", "TEKNOLOGI KOMPUTERAN"];
         
-        const mataJawatan = {"Ketua Jabatan":9, "Ketua Unit (Vokasional)":7, "Ketua Warden":7, "Guru Data":5, "Pegawai Aset":5, "Warden":5, "Mentor":4, "Penyelaras":4, "Setiausaha":3, "Bendahari":2, "AJK":1}; 
+        // Data dari ata 2.pdf 
+        const mataJawatan = {"Ketua Jabatan":9, "Ketua Unit (Vokasional)":7, "Ketua Warden":7, "Guru Data":5, "Ketua Unit (Akademik/Insaniah)":5, "Ketua Unit HEP":5, "Ketua Unit Pembangunan":5, "Ketua Unit Perhubungan Awam":5, "Ketua Unit Psikologi & Kerjaya":5, "Ketua Unit Pusat Sumber":5, "Ketua Unit Sukan & KoKurikulum":5, "Ketua Unit Teknologi Maklumat":5, "Pegawai Aset":5, "Warden":5, "Ketua Bengkel":4, "Ketua Unit Pasukan Uniform":4, "Mentor":4, "Pengerusi KKSK":4, "Penyelaras Jaminan Kualiti":4, "Penyelaras Kursus":4, "Penyelia OJT":4, "Setiausaha":3, "Bendahari":2, "AJK":1}; 
 
         window.onload = () => {
             populateDropdown('nama', senaraiNama);
@@ -174,9 +176,9 @@
         }
 
         function addRowRutin() {
-            let options = Object.keys(mataJawatan).map(j => `<option value="${mataJawatan[j]}">${j} (${mataJawatan[j]})</option>`).join('');
+            let options = Object.keys(mataJawatan).map(j => `<option value="${mataJawatan[j]}">${j} (${mataJawatan[j]}J)</option>`).join('');
             const html = `<tr class="border-b border-slate-800">
-                <td class="py-2"><input type="text" class="input-box w-full p-2 rounded text-xs" placeholder="Nama Unit"></td>
+                <td class="py-2"><input type="text" class="input-box w-full p-2 rounded text-xs" placeholder="Unit/JK"></td>
                 <td class="py-2"><select class="input-box w-full p-2 rounded text-xs r-val" onchange="calc()">${options}</select></td>
                 <td class="py-2 text-right font-bold r-atp text-white">0.0</td>
             </tr>`;
@@ -186,7 +188,7 @@
 
         function addRowAdhoc() {
             const html = `<tr class="border-b border-slate-800">
-                <td class="py-2"><input type="text" class="input-box w-full p-2 rounded text-xs ad-name" placeholder="KV Skill / Inoro"></td>
+                <td class="py-2"><input type="text" class="input-box w-full p-2 rounded text-xs ad-name" placeholder="Contoh: KV Skill"></td>
                 <td class="py-2"><input type="text" class="input-box w-full p-2 rounded text-xs" placeholder="Catatan"></td>
             </tr>`;
             document.getElementById('rows-adhoc').insertAdjacentHTML('beforeend', html);
@@ -215,7 +217,7 @@
 
             if (finalTotal > 40) {
                 totalDisplay.classList.add('over-limit');
-                statusBox.innerText = "WARNING: LEBIH HAD";
+                statusBox.innerText = "AMARAN: MELEBIHI 40J";
                 statusBox.classList.add('status-danger');
             } else {
                 totalDisplay.classList.remove('over-limit');
@@ -229,11 +231,10 @@
             const name = document.getElementById('nama').value;
             const totalH = Array.from(document.querySelectorAll('.h-atp')).reduce((a,b) => a + parseFloat(b.innerText), 0);
             const totalR = Array.from(document.querySelectorAll('.r-atp')).reduce((a,b) => a + parseFloat(b.innerText), 0);
-            
             const rec = { id: Date.now(), nama: name, hakiki: totalH, rutin: totalR, adhocCount: Array.from(document.querySelectorAll('.ad-name')).filter(i => i.value !== "").length };
             db.push(rec);
             localStorage.setItem('eziATP_PRO', JSON.stringify(db));
-            alert("Rekod " + name + " disimpan.");
+            alert("Rekod " + name + " berjaya disimpan.");
         }
 
         function showReport() {
@@ -246,10 +247,10 @@
                 const total = s.hakiki + s.rutin;
                 body.innerHTML += `<tr>
                     <td class="border border-slate-700 p-2 text-center">${i+1}</td>
-                    <td class="border border-slate-700 p-2 font-bold ${total > 40 ? 'text-red-500' : ''}">${s.nama}</td>
+                    <td class="border border-slate-700 p-2 font-bold ${total > 40 ? 'text-red-500 font-black' : ''}">${s.nama}</td>
                     <td class="border border-slate-700 p-2 text-center">${s.hakiki.toFixed(1)}</td>
                     <td class="border border-slate-700 p-2 text-center">${s.rutin.toFixed(1)}</td>
-                    <td class="border border-slate-700 p-2 text-center font-bold ${total > 40 ? 'text-red-500' : ''}">${total.toFixed(1)}</td>
+                    <td class="border border-slate-700 p-2 text-center font-bold ${total > 40 ? 'text-red-500 font-black' : ''}">${total.toFixed(1)}</td>
                     <td class="border border-slate-700 p-2 text-center">${s.adhocCount}</td>
                 </tr>`;
             });
