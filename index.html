@@ -16,8 +16,9 @@
             body { background-color: white !important; color: black !important; padding: 0; }
             .no-print { display: none !important; }
             .print-area { display: block !important; width: 100%; }
-            table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-            th, td { border: 1px solid black !important; padding: 4px; font-size: 8pt; color: black !important; }
+            table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background-color: white !important; }
+            th { background-color: #f1f5f9 !important; color: black !important; border: 1px solid black !important; padding: 4px; font-size: 8pt; }
+            td { background-color: white !important; color: black !important; border: 1px solid black !important; padding: 4px; font-size: 8pt; }
             .signature-container { display: flex; justify-content: space-between; margin-top: 50px; page-break-inside: avoid; }
             .sig-block { width: 280px; }
             .sig-label { margin-bottom: 3.5rem; font-size: 10pt; }
@@ -32,12 +33,11 @@
         <div class="no-print flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
             <div>
                 <h1 class="text-4xl font-black text-white italic tracking-tighter">EZI - <span style="color: #FFD700;">ATP</span></h1>
-                <p class="text-slate-400 text-xs font-medium uppercase tracking-wide">KV KULIM - SISTEM PENGIRAAN AMANAH TUGAS</p>
+                <p class="text-slate-400 text-xs font-medium uppercase tracking-wide">SISTEM PENGIRAAN AMANAH TUGAS PENSYARAH</p>
             </div>
             <div class="flex flex-wrap gap-2">
-                <button onclick="location.reload()" class="bg-slate-700 px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-600">RESET</button>
-                <button onclick="saveRecord()" class="bg-emerald-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-emerald-500">SIMPAN</button>
-                <button onclick="showMainReport()" class="bg-blue-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-blue-500">LAPORAN</button>
+                <button onclick="location.reload()" class="bg-slate-700 px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-600 transition">RESET</button>
+                <button onclick="showMainReport()" class="bg-blue-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-blue-500 transition">LAPORAN</button>
             </div>
         </div>
 
@@ -109,9 +109,7 @@
                 </div>
                 <div class="text-right mt-4 md:mt-0">
                     <p class="gold-title text-[10px] mb-2">STATUS BEBAN TUGAS</p>
-                    <div id="status-box" class="px-8 py-3 rounded-full bg-slate-800 text-yellow-400 border-2 border-yellow-400 font-black text-lg uppercase tracking-widest">
-                        SEDIA
-                    </div>
+                    <div id="status-box" class="px-8 py-3 rounded-full bg-slate-800 text-yellow-400 border-2 border-yellow-400 font-black text-lg uppercase tracking-widest">SEDIA</div>
                 </div>
             </div>
 
@@ -138,7 +136,7 @@
                         <th class="p-2 border border-slate-700 text-center no-print">AKSI</th>
                     </tr>
                 </thead>
-                <tbody id="report-body"></tbody>
+                <tbody id="report-body" class="bg-white text-black"></tbody>
             </table>
             <div class="mt-8 text-center no-print">
                 <button onclick="backToMain()" class="text-blue-400 font-bold underline text-xs">KEMBALI KE BORANG INPUT</button>
@@ -152,7 +150,6 @@
             </div>
             <div id="slip-meta" class="mb-4 grid grid-cols-2 gap-2 text-[9pt]"></div>
             <div id="slip-content"></div>
-
             <div class="signature-container">
                 <div class="sig-block">
                     <p class="sig-label">Disediakan oleh:</p>
@@ -239,16 +236,30 @@
             const tbody = document.getElementById('report-body'); tbody.innerHTML = '';
             let db = JSON.parse(localStorage.getItem('eziATP_Final')) || [];
             db.forEach((r, i) => {
-                tbody.innerHTML += `<tr class="border-b border-slate-800">
-                    <td class="p-2 text-center">${i+1}</td>
-                    <td class="p-2 uppercase font-bold text-slate-200">${r.nama}</td>
-                    <td class="p-2 text-center">${r.hTotal}</td>
-                    <td class="p-2 text-center">${r.rTotal}</td>
-                    <td class="p-2 text-center font-bold text-emerald-400">${r.adCount}</td>
-                    <td class="p-2 text-center text-yellow-400 font-bold">${r.total}</td>
-                    <td class="p-2 text-center no-print"><button onclick="printIndividual(${r.id})" class="bg-emerald-600 px-2 py-1 rounded text-[9px] font-bold">CETAK</button></td>
+                tbody.innerHTML += `<tr class="border-b border-slate-300">
+                    <td class="p-2 text-center border border-slate-300">${i+1}</td>
+                    <td class="p-2 border border-slate-300 uppercase font-bold">${r.nama}</td>
+                    <td class="p-2 text-center border border-slate-300">${r.hTotal}</td>
+                    <td class="p-2 text-center border border-slate-300">${r.rTotal}</td>
+                    <td class="p-2 text-center border border-slate-300 font-bold text-emerald-700">${r.adCount}</td>
+                    <td class="p-2 text-center border border-slate-300 font-bold">${r.total}</td>
+                    <td class="p-2 text-center border border-slate-300 no-print">
+                        <div class="flex gap-1 justify-center">
+                            <button onclick="printIndividual(${r.id})" class="bg-emerald-600 text-white px-2 py-1 rounded text-[9px] font-bold">CETAK</button>
+                            <button onclick="deleteRecord(${r.id})" class="bg-red-600 text-white px-2 py-1 rounded text-[9px] font-bold">✖</button>
+                        </div>
+                    </td>
                 </tr>`;
             });
+        }
+
+        function deleteRecord(id) {
+            if(confirm("Padam rekod ini?")) {
+                let db = JSON.parse(localStorage.getItem('eziATP_Final')) || [];
+                db = db.filter(x => x.id !== id);
+                localStorage.setItem('eziATP_Final', JSON.stringify(db));
+                showMainReport();
+            }
         }
 
         function printIndividual(id) {
@@ -256,7 +267,7 @@
             document.getElementById('report-section').classList.add('hidden');
             document.getElementById('individual-slip').classList.remove('hidden');
             document.getElementById('slip-meta').innerHTML = `<div><strong>NAMA:</strong> ${r.nama}</div><div><strong>SESI:</strong> ${r.bulan}</div><div><strong>JABATAN:</strong> ${r.jabatan}</div><div><strong>UNIT:</strong> ${r.unit}</div>`;
-            document.getElementById('slip-content').innerHTML = `<table class="w-full"><thead><tr class="bg-gray-100"><th>BIL</th><th>KOD</th><th>KURSUS</th><th>T</th><th>A</th><th>C</th><th>ATP</th></tr></thead><tbody>${r.hakiki.map(h => `<tr><td class="text-center">${h.bil}</td><td>${h.kod}</td><td>${h.nama}</td><td class="text-center">${h.t}</td><td class="text-center">${h.a}</td><td class="text-center">${h.c}</td><td class="text-right">${h.atp}</td></tr>`).join('')}</tbody></table><table class="w-full mt-2"><thead><tr class="bg-gray-100"><th>BIL</th><th>UNIT/JK</th><th>BIDANG</th><th>ATP</th></tr></thead><tbody>${r.rutin.map(rt => `<tr><td class="text-center">${rt.bil}</td><td>${rt.nama}</td><td>${rt.bidang}</td><td class="text-right">${rt.atp}</td></tr>`).join('')}</tbody></table><table class="w-full mt-2"><thead><tr class="bg-gray-100"><th>BIL</th><th>PROGRAM AD-HOC</th><th>PERANAN</th></tr></thead><tbody>${r.adhoc.map(a => `<tr><td class="text-center">${a.bil}</td><td>${a.nama}</td><td>${a.task}</td></tr>`).join('')}</tbody></table><div class="text-right font-bold mt-2">JUMLAH KESELURUHAN ATP: ${r.total} JAM</div>`;
+            document.getElementById('slip-content').innerHTML = `<table class="w-full"><thead><tr><th>BIL</th><th>KOD</th><th>KURSUS</th><th>T</th><th>A</th><th>C</th><th>ATP</th></tr></thead><tbody>${r.hakiki.map(h => `<tr><td class="text-center">${h.bil}</td><td>${h.kod}</td><td>${h.nama}</td><td class="text-center">${h.t}</td><td class="text-center">${h.a}</td><td class="text-center">${h.c}</td><td class="text-right">${h.atp}</td></tr>`).join('')}</tbody></table><table class="w-full mt-2"><thead><tr><th>BIL</th><th>UNIT/JK</th><th>BIDANG</th><th>ATP</th></tr></thead><tbody>${r.rutin.map(rt => `<tr><td class="text-center">${rt.bil}</td><td>${rt.nama}</td><td>${rt.bidang}</td><td class="text-right">${rt.atp}</td></tr>`).join('')}</tbody></table><table class="w-full mt-2"><thead><tr><th>BIL</th><th>PROGRAM AD-HOC</th><th>PERANAN</th></tr></thead><tbody>${r.adhoc.map(a => `<tr><td class="text-center">${a.bil}</td><td>${a.nama}</td><td>${a.task}</td></tr>`).join('')}</tbody></table><div class="text-right font-bold mt-2">JUMLAH KESELURUHAN ATP: ${r.total} JAM</div>`;
             document.getElementById('sig-staff-name').innerText = r.nama;
             window.print();
         }
