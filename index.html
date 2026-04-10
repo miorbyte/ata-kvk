@@ -32,12 +32,12 @@
         <div class="no-print flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
             <div>
                 <h1 class="text-4xl font-black text-white italic tracking-tighter">EZI - <span style="color: #FFD700;">ATP</span></h1>
-                <p class="text-slate-400 text-xs font-medium uppercase tracking-wide">Platform kemudahan pengiraan ATP bagi kegunaan Kolej Vokasional Kulim</p>
+                <p class="text-slate-400 text-xs font-medium uppercase tracking-wide">KV KULIM - SISTEM PENGIRAAN AMANAH TUGAS</p>
             </div>
             <div class="flex flex-wrap gap-2">
-                <button onclick="location.reload()" class="bg-slate-700 px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-600 transition">RESET</button>
-                <button onclick="saveRecord()" class="bg-emerald-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-emerald-500 transition">SIMPAN REKOD</button>
-                <button onclick="showMainReport()" class="bg-blue-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-blue-500 transition">LAPORAN</button>
+                <button onclick="location.reload()" class="bg-slate-700 px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-600">RESET</button>
+                <button onclick="saveRecord()" class="bg-emerald-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-emerald-500">SIMPAN</button>
+                <button onclick="showMainReport()" class="bg-blue-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-blue-500">LAPORAN</button>
             </div>
         </div>
 
@@ -101,6 +101,24 @@
                 </table>
                 <button onclick="addRowAdhoc()" class="mt-4 text-xs font-bold text-yellow-400 no-print hover:underline">+ TAMBAH BARIS</button>
             </div>
+
+            <div class="glass-card rounded-3xl p-8 flex flex-col md:flex-row justify-between items-center border-l-8 border-yellow-400 no-print mb-8">
+                <div>
+                    <p class="gold-title text-[10px]">TOTAL ATP KESELURUHAN</p>
+                    <h3 id="grand-total" class="text-6xl font-black text-white">0.0</h3>
+                </div>
+                <div class="text-right mt-4 md:mt-0">
+                    <p class="gold-title text-[10px] mb-2">STATUS BEBAN TUGAS</p>
+                    <div id="status-box" class="px-8 py-3 rounded-full bg-slate-800 text-yellow-400 border-2 border-yellow-400 font-black text-lg uppercase tracking-widest">
+                        SEDIA
+                    </div>
+                </div>
+            </div>
+
+            <div class="no-print flex gap-4 justify-center mb-20">
+                <button onclick="saveRecord()" class="bg-emerald-600 px-10 py-4 rounded-2xl font-black text-sm hover:scale-105 transition shadow-lg shadow-emerald-900/20 uppercase tracking-widest">💾 SIMPAN REKOD</button>
+                <button onclick="showMainReport()" class="bg-blue-600 px-10 py-4 rounded-2xl font-black text-sm hover:scale-105 transition shadow-lg shadow-blue-900/20 uppercase tracking-widest">📊 PAPAR / CETAK</button>
+            </div>
         </div>
 
         <div id="report-section" class="hidden mt-10">
@@ -160,24 +178,9 @@
         const senaraiJabatan = ["JABATAN PENDIDIKAN UMUM", "JABATAN MEKANIKAL", "JABATAN KEJURUTERAAN AWAM", "JABATAN ELEKTRIK & ELEKTRONIK", "JABATAN TEKNOLOGI MAKLUMAT", "JABATAN PERNIAGAAN"];
         const senaraiUnit = ["BAHASA", "KEMANUSIAAN", "SAINS & MATEMATIK", "TERAS UMUM", "PENGURUSAN PERNIAGAAN", "TEKNOLOGI AUTOMATIF", "TEKNOLOGI PENYEJUKAN & PENYAMANAN UDARA", "TEKNOLOGI KIMPALAN", "TEKNOLOGI PEMESINAN INDUSTRI", "TEKNOLOGI ELEKTRIK", "TEKNOLOGI ELEKTRONIK", "TEKNOLOGI PEMBINAAN", "TEKNOLOGI KOMPUTERAN"];
         
-        // Data Jawatan & ATP
-        const mataJawatan = {
-            "Ketua Jabatan": 9, "Ketua Unit (Vokasional)": 7, "Ketua Warden": 7, "Guru Data": 5,
-            "Ketua Unit (Akademik/Insaniah)": 5, "Ketua Unit HEP": 5, "Ketua Unit Pembangunan": 5,
-            "Ketua Unit Perhubungan Awam": 5, "Ketua Unit Psikologi & Kerjaya": 5, "Ketua Unit Pusat Sumber": 5,
-            "Ketua Unit Sukan & KoKurikulum": 5, "Ketua Unit Teknologi Maklumat": 5, "Pegawai Aset": 5,
-            "Warden": 5, "Ketua Bengkel": 4, "Ketua Unit Pasukan Uniform": 4, "Mentor": 4,
-            "Pengerusi KKSK": 4, "Penyelaras Jawatankuasa Jaminan Kualiti /Khas": 4, "Penyelaras Kursus / Unit (Akademik)": 4,
-            "Penyelaras Unit Sokongan Akademik / Biro": 4, "Penyelia OJT (PPO)": 4, "Ketua Unit Sukan & Permainan": 3,
-            "Penolong Warden": 3, "Penolong Ketua": 3, "Setiausaha": 3, "Bendahari": 2,
-            "Ketua Unit Kelab Dan Persatuan": 2, "Penolong Setiausaha": 2, "Ahli , AJK": 1
-        };
+        const mataJawatan = {"Ketua Jabatan":9, "Ketua Unit (Vokasional)":7, "Ketua Warden":7, "Guru Data":5, "Ketua Unit (Akademik/Insaniah)":5, "Ketua Unit HEP":5, "Ketua Unit Pembangunan":5, "Ketua Unit Perhubungan Awam":5, "Ketua Unit Psikologi & Kerjaya":5, "Ketua Unit Pusat Sumber":5, "Ketua Unit Sukan & KoKurikulum":5, "Ketua Unit Teknologi Maklumat":5, "Pegawai Aset":5, "Warden":5, "Ketua Bengkel":4, "Ketua Unit Pasukan Uniform":4, "Mentor":4, "Pengerusi KKSK":4, "Penyelaras Jawatankuasa Jaminan Kualiti /Khas":4, "Penyelaras Kursus / Unit (Akademik)":4, "Penyelaras Unit Sokongan Akademik / Biro":4, "Penyelia OJT (PPO)":4, "Ketua Unit Sukan & Permainan":3, "Penolong Warden":3, "Penolong Ketua":3, "Setiausaha":3, "Bendahari":2, "Ketua Unit Kelab Dan Persatuan":2, "Penolong Setiausaha":2, "Ahli , AJK":1};
 
-        window.onload = () => {
-            populate('nama', senaraiNama); populate('jabatan', senaraiJabatan); populate('unit', senaraiUnit);
-            addRowHakiki(); addRowRutin(); addRowAdhoc();
-        };
-
+        window.onload = () => { populate('nama', senaraiNama); populate('jabatan', senaraiJabatan); populate('unit', senaraiUnit); addRowHakiki(); addRowRutin(); addRowAdhoc(); };
         function populate(id, list) { document.getElementById(id).innerHTML = list.map(v => `<option value="${v}">${v}</option>`).join(''); }
         function renumber(cid) { document.querySelectorAll(`#${cid} tr`).forEach((r, i) => r.cells[0].innerText = i + 1); }
 
@@ -198,30 +201,36 @@
         }
 
         function calc() {
+            let hT = 0, rT = 0;
             document.querySelectorAll('#rows-hakiki tr').forEach(r => {
                 let t = parseFloat(r.querySelector('.t-jam').value)||0, a = parseFloat(r.querySelector('.a-jam').value)||0, c = parseFloat(r.querySelector('.c-jam').value)||0;
-                r.querySelector('.h-atp').innerText = (((t+a)*1.5)+c).toFixed(1);
+                let val = ((t+a)*1.5)+c; r.querySelector('.h-atp').innerText = val.toFixed(1); hT += val;
             });
-            document.querySelectorAll('#rows-rutin tr').forEach(r => { r.querySelector('.r-atp').innerText = parseFloat(r.querySelector('.r-val').value).toFixed(1); });
+            document.querySelectorAll('#rows-rutin tr').forEach(r => {
+                let val = parseFloat(r.querySelector('.r-val').value); r.querySelector('.r-atp').innerText = val.toFixed(1); rT += val;
+            });
+            let total = hT + rT;
+            document.getElementById('grand-total').innerText = total.toFixed(1);
+            let sBox = document.getElementById('status-box');
+            if(total < 38) { sBox.innerText = "BEBAN RENDAH"; sBox.style.color = "#FFD700"; }
+            else if(total <= 42) { sBox.innerText = "OPTIMUM"; sBox.style.color = "#4ade80"; }
+            else { sBox.innerText = "BEBAN TINGGI"; sBox.style.color = "#f87171"; }
         }
 
         function saveRecord() {
             let db = JSON.parse(localStorage.getItem('eziATP_Final')) || [];
-            let hTotal = Array.from(document.querySelectorAll('.h-atp')).reduce((s, e) => s + parseFloat(e.innerText), 0);
-            let rTotal = Array.from(document.querySelectorAll('.r-atp')).reduce((s, e) => s + parseFloat(e.innerText), 0);
-            let adCount = Array.from(document.querySelectorAll('.ad-name')).filter(e => e.value.trim() !== "").length;
-
             let entry = {
-                id: Date.now(),
-                nama: document.getElementById('nama').value, jabatan: document.getElementById('jabatan').value,
+                id: Date.now(), nama: document.getElementById('nama').value, jabatan: document.getElementById('jabatan').value,
                 unit: document.getElementById('unit').value, bulan: document.getElementById('bulan').value,
-                hTotal: hTotal.toFixed(1), rTotal: rTotal.toFixed(1), adCount: adCount,
+                hTotal: Array.from(document.querySelectorAll('.h-atp')).reduce((s, e) => s + parseFloat(e.innerText), 0).toFixed(1),
+                rTotal: Array.from(document.querySelectorAll('.r-atp')).reduce((s, e) => s + parseFloat(e.innerText), 0).toFixed(1),
+                adCount: Array.from(document.querySelectorAll('.ad-name')).filter(e => e.value.trim() !== "").length,
                 hakiki: Array.from(document.querySelectorAll('#rows-hakiki tr')).filter(r => r.querySelector('.kod').value).map((r, i) => ({ bil: i+1, kod: r.querySelector('.kod').value, nama: r.querySelector('.nkursus').value, t: r.querySelector('.t-jam').value, a: r.querySelector('.a-jam').value, c: r.querySelector('.c-jam').value, atp: r.querySelector('.h-atp').innerText })),
                 rutin: Array.from(document.querySelectorAll('#rows-rutin tr')).filter(r => r.querySelector('.r-nama').value).map((r, i) => ({ bil: i+1, nama: r.querySelector('.r-nama').value, bidang: r.querySelector('.r-val').options[r.querySelector('.r-val').selectedIndex].text, atp: r.querySelector('.r-atp').innerText })),
                 adhoc: Array.from(document.querySelectorAll('#rows-adhoc tr')).filter(r => r.querySelector('.ad-name').value).map((r, i) => ({ bil: i+1, nama: r.querySelector('.ad-name').value, task: r.querySelector('.ad-task').value })),
-                total: (hTotal + rTotal).toFixed(1)
+                total: document.getElementById('grand-total').innerText
             };
-            db.push(entry); localStorage.setItem('eziATP_Final', JSON.stringify(db)); alert("Rekod disimpan!");
+            db.push(entry); localStorage.setItem('eziATP_Final', JSON.stringify(db)); alert("Rekod Berjaya Disimpan!");
         }
 
         function showMainReport() {
@@ -247,22 +256,12 @@
             document.getElementById('report-section').classList.add('hidden');
             document.getElementById('individual-slip').classList.remove('hidden');
             document.getElementById('slip-meta').innerHTML = `<div><strong>NAMA:</strong> ${r.nama}</div><div><strong>SESI:</strong> ${r.bulan}</div><div><strong>JABATAN:</strong> ${r.jabatan}</div><div><strong>UNIT:</strong> ${r.unit}</div>`;
-            
-            let out = `<table class="w-full"><thead><tr class="bg-gray-100"><th>BIL</th><th>KOD</th><th>KURSUS</th><th>T</th><th>A</th><th>C</th><th>ATP</th></tr></thead><tbody>${r.hakiki.map(h => `<tr><td class="text-center">${h.bil}</td><td>${h.kod}</td><td>${h.nama}</td><td class="text-center">${h.t}</td><td class="text-center">${h.a}</td><td class="text-center">${h.c}</td><td class="text-right">${h.atp}</td></tr>`).join('')}</tbody></table>`;
-            out += `<table class="w-full mt-2"><thead><tr class="bg-gray-100"><th>BIL</th><th>UNIT/JK</th><th>BIDANG</th><th>ATP</th></tr></thead><tbody>${r.rutin.map(rt => `<tr><td class="text-center">${rt.bil}</td><td>${rt.nama}</td><td>${rt.bidang}</td><td class="text-right">${rt.atp}</td></tr>`).join('')}</tbody></table>`;
-            out += `<table class="w-full mt-2"><thead><tr class="bg-gray-100"><th>BIL</th><th>PROGRAM AD-HOC</th><th>PERANAN</th></tr></thead><tbody>${r.adhoc.map(a => `<tr><td class="text-center">${a.bil}</td><td>${a.nama}</td><td>${a.task}</td></tr>`).join('')}</tbody></table>`;
-            out += `<div class="text-right font-bold mt-2">JUMLAH KESELURUHAN ATP: ${r.total} JAM</div>`;
-            
-            document.getElementById('slip-content').innerHTML = out;
+            document.getElementById('slip-content').innerHTML = `<table class="w-full"><thead><tr class="bg-gray-100"><th>BIL</th><th>KOD</th><th>KURSUS</th><th>T</th><th>A</th><th>C</th><th>ATP</th></tr></thead><tbody>${r.hakiki.map(h => `<tr><td class="text-center">${h.bil}</td><td>${h.kod}</td><td>${h.nama}</td><td class="text-center">${h.t}</td><td class="text-center">${h.a}</td><td class="text-center">${h.c}</td><td class="text-right">${h.atp}</td></tr>`).join('')}</tbody></table><table class="w-full mt-2"><thead><tr class="bg-gray-100"><th>BIL</th><th>UNIT/JK</th><th>BIDANG</th><th>ATP</th></tr></thead><tbody>${r.rutin.map(rt => `<tr><td class="text-center">${rt.bil}</td><td>${rt.nama}</td><td>${rt.bidang}</td><td class="text-right">${rt.atp}</td></tr>`).join('')}</tbody></table><table class="w-full mt-2"><thead><tr class="bg-gray-100"><th>BIL</th><th>PROGRAM AD-HOC</th><th>PERANAN</th></tr></thead><tbody>${r.adhoc.map(a => `<tr><td class="text-center">${a.bil}</td><td>${a.nama}</td><td>${a.task}</td></tr>`).join('')}</tbody></table><div class="text-right font-bold mt-2">JUMLAH KESELURUHAN ATP: ${r.total} JAM</div>`;
             document.getElementById('sig-staff-name').innerText = r.nama;
             window.print();
         }
 
-        function backToMain() { 
-            document.getElementById('main-content').classList.remove('hidden'); 
-            document.getElementById('report-section').classList.add('hidden');
-            document.getElementById('individual-slip').classList.add('hidden');
-        }
+        function backToMain() { document.getElementById('main-content').classList.remove('hidden'); document.getElementById('report-section').classList.add('hidden'); document.getElementById('individual-slip').classList.add('hidden'); }
     </script>
 </body>
 </html>
