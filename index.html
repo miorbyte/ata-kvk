@@ -19,6 +19,7 @@
             table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background-color: white !important; }
             th { background-color: #f1f5f9 !important; color: black !important; border: 1px solid black !important; padding: 4px; font-size: 8pt; }
             td { background-color: white !important; color: black !important; border: 1px solid black !important; padding: 4px; font-size: 8pt; }
+            .report-sub-header { background-color: #e2e8f0 !important; font-weight: bold; text-align: left; padding: 5px; border: 1px solid black; }
             .signature-container { display: flex; justify-content: space-between; margin-top: 50px; page-break-inside: avoid; }
             .sig-block { width: 280px; }
             .sig-label { margin-bottom: 3.5rem; font-size: 10pt; }
@@ -60,9 +61,9 @@
                             <th class="py-2 w-10 text-center">BIL</th>
                             <th class="py-2 w-24">KOD</th>
                             <th class="py-2">KURSUS</th>
-                            <th class="py-2 text-center">T</th>
-                            <th class="py-2 text-center">A</th>
-                            <th class="py-2 text-center">C</th>
+                            <th class="py-2 text-center">TEORI</th>
+                            <th class="py-2 text-center">AMALI</th>
+                            <th class="py-2 text-center">KELAS</th>
                             <th class="py-2 text-right">ATP</th>
                         </tr>
                     </thead>
@@ -99,6 +100,15 @@
                     </thead>
                     <tbody id="rows-adhoc"></tbody>
                 </table>
+                <datalist id="adhoc-suggestions">
+                    <option value="Hari Keusahawanan">
+                    <option value="MAKSIS">
+                    <option value="INORO">
+                    <option value="Pertandingan KV Skill">
+                    <option value="Outreach">
+                    <option value="Inreach">
+                    <option value="Kejohanan Sukan KV">
+                </datalist>
                 <button onclick="addRowAdhoc()" class="mt-4 text-xs font-bold text-yellow-400 no-print hover:underline">+ TAMBAH BARIS</button>
             </div>
 
@@ -149,7 +159,9 @@
                 <p class="font-bold">KOLEJ VOKASIONAL KULIM</p>
             </div>
             <div id="slip-meta" class="mb-4 grid grid-cols-2 gap-2 text-[9pt]"></div>
+            
             <div id="slip-content"></div>
+
             <div class="signature-container">
                 <div class="sig-block">
                     <p class="sig-label">Disediakan oleh:</p>
@@ -182,7 +194,7 @@
         function renumber(cid) { document.querySelectorAll(`#${cid} tr`).forEach((r, i) => r.cells[0].innerText = i + 1); }
 
         function addRowHakiki() {
-            const html = `<tr><td class="text-center font-bold text-slate-500"></td><td><input type="text" class="input-box w-full kod" placeholder="Kod"></td><td><input type="text" class="input-box w-full nkursus" placeholder="Kursus"></td><td class="text-center"><input type="number" class="input-box w-12 t-jam" oninput="calc()" value="0"></td><td class="text-center"><input type="number" class="input-box w-12 a-jam" oninput="calc()" value="0"></td><td class="text-center"><input type="number" class="input-box w-12 c-jam" oninput="calc()" value="0"></td><td class="text-right font-bold h-atp">0.0</td></tr>`;
+            const html = `<tr><td class="text-center font-bold text-slate-500"></td><td><input type="text" class="input-box w-full kod" placeholder="Kod"></td><td><input type="text" class="input-box w-full nkursus" placeholder="Kursus"></td><td class="text-center"><input type="number" class="input-box w-16 t-jam" oninput="calc()" value="0"></td><td class="text-center"><input type="number" class="input-box w-16 a-jam" oninput="calc()" value="0"></td><td class="text-center"><input type="number" class="input-box w-16 c-jam" oninput="calc()" value="0"></td><td class="text-right font-bold h-atp">0.0</td></tr>`;
             document.getElementById('rows-hakiki').insertAdjacentHTML('beforeend', html); renumber('rows-hakiki');
         }
 
@@ -193,7 +205,7 @@
         }
 
         function addRowAdhoc() {
-            const html = `<tr><td class="text-center font-bold text-slate-500"></td><td><input type="text" class="input-box w-full ad-name" placeholder="Program"></td><td><input type="text" class="input-box w-full ad-task" placeholder="Peranan"></td></tr>`;
+            const html = `<tr><td class="text-center font-bold text-slate-500"></td><td><input type="text" class="input-box w-full ad-name" list="adhoc-suggestions" placeholder="Pilih atau Taip Program"></td><td><input type="text" class="input-box w-full ad-task" placeholder="Peranan"></td></tr>`;
             document.getElementById('rows-adhoc').insertAdjacentHTML('beforeend', html); renumber('rows-adhoc');
         }
 
@@ -267,7 +279,23 @@
             document.getElementById('report-section').classList.add('hidden');
             document.getElementById('individual-slip').classList.remove('hidden');
             document.getElementById('slip-meta').innerHTML = `<div><strong>NAMA:</strong> ${r.nama}</div><div><strong>SESI:</strong> ${r.bulan}</div><div><strong>JABATAN:</strong> ${r.jabatan}</div><div><strong>UNIT:</strong> ${r.unit}</div>`;
-            document.getElementById('slip-content').innerHTML = `<table class="w-full"><thead><tr><th>BIL</th><th>KOD</th><th>KURSUS</th><th>T</th><th>A</th><th>C</th><th>ATP</th></tr></thead><tbody>${r.hakiki.map(h => `<tr><td class="text-center">${h.bil}</td><td>${h.kod}</td><td>${h.nama}</td><td class="text-center">${h.t}</td><td class="text-center">${h.a}</td><td class="text-center">${h.c}</td><td class="text-right">${h.atp}</td></tr>`).join('')}</tbody></table><table class="w-full mt-2"><thead><tr><th>BIL</th><th>UNIT/JK</th><th>BIDANG</th><th>ATP</th></tr></thead><tbody>${r.rutin.map(rt => `<tr><td class="text-center">${rt.bil}</td><td>${rt.nama}</td><td>${rt.bidang}</td><td class="text-right">${rt.atp}</td></tr>`).join('')}</tbody></table><table class="w-full mt-2"><thead><tr><th>BIL</th><th>PROGRAM AD-HOC</th><th>PERANAN</th></tr></thead><tbody>${r.adhoc.map(a => `<tr><td class="text-center">${a.bil}</td><td>${a.nama}</td><td>${a.task}</td></tr>`).join('')}</tbody></table><div class="text-right font-bold mt-2">JUMLAH KESELURUHAN ATP: ${r.total} JAM</div>`;
+            
+            let content = `
+                <table class="w-full">
+                    <thead><tr><th colspan="7" class="report-sub-header">1. AMANAH TUGAS SYARAHAN (HAKIKI)</th></tr><tr><th>BIL</th><th>KOD</th><th>KURSUS</th><th>TEORI</th><th>AMALI</th><th>KELAS</th><th>ATP</th></tr></thead>
+                    <tbody>${r.hakiki.map(h => `<tr><td class="text-center">${h.bil}</td><td>${h.kod}</td><td>${h.nama}</td><td class="text-center">${h.t}</td><td class="text-center">${h.a}</td><td class="text-center">${h.c}</td><td class="text-right">${h.atp}</td></tr>`).join('')}</tbody>
+                </table>
+                <table class="w-full mt-2">
+                    <thead><tr><th colspan="4" class="report-sub-header">2. TUGAS-TUGAS RUTIN (BERMATA)</th></tr><tr><th>BIL</th><th>UNIT/JK</th><th>BIDANG</th><th>ATP</th></tr></thead>
+                    <tbody>${r.rutin.map(rt => `<tr><td class="text-center">${rt.bil}</td><td>${rt.nama}</td><td>${rt.bidang}</td><td class="text-right">${rt.atp}</td></tr>`).join('')}</tbody>
+                </table>
+                <table class="w-full mt-2">
+                    <thead><tr><th colspan="3" class="report-sub-header">3. TUGAS-TUGAS BUKAN RUTIN (AD-HOC)</th></tr><tr><th>BIL</th><th>PROGRAM AD-HOC</th><th>PERANAN</th></tr></thead>
+                    <tbody>${r.adhoc.length > 0 ? r.adhoc.map(a => `<tr><td class="text-center">${a.bil}</td><td>${a.nama}</td><td>${a.task}</td></tr>`).join('') : '<tr><td colspan="3" class="text-center italic">Tiada rekod</td></tr>'}</tbody>
+                </table>
+                <div class="text-right font-bold mt-2">JUMLAH KESELURUHAN ATP: ${r.total} JAM</div>`;
+            
+            document.getElementById('slip-content').innerHTML = content;
             document.getElementById('sig-staff-name').innerText = r.nama;
             window.print();
         }
