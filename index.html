@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EZI - ATP | KV KULIM</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f1f5f9; }
@@ -35,7 +39,7 @@
         <div class="no-print flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
             <div>
                 <h1 class="text-4xl font-black text-white italic tracking-tighter">EZI - <span style="color: #FFD700;">ATP</span></h1>
-                <p class="text-slate-400 text-xs font-medium uppercase tracking-wide">SISTEM PENGIRAAN AMANAH TUGAS PENSYARAH</p>
+                <p class="text-slate-400 text-xs font-medium uppercase tracking-wide">SISTEM PENGIRAAN AMANAH TUGAS PENSYARAH (CLOUD)</p>
             </div>
             <div class="flex flex-wrap gap-2">
                 <button onclick="location.reload()" class="bg-slate-700 px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-600 transition">RESET</button>
@@ -102,17 +106,9 @@
                     <tbody id="rows-adhoc"></tbody>
                 </table>
                 <datalist id="adhoc-suggestions">
-                    <option value="Hari Keusahawanan">
-                    <option value="MAKSIS">
-                    <option value="INORO">
-                    <option value="Pertandingan KV Skill">
-                    <option value="Outreach">
-                    <option value="Inreach">
-                    <option value="Pertandingan PTA">
-                    <option value="Pertandingan BMC">
-                    <option value="Pertandingan Hari Kemerdekaan">
-                    <option value="Pertandingan Ihya Ramadhan">
-                    <option value="Konvokesyen">
+                    <option value="Hari Keusahawanan"><option value="MAKSIS"><option value="INORO">
+                    <option value="Pertandingan KV Skill"><option value="Outreach"><option value="Inreach">
+                    <option value="Pertandingan PTA"><option value="Pertandingan BMC"><option value="Konvokesyen">
                 </datalist>
                 <button onclick="addRowAdhoc()" class="mt-4 text-xs font-bold text-yellow-400 no-print hover:underline">+ TAMBAH BARIS</button>
             </div>
@@ -129,7 +125,7 @@
             </div>
 
             <div class="no-print flex gap-4 justify-center mb-20">
-                <button onclick="saveRecord()" class="bg-emerald-600 px-10 py-4 rounded-2xl font-black text-sm hover:scale-105 transition shadow-lg shadow-emerald-900/20 uppercase tracking-widest">💾 SIMPAN REKOD</button>
+                <button onclick="saveRecord()" class="bg-emerald-600 px-10 py-4 rounded-2xl font-black text-sm hover:scale-105 transition shadow-lg shadow-emerald-900/20 uppercase tracking-widest">💾 SIMPAN KE CLOUD</button>
                 <button onclick="showMainReport()" class="bg-blue-600 px-10 py-4 rounded-2xl font-black text-sm hover:scale-105 transition shadow-lg shadow-blue-900/20 uppercase tracking-widest">📊 PAPAR / CETAK</button>
             </div>
         </div>
@@ -164,14 +160,11 @@
                 <p class="font-bold">KOLEJ VOKASIONAL KULIM</p>
             </div>
             <div id="slip-meta" class="mb-4 grid grid-cols-2 gap-2 text-[9pt]"></div>
-            
             <div id="slip-content"></div>
-
             <div class="declaration-text">
-                Berhubung amanah tugas dan jumlah jam ATP di atas, dengan ini saya mengesahkan akan melaksanakan tugas dan tanggungjawab yang diberikan bermula <strong>1 Januari tahun semasa</strong> dengan penuh dedikasi, integriti dan komitmen.
+                Berhubung amanah tugas dan jumlah jam ATP di atas, dengan ini saya mengesahkan akan melaksanakan tugas dan tanggungjawab yang diberikan bermula <strong>1 Januari 2026</strong> dengan penuh dedikasi, integriti dan komitmen.
                 <br><br>Sekian, terima kasih.
             </div>
-
             <div class="signature-container">
                 <div class="sig-block">
                     <p class="sig-label">Disediakan oleh:</p>
@@ -193,14 +186,32 @@
     </div>
 
     <script>
-        // Data lists tetap sama seperti sebelumnya
+        // CONFIG FIREBASE - MASUKKAN DATA ANDA DI SINI
+        const firebaseConfig = {
+            apiKey: "MASUKKAN_API_KEY_ANDA",
+            authDomain: "PROJEK-ANDA.firebaseapp.com",
+            databaseURL: "https://PROJEK-ANDA-default-rtdb.firebaseio.com",
+            projectId: "PROJEK-ANDA",
+            storageBucket: "PROJEK-ANDA.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdef"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // Data Lists
         const senaraiNama = ["AINUN BADARIAH BINTI MOHD ISA", "ALIANA BINTI AZIZAN", "ALLIRANI A/P CHANDRAKESAN", "ALYANI NAZIRAH BINTI ABD RASHID", "AMALINA ZAWANI BINTI AHMAD SHABRI", "AMIR FAKHRI BIN ABDUL JAMIL", "AMRINA BINTI ABU BAKAR", "ANIS IZWANI BINTI MD RADZI", "ANIZAH BINTI AHMAD", "ARUNA A/P MUNIANDY", "AZHAR B AHMAD", "AZRUL BIN AHMAD", "FAIZA BINTI AHMAD PHUAT", "FAIZAH BINTI HASSAN", "FARIZA BINTI HUSSIN @ YUSOF", "FATIN FARHANA BT NORDIN", "HAKIMAH BINTI MHD YUSUF", "HALIMATON SADIAH BINTI MOHD ROSLI", "HALIMATULSAADIAH BINTI CHE ANI", "HAZIRA BT ABDUL LATIF", "HURAIAH BINTI YAHAYA", "INTAN ROHAIZAN BINTI AHMAD", "IZATUL ANIS BINTI MD RODI", "KAMESWARY A/P S.RAMASAMY", "KHAIRUL AZHAR BIN SHAMSULDIN", "KU NOR ATIKAH BINTI KU SHUIB", "LIM HUI KEAN", "MAZURA BINTI MAMAT", "MIOR MUHAMMAD MAHADHIR BIN ZAHARI", "MOHAMAD AMIR BIN MOHAMAD KHIR", "MOHAMAD RIDZUAN BIN SAAID", "MOHAMAD SHAHRUL AMRI BIN RAMLI", "MOHAMMAD HUZAIRIE BIN SUHAIMI", "MOHD ABI ALKAM BIN BAHARUDIN", "MOHD ASRI BIN TAHA", "MOHD FAKRUL HAKIMI BIN ZAINAL ABIDIN", "MOHD FIKRI BIN HAJI AHMAD", "MOHD HAFIZ BIN FAKHRURAZI", "MOHD HAFIZ BIN SALLEH", "MOHD HANIF BIN ISMAIL", "MOHD IKHWAN BIN MOHD GHAZALI", "MOHD ILMI BIN IBRAHIM", "MOHD ISHAK BIN ABU BAKAR", "MOHD KHIDIR RUSTAM BIN ABDUL RAHMAN", "MOHD NASIR BIN MOHAMAD NORDIN", "MOHD NIZWAN BIN ABDULLAH", "MOHD SUHAIRI BIN MOHD ISA", "MOHD YUSUF BIN HASSAN", "MOHD ZULFAHMI BIN MOHD BADARUDIN", "MUHAMAD FAIZAL BIN DAHLAN", "MUHAMAD NAZDAN BIN ALI", "MUHAMAD SHAHRIL BIN MUHAMAD SAUPI", "MUHAMAD ZAKI BIN ABDULLAH", "MUHAMAD ZAMBRI BIN ZAINOL", "MUHAMMAD AFIQ BIN MOHD ALLIMI", "MUHAMMAD FAIZ BIN ROSLAN", "MUHAMMAD FARIZ BIN CHE NOH", "MUHAMMAD SYAUQI ASYRAF BIN AHMAD TAJUDIN", "MUHAMMAD TAKIYUDIN BIN SUKERI", "MUNIR BIN MOHAMAD NOOR", "NADZIRAH BINTI MOHD JAUAH", "NADZRIAH BINTI LONG @ ABDUL SAMAH", "NASHOBUDIN BIN BAKAR", "NAZATUN ISMANIZA BINTI NAYAN", "NOOR 'AINI BINTI KHALID", "NOOR AZIRA BINTI HAMZAH", "NOOR AZIZAH BINTI MOHD ARSHAD", "NOOR AZLIZA BINTI AHMAD", "NOOR FATIN BT JAAFAR", "NOOR HISHAM BIN MOHD YUSOFF", "NOOR SARAH BINTI ABD RAHIM", "NOORAMERA BINTI ABU HASAN", "NOORZAIMAH BT MD ISA", "NOR AISHA BT. ALIAS", "NOR ASYITAH BINTI MOHAMAD NASROL", "NOR AZIZA BT OTHMAN", "NORA BINTI AB RAHMAN", "NORADAWIYAH BINTI AZMAN", "NORASHIDA BINTI KHALID", "NORFARAHIYAH BINTI ABDULLAH", "NORFATIMAH BINTI DOLLAH", "NORHAYATI BINTI ISHAK", "NORZIANA BT OTHMAN", "NUR AIESYAH BINTI ABDUL HALIM", "NUR AINAA AMIRAH BINTI MOHD YATIM", "NUR AMINAH BINTI ISMAIL", "NUR AZIZAH BINTI NOZORI", "NUR FAZLIYAH BINTI MOHD KHOZAM", "NUR MAHFUZAH BINTI AHMAD TAJUDDIN", "NUR ROSLINA BINTI RAMLI", "NURALIA BINTI KHALID", "NUR'ASHIKIN BT AHMAD", "NURHIYAH BINTI ABU BAKAR", "NURUL AMIRA BINTI YAAKOB", "NURUL FARRAHIN BINTI ABU", "NURUL IZATI BINTI MOHAMAD KHAIRI", "NURWAHIDAH BINTI MEOR AKIL JULNASIR", "PARAMASIVAN A/L MUNUSAMY", "PARTHIBEN A/L CHINNAN", "PUTERI FATEN NADIA BINTI ROZIZI", "ROHAIZAD BIN REZUAN", "ROZANA BT JAMALUDIN", "ROZILA BT NAWANG", "ROZIYATON BIDAYAH BT IBRAHIM", "SALLEH BIN ISMAIL", "SAZALI BIN SAID", "SHAHRUL BIN SHAMSUDDIN", "SHAIFOL AZLI BIN ZAKARIA", "SHIR MOHD BIN NOORDIN", "SITI AISHAH BINTI ABDULLAH", "SITI 'AMIRAH BINTI BASIRUN", "SITI HAJA BINTI KASIM", "SITI HAJAR BT MAT", "SITI MUNIRAH BINTI ABDUL MALIK", "SITI NUR MADEEHAH BINTI ISMAWI", "SITI SALWA BINTI ABDULLAH", "SITI ZAINI BINTI ZAINOL ABIDIN", "SUZANA BINTI AHMAD", "SYAZWANI BINTI MOHD ZUKI", "SYUHADA BINTI MAN", "TARUDIN BIN ABDUL HAMID", "TENGKU ZAINALABIDIN BIN TENGKU AHMAD", "VIKNESHWERY A/P VELOO GOPAL", "WAN NI HALIMATUN SAADIAH BINTI MOHD NAZIN", "WAN SAMSUHAIMI BIN MUSA", "YA'AKUB BIN ISMAIL", "ZAINOL AKBAR BIN ZAINOL ABIDIN", "ZARANI BIN WAHAB"];
         const senaraiJabatan = ["JABATAN PENDIDIKAN UMUM", "JABATAN MEKANIKAL", "JABATAN KEJURUTERAAN AWAM", "JABATAN ELEKTRIK & ELEKTRONIK", "JABATAN TEKNOLOGI MAKLUMAT", "JABATAN PERNIAGAAN"];
         const senaraiUnit = ["BAHASA", "KEMANUSIAAN", "SAINS & MATEMATIK", "TERAS UMUM", "PENGURUSAN PERNIAGAAN", "TEKNOLOGI AUTOMATIF", "TEKNOLOGI PENYEJUKAN & PENYAMANAN UDARA", "TEKNOLOGI KIMPALAN", "TEKNOLOGI PEMESINAN INDUSTRI", "TEKNOLOGI ELEKTRIK", "TEKNOLOGI ELEKTRONIK", "TEKNOLOGI PEMBINAAN", "TEKNOLOGI KOMPUTERAN"];
-        
-        const mataJawatan = {"Ketua Jabatan":9, "Ketua Unit (Vokasional)":7, "Ketua Warden":7, "Guru Data":5, "Ketua Unit (Akademik/Insaniah)":5, "Ketua Unit HEP":5, "Ketua Unit Pembangunan":5, "Ketua Unit Perhubungan Awam":5, "Ketua Unit Psikologi & Kerjaya":5, "Ketua Unit Pusat Sumber":5, "Ketua Unit Sukan & KoKurikulum":5, "Ketua Unit Teknologi Maklumat":5, "Pegawai Aset":5, "Warden":5, "Ketua Bengkel":4, "Ketua Unit Pasukan Uniform":4, "Mentor":4, "Pengerusi KKSK":4, "Penyelaras Jawatankuasa Jaminan Kualiti /Khas":4, "Penyelaras Kursus / Unit (Akademik)":4, "Penyelaras Unit Sokongan Akademik / Biro":4, "Penyelia OJT (PPO)":4, "Ketua Unit Sukan & Permainan":3, "Penolong Warden":3, "Penolong Ketua":3, "Setiausaha":3, "Bendahari":2, "Ketua Unit Kelab Dan Persatuan":2, "Penolong Setiausaha":2, "Ahli , AJK":1};
+        const mataJawatan = {"Ketua Jabatan":9, "Ketua Unit (Vokasional)":7, "Ketua Warden":7, "Guru Data":5, "Ketua Unit Akademik":5, "Ketua Bengkel":4, "Mentor":4, "Setiausaha":3, "Bendahari":2, "AJK":1};
 
-        window.onload = () => { populate('nama', senaraiNama); populate('jabatan', senaraiJabatan); populate('unit', senaraiUnit); addRowHakiki(); addRowRutin(); addRowAdhoc(); };
+        window.onload = () => { 
+            populate('nama', senaraiNama); populate('jabatan', senaraiJabatan); populate('unit', senaraiUnit); 
+            addRowHakiki(); addRowRutin(); addRowAdhoc(); 
+        };
+
         function populate(id, list) { document.getElementById(id).innerHTML = list.map(v => `<option value="${v}">${v}</option>`).join(''); }
         function renumber(cid) { document.querySelectorAll(`#${cid} tr`).forEach((r, i) => r.cells[0].innerText = i + 1); }
 
@@ -237,11 +248,14 @@
             else { sBox.innerText = "BEBAN TINGGI"; sBox.style.color = "#f87171"; }
         }
 
+        // FIREBASE ACTIONS
         function saveRecord() {
-            let db = JSON.parse(localStorage.getItem('eziATP_Final')) || [];
-            let entry = {
-                id: Date.now(), nama: document.getElementById('nama').value, jabatan: document.getElementById('jabatan').value,
-                unit: document.getElementById('unit').value, bulan: document.getElementById('bulan').value,
+            const entry = {
+                id: Date.now(), 
+                nama: document.getElementById('nama').value, 
+                jabatan: document.getElementById('jabatan').value,
+                unit: document.getElementById('unit').value, 
+                bulan: document.getElementById('bulan').value,
                 hTotal: Array.from(document.querySelectorAll('.h-atp')).reduce((s, e) => s + parseFloat(e.innerText), 0).toFixed(1),
                 rTotal: Array.from(document.querySelectorAll('.r-atp')).reduce((s, e) => s + parseFloat(e.innerText), 0).toFixed(1),
                 adCount: Array.from(document.querySelectorAll('.ad-name')).filter(e => e.value.trim() !== "").length,
@@ -250,68 +264,80 @@
                 adhoc: Array.from(document.querySelectorAll('#rows-adhoc tr')).filter(r => r.querySelector('.ad-name').value).map((r, i) => ({ bil: i+1, nama: r.querySelector('.ad-name').value, task: r.querySelector('.ad-task').value })),
                 total: document.getElementById('grand-total').innerText
             };
-            db.push(entry); localStorage.setItem('eziATP_Final', JSON.stringify(db)); alert("Rekod Berjaya Disimpan!");
+
+            db.ref('eziATP/' + entry.id).set(entry)
+              .then(() => alert("Data Berjaya Disimpan ke Cloud!"))
+              .catch(e => alert("Ralat: " + e.message));
         }
 
         function showMainReport() {
             document.getElementById('main-content').classList.add('hidden');
             document.getElementById('report-section').classList.remove('hidden');
-            const tbody = document.getElementById('report-body'); tbody.innerHTML = '';
-            let db = JSON.parse(localStorage.getItem('eziATP_Final')) || [];
-            db.forEach((r, i) => {
-                tbody.innerHTML += `<tr class="border-b border-slate-300">
-                    <td class="p-2 text-center border border-slate-300">${i+1}</td>
-                    <td class="p-2 border border-slate-300 uppercase font-bold">${r.nama}</td>
-                    <td class="p-2 text-center border border-slate-300">${r.hTotal}</td>
-                    <td class="p-2 text-center border border-slate-300">${r.rTotal}</td>
-                    <td class="p-2 text-center border border-slate-300 font-bold text-emerald-700">${r.adCount}</td>
-                    <td class="p-2 text-center border border-slate-300 font-bold">${r.total}</td>
-                    <td class="p-2 text-center border border-slate-300 no-print">
-                        <div class="flex gap-1 justify-center">
-                            <button onclick="printIndividual(${r.id})" class="bg-emerald-600 text-white px-2 py-1 rounded text-[9px] font-bold">CETAK</button>
-                            <button onclick="deleteRecord(${r.id})" class="bg-red-600 text-white px-2 py-1 rounded text-[9px] font-bold">✖</button>
-                        </div>
-                    </td>
-                </tr>`;
+            const tbody = document.getElementById('report-body');
+            
+            db.ref('eziATP').on('value', (snapshot) => {
+                tbody.innerHTML = '';
+                const data = snapshot.val();
+                let i = 1;
+                for (let key in data) {
+                    let r = data[key];
+                    tbody.innerHTML += `<tr class="border-b border-slate-300">
+                        <td class="p-2 text-center border border-slate-300">${i++}</td>
+                        <td class="p-2 border border-slate-300 uppercase font-bold">${r.nama}</td>
+                        <td class="p-2 text-center border border-slate-300">${r.hTotal}</td>
+                        <td class="p-2 text-center border border-slate-300">${r.rTotal}</td>
+                        <td class="p-2 text-center border border-slate-300 font-bold text-emerald-700">${r.adCount}</td>
+                        <td class="p-2 text-center border border-slate-300 font-bold">${r.total}</td>
+                        <td class="p-2 text-center border border-slate-300 no-print">
+                            <div class="flex gap-1 justify-center">
+                                <button onclick="printIndividual('${key}')" class="bg-emerald-600 text-white px-2 py-1 rounded text-[9px] font-bold">CETAK</button>
+                                <button onclick="deleteRecord('${key}')" class="bg-red-600 text-white px-2 py-1 rounded text-[9px] font-bold">✖</button>
+                            </div>
+                        </td>
+                    </tr>`;
+                }
             });
         }
 
-        function deleteRecord(id) {
-            if(confirm("Padam rekod ini?")) {
-                let db = JSON.parse(localStorage.getItem('eziATP_Final')) || [];
-                db = db.filter(x => x.id !== id);
-                localStorage.setItem('eziATP_Final', JSON.stringify(db));
-                showMainReport();
+        function deleteRecord(key) {
+            if(confirm("Padam rekod ini dari Database?")) {
+                db.ref('eziATP/' + key).remove();
             }
         }
 
-        function printIndividual(id) {
-            let r = (JSON.parse(localStorage.getItem('eziATP_Final')) || []).find(x => x.id === id);
-            document.getElementById('report-section').classList.add('hidden');
-            document.getElementById('individual-slip').classList.remove('hidden');
-            document.getElementById('slip-meta').innerHTML = `<div><strong>NAMA:</strong> ${r.nama}</div><div><strong>SESI:</strong> ${r.bulan}</div><div><strong>JABATAN:</strong> ${r.jabatan}</div><div><strong>UNIT:</strong> ${r.unit}</div>`;
-            
-            let content = `
-                <table class="w-full">
-                    <thead><tr><th colspan="7" class="report-sub-header">1. AMANAH TUGAS SYARAHAN (HAKIKI)</th></tr><tr><th>BIL</th><th>KOD</th><th>KURSUS</th><th>TEORI</th><th>AMALI</th><th>KELAS</th><th>ATP</th></tr></thead>
-                    <tbody>${r.hakiki.map(h => `<tr><td class="text-center">${h.bil}</td><td>${h.kod}</td><td>${h.nama}</td><td class="text-center">${h.t}</td><td class="text-center">${h.a}</td><td class="text-center">${h.c}</td><td class="text-right">${h.atp}</td></tr>`).join('')}</tbody>
-                </table>
-                <table class="w-full mt-2">
-                    <thead><tr><th colspan="4" class="report-sub-header">2. TUGAS-TUGAS RUTIN (BERMATA)</th></tr><tr><th>BIL</th><th>UNIT/JK</th><th>BIDANG</th><th>ATP</th></tr></thead>
-                    <tbody>${r.rutin.map(rt => `<tr><td class="text-center">${rt.bil}</td><td>${rt.nama}</td><td>${rt.bidang}</td><td class="text-right">${rt.atp}</td></tr>`).join('')}</tbody>
-                </table>
-                <table class="w-full mt-2">
-                    <thead><tr><th colspan="3" class="report-sub-header">3. TUGAS-TUGAS BUKAN RUTIN (AD-HOC)</th></tr><tr><th>BIL</th><th>PROGRAM AD-HOC</th><th>PERANAN</th></tr></thead>
-                    <tbody>${r.adhoc.length > 0 ? r.adhoc.map(a => `<tr><td class="text-center">${a.bil}</td><td>${a.nama}</td><td>${a.task}</td></tr>`).join('') : '<tr><td colspan="3" class="text-center italic">Tiada rekod</td></tr>'}</tbody>
-                </table>
-                <div class="text-right font-bold mt-2">JUMLAH KESELURUHAN ATP: ${r.total} JAM</div>`;
-            
-            document.getElementById('slip-content').innerHTML = content;
-            document.getElementById('sig-staff-name').innerText = r.nama;
-            window.print();
+        function printIndividual(key) {
+            db.ref('eziATP/' + key).once('value').then((snapshot) => {
+                const r = snapshot.val();
+                document.getElementById('report-section').classList.add('hidden');
+                document.getElementById('individual-slip').classList.remove('hidden');
+                document.getElementById('slip-meta').innerHTML = `<div><strong>NAMA:</strong> ${r.nama}</div><div><strong>SESI:</strong> ${r.bulan}</div><div><strong>JABATAN:</strong> ${r.jabatan}</div><div><strong>UNIT:</strong> ${r.unit}</div>`;
+                
+                let content = `
+                    <table class="w-full">
+                        <thead><tr><th colspan="7" class="report-sub-header">1. AMANAH TUGAS SYARAHAN (HAKIKI)</th></tr><tr><th>BIL</th><th>KOD</th><th>KURSUS</th><th>TEORI</th><th>AMALI</th><th>KELAS</th><th>ATP</th></tr></thead>
+                        <tbody>${r.hakiki.map(h => `<tr><td class="text-center">${h.bil}</td><td>${h.kod}</td><td>${h.nama}</td><td class="text-center">${h.t}</td><td class="text-center">${h.a}</td><td class="text-center">${h.c}</td><td class="text-right">${h.atp}</td></tr>`).join('')}</tbody>
+                    </table>
+                    <table class="w-full mt-2">
+                        <thead><tr><th colspan="4" class="report-sub-header">2. TUGAS-TUGAS RUTIN (BERMATA)</th></tr><tr><th>BIL</th><th>UNIT/JK</th><th>BIDANG</th><th>ATP</th></tr></thead>
+                        <tbody>${r.rutin.map(rt => `<tr><td class="text-center">${rt.bil}</td><td>${rt.nama}</td><td>${rt.bidang}</td><td class="text-right">${rt.atp}</td></tr>`).join('')}</tbody>
+                    </table>
+                    <table class="w-full mt-2">
+                        <thead><tr><th colspan="3" class="report-sub-header">3. TUGAS-TUGAS BUKAN RUTIN (AD-HOC)</th></tr><tr><th>BIL</th><th>PROGRAM AD-HOC</th><th>PERANAN</th></tr></thead>
+                        <tbody>${r.adhoc && r.adhoc.length > 0 ? r.adhoc.map(a => `<tr><td class="text-center">${a.bil}</td><td>${a.nama}</td><td>${a.task}</td></tr>`).join('') : '<tr><td colspan="3" class="text-center italic">Tiada rekod</td></tr>'}</tbody>
+                    </table>
+                    <div class="text-right font-bold mt-2">JUMLAH KESELURUHAN ATP: ${r.total} JAM</div>`;
+                
+                document.getElementById('slip-content').innerHTML = content;
+                document.getElementById('sig-staff-name').innerText = r.nama;
+                window.print();
+            });
         }
 
-        function backToMain() { document.getElementById('main-content').classList.remove('hidden'); document.getElementById('report-section').classList.add('hidden'); document.getElementById('individual-slip').classList.add('hidden'); }
+        function backToMain() { 
+            document.getElementById('main-content').classList.remove('hidden'); 
+            document.getElementById('report-section').classList.add('hidden'); 
+            document.getElementById('individual-slip').classList.add('hidden'); 
+        }
     </script>
 </body>
 </html>
