@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EZI-ATP KV KULIM</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tailwindcss-cdn@3.4.16/tailwindcss.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
     body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f1f5f9; color: #1e293b; }
@@ -75,8 +75,8 @@
     <div class="card-premium p-7">
       <div class="flex justify-between items-center mb-5">
         <div>
-          <h3 class="font-black text-slate-800 uppercase text-sm">1. Amanah Tugas Syarahan (Hakiki)</h3>
-          <p class="text-[10px] text-slate-400 mt-1">Formula: ATP = (Teori + Amali) × 1.5 + Klinikal</p>
+          <h3 class="font-black text-slate-800 uppercase text-sm">1. Amanah Tugas Akademik (Hakiki)</h3>
+          <p class="text-[10px] text-slate-400 mt-1">Formula: ATP = (Teori + Amali) × 1.5 + Kelas</p>
         </div>
         <button onclick="addHakiki()" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-xl font-bold text-xs hover:bg-amber-200 transition">+ TAMBAH</button>
       </div>
@@ -208,7 +208,7 @@ function addHakiki() {
     <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400">Nama Kursus</label><input type="text" placeholder="Prinsip Ekonomi" class="input-premium h-kursus"></div>
     <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400 text-center">Teori</label><input type="number" value="0" min="0" class="input-premium text-center h-t" oninput="calc()"></div>
     <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400 text-center">Amali</label><input type="number" value="0" min="0" class="input-premium text-center h-a" oninput="calc()"></div>
-    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400 text-center">Klinikal</label><input type="number" value="0" min="0" class="input-premium text-center h-c" oninput="calc()"></div>
+    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400 text-center">Kelas</label><input type="number" value="0" min="0" class="input-premium text-center h-c" oninput="calc()"></div>
     <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400 text-right">Mata ATA</label><span class="ata-badge h-ata">0.0</span></div>
     <div class="text-center pt-6"><button onclick="this.closest('div.grid').remove();calc()" class="text-red-400 font-black text-xl hover:text-red-600">×</button></div>
   `;
@@ -341,8 +341,8 @@ function renderSlip(data) {
   document.getElementById('slip-content').innerHTML = `
     <table>
       <thead>
-        <tr><th colspan="7" class="sec-hdr">1. Amanah Tugas Syarahan (Hakiki)</th></tr>
-        <tr><th>Bil</th><th>Kod</th><th>Kursus</th><th>Teori</th><th>Amali</th><th>Klinikal</th><th>ATP</th></tr>
+        <tr><th colspan="7" class="sec-hdr">1. Amanah Tugas Akademik (Hakiki)</th></tr>
+        <tr><th>Bil</th><th>Kod</th><th>Kursus</th><th>Teori</th><th>Amali</th><th>Kelas</th><th>ATP</th></tr>
       </thead>
       <tbody>${trHakiki || '<tr><td colspan="7" align="center" style="font-style:italic;color:#888">Tiada rekod</td></tr>'}</tbody>
     </table>
