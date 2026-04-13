@@ -87,7 +87,7 @@
     <div class="card-premium p-7">
       <div class="flex justify-between items-center mb-5">
         <div>
-          <h3 class="font-black text-slate-800 uppercase text-sm">2. Tugas-Tugas Rutin (Bermata)</h3>
+          <h3 class="font-black text-slate-800 uppercase text-sm">2. Tugas-Tugas Rutin (ATA)</h3>
           <p class="text-[10px] text-slate-400 mt-1">Pilih jawatan & masukkan jam ATP mengikut jadual rasmi</p>
         </div>
         <button onclick="addRutin()" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-xl font-bold text-xs hover:bg-amber-200 transition">+ TAMBAH</button>
@@ -101,7 +101,7 @@
         <h3 class="font-black text-slate-800 uppercase text-sm">3. Tugas Bukan Rutin (Ad-Hoc)</h3>
         <button onclick="addAdhoc()" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-xl font-bold text-xs hover:bg-amber-200 transition">+ TAMBAH</button>
       </div>
-      <div id="list-adhoc" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+      <div id="list-adhoc" class="space-y-3"></div>
     </div>
 
     <!-- JUMLAH & SIMPAN -->
@@ -228,7 +228,7 @@ function addRutin() {
     <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400">Jawatan / Peranan</label>
       <select class="input-premium r-bidang" onchange="autoFillAtp(this)">${opts}</select>
     </div>
-    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400 text-right">Jam ATP</label><input type="number" value="1" min="0" step="0.5" class="input-premium text-center r-atp" oninput="calc()"></div>
+    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400 text-right">Jam ATA</label><input type="number" value="1" class="ata-badge r-atp" readonly style="cursor:default;"></div>
     <div class="text-center pt-6"><button onclick="this.closest('div.grid').remove();calc()" class="text-red-400 font-black text-xl hover:text-red-600">×</button></div>
   `;
   c.appendChild(d);
@@ -249,13 +249,14 @@ function autoFillAtp(sel) {
 function addAdhoc() {
   const c = document.getElementById('list-adhoc');
   const d = document.createElement('div');
-  d.className = "flex flex-col gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-100";
+  d.className = "grid gap-3 items-end bg-slate-50 p-4 rounded-2xl border border-slate-100";
+  d.style.gridTemplateColumns = "5fr 4fr 0.5fr";
   const opts = ADHOC_SUGGESTIONS.map(s => `<option value="${s}">`).join('');
   d.innerHTML = `
     <datalist id="adhoc-dlist">${opts}</datalist>
     <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400">Nama Program</label><input list="adhoc-dlist" placeholder="Cth: KV Skill / Hari Sukan" class="input-premium a-nama"></div>
     <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400">Peranan</label><input type="text" placeholder="AJK / Pengerusi / Jurulatih" class="input-premium a-peran"></div>
-    <button onclick="this.parentElement.remove()" class="text-red-400 text-[10px] font-bold text-right uppercase hover:text-red-600">Hapus</button>
+    <div class="text-center pt-6"><button onclick="this.closest('div.grid').remove()" class="text-red-400 font-black text-xl hover:text-red-600">×</button></div>
   `;
   c.appendChild(d);
 }
