@@ -20,11 +20,12 @@
             th { background-color: #f1f5f9 !important; color: black !important; border: 1px solid black !important; padding: 4px; font-size: 8pt; }
             td { background-color: white !important; color: black !important; border: 1px solid black !important; padding: 4px; font-size: 8pt; }
             .report-sub-header { background-color: #e2e8f0 !important; font-weight: bold; text-align: left; padding: 5px; border: 1px solid black; }
-            .signature-container { display: flex; justify-content: space-between; margin-top: 50px; page-break-inside: avoid; }
+            .signature-container { display: flex; justify-content: space-between; margin-top: 30px; page-break-inside: avoid; }
             .sig-block { width: 280px; }
             .sig-label { margin-bottom: 3.5rem; font-size: 10pt; }
             .sig-line { border-top: 1px solid black; margin-bottom: 4px; }
             .sig-post { font-size: 9pt; }
+            .declaration-text { font-size: 9pt; line-height: 1.4; margin-top: 20px; margin-bottom: 20px; text-align: justify; }
         }
     </style>
 </head>
@@ -108,7 +109,10 @@
                     <option value="Outreach">
                     <option value="Inreach">
                     <option value="Pertandingan PTA">
-                    <option value="Kejohanan Sukan KV">
+                    <option value="Pertandingan BMC">
+                    <option value="Pertandingan Hari Kemerdekaan">
+                    <option value="Pertandingan Ihya Ramadhan">
+                    <option value="Konvokesyen">
                 </datalist>
                 <button onclick="addRowAdhoc()" class="mt-4 text-xs font-bold text-yellow-400 no-print hover:underline">+ TAMBAH BARIS</button>
             </div>
@@ -163,6 +167,11 @@
             
             <div id="slip-content"></div>
 
+            <div class="declaration-text">
+                Berhubung amanah tugas dan jumlah jam ATP di atas, dengan ini saya mengesahkan akan melaksanakan tugas dan tanggungjawab yang diberikan bermula <strong>1 Januari tahun semasa</strong> dengan penuh dedikasi, integriti dan komitmen.
+                <br><br>Sekian, terima kasih.
+            </div>
+
             <div class="signature-container">
                 <div class="sig-block">
                     <p class="sig-label">Disediakan oleh:</p>
@@ -173,8 +182,8 @@
                 <div class="sig-block">
                     <p class="sig-label">Disahkan oleh:</p>
                     <div class="sig-line"></div>
-                    <div class="flex justify-between font-bold w-full"><span>(</span><span>)</span></div>
-                    <p class="sig-post text-center">Ketua Jaminan Kualiti</p>
+                    <div class="flex justify-between font-bold w-full"><span>(</span><span class="flex-grow text-center"></span><span>)</span></div>
+                    <p class="sig-post text-center">Ketua Jaminan Kualiti / Pengarah</p>
                 </div>
             </div>
             <div class="mt-10 text-center no-print">
@@ -184,6 +193,7 @@
     </div>
 
     <script>
+        // Data lists tetap sama seperti sebelumnya
         const senaraiNama = ["AINUN BADARIAH BINTI MOHD ISA", "ALIANA BINTI AZIZAN", "ALLIRANI A/P CHANDRAKESAN", "ALYANI NAZIRAH BINTI ABD RASHID", "AMALINA ZAWANI BINTI AHMAD SHABRI", "AMIR FAKHRI BIN ABDUL JAMIL", "AMRINA BINTI ABU BAKAR", "ANIS IZWANI BINTI MD RADZI", "ANIZAH BINTI AHMAD", "ARUNA A/P MUNIANDY", "AZHAR B AHMAD", "AZRUL BIN AHMAD", "FAIZA BINTI AHMAD PHUAT", "FAIZAH BINTI HASSAN", "FARIZA BINTI HUSSIN @ YUSOF", "FATIN FARHANA BT NORDIN", "HAKIMAH BINTI MHD YUSUF", "HALIMATON SADIAH BINTI MOHD ROSLI", "HALIMATULSAADIAH BINTI CHE ANI", "HAZIRA BT ABDUL LATIF", "HURAIAH BINTI YAHAYA", "INTAN ROHAIZAN BINTI AHMAD", "IZATUL ANIS BINTI MD RODI", "KAMESWARY A/P S.RAMASAMY", "KHAIRUL AZHAR BIN SHAMSULDIN", "KU NOR ATIKAH BINTI KU SHUIB", "LIM HUI KEAN", "MAZURA BINTI MAMAT", "MIOR MUHAMMAD MAHADHIR BIN ZAHARI", "MOHAMAD AMIR BIN MOHAMAD KHIR", "MOHAMAD RIDZUAN BIN SAAID", "MOHAMAD SHAHRUL AMRI BIN RAMLI", "MOHAMMAD HUZAIRIE BIN SUHAIMI", "MOHD ABI ALKAM BIN BAHARUDIN", "MOHD ASRI BIN TAHA", "MOHD FAKRUL HAKIMI BIN ZAINAL ABIDIN", "MOHD FIKRI BIN HAJI AHMAD", "MOHD HAFIZ BIN FAKHRURAZI", "MOHD HAFIZ BIN SALLEH", "MOHD HANIF BIN ISMAIL", "MOHD IKHWAN BIN MOHD GHAZALI", "MOHD ILMI BIN IBRAHIM", "MOHD ISHAK BIN ABU BAKAR", "MOHD KHIDIR RUSTAM BIN ABDUL RAHMAN", "MOHD NASIR BIN MOHAMAD NORDIN", "MOHD NIZWAN BIN ABDULLAH", "MOHD SUHAIRI BIN MOHD ISA", "MOHD YUSUF BIN HASSAN", "MOHD ZULFAHMI BIN MOHD BADARUDIN", "MUHAMAD FAIZAL BIN DAHLAN", "MUHAMAD NAZDAN BIN ALI", "MUHAMAD SHAHRIL BIN MUHAMAD SAUPI", "MUHAMAD ZAKI BIN ABDULLAH", "MUHAMAD ZAMBRI BIN ZAINOL", "MUHAMMAD AFIQ BIN MOHD ALLIMI", "MUHAMMAD FAIZ BIN ROSLAN", "MUHAMMAD FARIZ BIN CHE NOH", "MUHAMMAD SYAUQI ASYRAF BIN AHMAD TAJUDIN", "MUHAMMAD TAKIYUDIN BIN SUKERI", "MUNIR BIN MOHAMAD NOOR", "NADZIRAH BINTI MOHD JAUAH", "NADZRIAH BINTI LONG @ ABDUL SAMAH", "NASHOBUDIN BIN BAKAR", "NAZATUN ISMANIZA BINTI NAYAN", "NOOR 'AINI BINTI KHALID", "NOOR AZIRA BINTI HAMZAH", "NOOR AZIZAH BINTI MOHD ARSHAD", "NOOR AZLIZA BINTI AHMAD", "NOOR FATIN BT JAAFAR", "NOOR HISHAM BIN MOHD YUSOFF", "NOOR SARAH BINTI ABD RAHIM", "NOORAMERA BINTI ABU HASAN", "NOORZAIMAH BT MD ISA", "NOR AISHA BT. ALIAS", "NOR ASYITAH BINTI MOHAMAD NASROL", "NOR AZIZA BT OTHMAN", "NORA BINTI AB RAHMAN", "NORADAWIYAH BINTI AZMAN", "NORASHIDA BINTI KHALID", "NORFARAHIYAH BINTI ABDULLAH", "NORFATIMAH BINTI DOLLAH", "NORHAYATI BINTI ISHAK", "NORZIANA BT OTHMAN", "NUR AIESYAH BINTI ABDUL HALIM", "NUR AINAA AMIRAH BINTI MOHD YATIM", "NUR AMINAH BINTI ISMAIL", "NUR AZIZAH BINTI NOZORI", "NUR FAZLIYAH BINTI MOHD KHOZAM", "NUR MAHFUZAH BINTI AHMAD TAJUDDIN", "NUR ROSLINA BINTI RAMLI", "NURALIA BINTI KHALID", "NUR'ASHIKIN BT AHMAD", "NURHIYAH BINTI ABU BAKAR", "NURUL AMIRA BINTI YAAKOB", "NURUL FARRAHIN BINTI ABU", "NURUL IZATI BINTI MOHAMAD KHAIRI", "NURWAHIDAH BINTI MEOR AKIL JULNASIR", "PARAMASIVAN A/L MUNUSAMY", "PARTHIBEN A/L CHINNAN", "PUTERI FATEN NADIA BINTI ROZIZI", "ROHAIZAD BIN REZUAN", "ROZANA BT JAMALUDIN", "ROZILA BT NAWANG", "ROZIYATON BIDAYAH BT IBRAHIM", "SALLEH BIN ISMAIL", "SAZALI BIN SAID", "SHAHRUL BIN SHAMSUDDIN", "SHAIFOL AZLI BIN ZAKARIA", "SHIR MOHD BIN NOORDIN", "SITI AISHAH BINTI ABDULLAH", "SITI 'AMIRAH BINTI BASIRUN", "SITI HAJA BINTI KASIM", "SITI HAJAR BT MAT", "SITI MUNIRAH BINTI ABDUL MALIK", "SITI NUR MADEEHAH BINTI ISMAWI", "SITI SALWA BINTI ABDULLAH", "SITI ZAINI BINTI ZAINOL ABIDIN", "SUZANA BINTI AHMAD", "SYAZWANI BINTI MOHD ZUKI", "SYUHADA BINTI MAN", "TARUDIN BIN ABDUL HAMID", "TENGKU ZAINALABIDIN BIN TENGKU AHMAD", "VIKNESHWERY A/P VELOO GOPAL", "WAN NI HALIMATUN SAADIAH BINTI MOHD NAZIN", "WAN SAMSUHAIMI BIN MUSA", "YA'AKUB BIN ISMAIL", "ZAINOL AKBAR BIN ZAINOL ABIDIN", "ZARANI BIN WAHAB"];
         const senaraiJabatan = ["JABATAN PENDIDIKAN UMUM", "JABATAN MEKANIKAL", "JABATAN KEJURUTERAAN AWAM", "JABATAN ELEKTRIK & ELEKTRONIK", "JABATAN TEKNOLOGI MAKLUMAT", "JABATAN PERNIAGAAN"];
         const senaraiUnit = ["BAHASA", "KEMANUSIAAN", "SAINS & MATEMATIK", "TERAS UMUM", "PENGURUSAN PERNIAGAAN", "TEKNOLOGI AUTOMATIF", "TEKNOLOGI PENYEJUKAN & PENYAMANAN UDARA", "TEKNOLOGI KIMPALAN", "TEKNOLOGI PEMESINAN INDUSTRI", "TEKNOLOGI ELEKTRIK", "TEKNOLOGI ELEKTRONIK", "TEKNOLOGI PEMBINAAN", "TEKNOLOGI KOMPUTERAN"];
