@@ -9,19 +9,19 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f1f5f9; }
         .gold-title { color: #FFD700; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
-        .input-box { background-color: #ffffff !important; color: #000000 !important; border: 2px solid #FFD700; font-weight: 600; height: 38px; font-size: 0.75rem; padding: 0 10px; }
+        .input-box { background-color: #ffffff !important; color: #000000 !important; border: 2px solid #FFD700; font-weight: 600; height: 42px; font-size: 0.8rem; padding: 0 10px; }
         .glass-card { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 215, 0, 0.4); }
         
         @media print {
             body { background-color: white !important; color: black !important; padding: 0; margin: 0; }
             .no-print { display: none !important; }
             .print-area { display: block !important; width: 100%; }
-            table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
-            th, td { border: 1px solid black !important; padding: 6px; font-size: 9pt; color: black !important; }
-            th { background-color: #f2f2f2 !important; }
-            .report-sub-header { background-color: #e2e8f0 !important; font-weight: bold; text-align: left; padding: 8px; border: 1px solid black; }
-            .sig-container { display: flex; justify-content: space-between; margin-top: 50px; }
-            .sig-box { width: 250px; text-align: center; }
+            table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background-color: white !important; }
+            th { background-color: #f1f5f9 !important; color: black !important; border: 1px solid black !important; padding: 6px; font-size: 9pt; }
+            td { background-color: white !important; color: black !important; border: 1px solid black !important; padding: 6px; font-size: 9pt; }
+            .report-sub-header { background-color: #e2e8f0 !important; font-weight: bold; text-align: left; padding: 8px; border: 1px solid black; text-transform: uppercase; }
+            .signature-container { display: flex; justify-content: space-between; margin-top: 50px; page-break-inside: avoid; }
+            .sig-block { width: 250px; text-align: center; }
             .sig-line { border-top: 1px solid black; margin-top: 60px; font-weight: bold; text-transform: uppercase; }
         }
     </style>
@@ -32,36 +32,37 @@
         <div class="no-print flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
             <div>
                 <h1 class="text-4xl font-black text-white italic tracking-tighter">EZI - <span style="color: #FFD700;">ATP</span></h1>
-                <p class="text-slate-400 text-xs font-medium uppercase tracking-wide">PENGIRAAN AMANAH TUGAS PENSYARAH</p>
+                <p class="text-slate-400 text-xs font-medium uppercase tracking-wide">SISTEM PENGIRAAN AMANAH TUGAS PENSYARAH</p>
             </div>
             <div class="flex flex-wrap gap-2">
                 <button onclick="location.reload()" class="bg-slate-700 px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-600 transition">RESET</button>
-                <button onclick="showMainReport()" class="bg-blue-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-blue-500 transition">📊 LAPORAN KESELURUHAN</button>
+                <button onclick="showMainReport()" class="bg-blue-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-blue-500 transition">📊 LAPORAN LIVE</button>
             </div>
         </div>
 
         <div id="main-content">
-            <div class="glass-card rounded-3xl p-6 mb-6 no-print">
-                <h2 class="gold-title text-xs mb-4">MAKLUMAT PENSYARAH</h2>
+            <div class="glass-card rounded-3xl p-8 mb-6 no-print">
+                <h2 class="gold-title text-sm mb-6">MAKLUMAT PENSYARAH</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div><label class="gold-title text-[10px] mb-1 block">NAMA</label><select id="nama" class="input-box w-full rounded-lg"></select></div>
                     <div><label class="gold-title text-[10px] mb-1 block">JABATAN</label><select id="jabatan" class="input-box w-full rounded-lg"></select></div>
                     <div><label class="gold-title text-[10px] mb-1 block">UNIT</label><select id="unit" class="input-box w-full rounded-lg"></select></div>
-                    <div><label class="gold-title text-[10px] mb-1 block">SESI</label><input type="text" id="bulan" class="input-box w-full rounded-lg" value="JAN-DISEMBER 2026"></div>
+                    <div><label class="gold-title text-[10px] mb-1 block">SESI/BULAN</label><input type="text" id="bulan" class="input-box w-full rounded-lg" value="JAN-DISEMBER 2026"></div>
                 </div>
             </div>
 
-            <div class="glass-card rounded-3xl p-6 mb-6 overflow-x-auto">
-                <h2 class="gold-title text-xs mb-4">1. TUGAS SYARAHAN (HAKIKI)</h2>
+            <div class="glass-card rounded-3xl p-8 mb-6 overflow-x-auto">
+                <h2 class="gold-title text-sm mb-4">1. AMANAH TUGAS SYARAHAN (HAKIKI)</h2>
                 <table class="w-full text-sm">
                     <thead>
                         <tr class="text-yellow-200 border-b border-slate-700 text-left">
                             <th class="py-2 w-10 text-center">BIL</th>
-                            <th class="py-2">KOD & KURSUS</th>
-                            <th class="py-2 text-center w-16">T</th>
-                            <th class="py-2 text-center w-16">A</th>
-                            <th class="py-2 text-center w-16">C</th>
-                            <th class="py-2 text-right w-20">ATP</th>
+                            <th class="py-2 w-24">KOD</th>
+                            <th class="py-2">KURSUS</th>
+                            <th class="py-2 text-center">T</th>
+                            <th class="py-2 text-center">A</th>
+                            <th class="py-2 text-center">C</th>
+                            <th class="py-2 text-right">ATP</th>
                             <th class="py-2 w-10 no-print"></th>
                         </tr>
                     </thead>
@@ -70,14 +71,15 @@
                 <button onclick="addRowHakiki()" class="mt-4 text-xs font-bold text-yellow-400 no-print hover:underline">+ TAMBAH BARIS</button>
             </div>
 
-            <div class="glass-card rounded-3xl p-6 mb-6 overflow-x-auto">
-                <h2 class="gold-title text-xs mb-4">2. TUGAS RUTIN (BERMATA)</h2>
+            <div class="glass-card rounded-3xl p-8 mb-6 overflow-x-auto">
+                <h2 class="gold-title text-sm mb-4">2. TUGAS-TUGAS RUTIN (BERMATA)</h2>
                 <table class="w-full text-sm">
                     <thead>
                         <tr class="text-yellow-200 border-b border-slate-700 text-left">
                             <th class="py-2 w-10 text-center">BIL</th>
-                            <th class="py-2">JAWATANKUASA / UNIT</th>
-                            <th class="py-2 text-right w-24">ATP</th>
+                            <th class="py-2">UNIT / JAWATANKUASA</th>
+                            <th class="py-2">BIDANG TUGAS</th>
+                            <th class="py-2 text-right">ATP</th>
                             <th class="py-2 w-10 no-print"></th>
                         </tr>
                     </thead>
@@ -86,13 +88,14 @@
                 <button onclick="addRowRutin()" class="mt-4 text-xs font-bold text-yellow-400 no-print hover:underline">+ TAMBAH BARIS</button>
             </div>
 
-            <div class="glass-card rounded-3xl p-6 mb-6 overflow-x-auto">
-                <h2 class="gold-title text-xs mb-4">3. TUGAS AD-HOC</h2>
+            <div class="glass-card rounded-3xl p-8 mb-6 overflow-x-auto">
+                <h2 class="gold-title text-sm mb-4">3. TUGAS-TUGAS BUKAN RUTIN (AD-HOC)</h2>
                 <table class="w-full text-sm">
                     <thead>
                         <tr class="text-yellow-200 border-b border-slate-700 text-left">
                             <th class="py-2 w-10 text-center">BIL</th>
-                            <th class="py-2">PROGRAM / PERISTIWA</th>
+                            <th class="py-2">PROGRAM / PROJEK / AD-HOC</th>
+                            <th class="py-2">PERANAN</th>
                             <th class="py-2 w-10 no-print"></th>
                         </tr>
                     </thead>
@@ -103,45 +106,47 @@
 
             <div class="glass-card rounded-3xl p-8 flex flex-col md:flex-row justify-between items-center border-l-8 border-yellow-400 no-print mb-8">
                 <div>
-                    <p class="gold-title text-[10px]">TOTAL ATP</p>
+                    <p class="gold-title text-[10px]">TOTAL ATP KESELURUHAN</p>
                     <h3 id="grand-total" class="text-6xl font-black text-white">0.0</h3>
                 </div>
-                <button id="btnSave" onclick="saveRecord()" class="bg-emerald-600 px-10 py-4 rounded-2xl font-black text-sm hover:scale-105 transition shadow-lg uppercase tracking-widest">💾 SIMPAN REKOD CLOUD</button>
+                <div class="flex gap-4">
+                    <button id="btnSave" onclick="saveRecord()" class="bg-emerald-600 px-10 py-4 rounded-2xl font-black text-sm hover:scale-105 transition shadow-lg uppercase tracking-widest">💾 SIMPAN KE CLOUD</button>
+                </div>
             </div>
         </div>
 
         <div id="report-section" class="hidden mt-10">
-            <h2 class="text-2xl font-bold text-yellow-400 mb-6 uppercase border-b border-yellow-400 pb-2">Laporan Pengguna</h2>
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm bg-white text-black border-collapse">
+            <h2 class="text-2xl font-bold text-yellow-400 mb-6 uppercase border-b-2 border-yellow-400 pb-2">Laporan Keseluruhan</h2>
+            <div class="overflow-x-auto bg-white rounded-xl">
+                <table class="w-full text-sm text-black border-collapse">
                     <thead>
                         <tr class="bg-slate-800 text-yellow-400">
                             <th class="p-3 border">BIL</th>
-                            <th class="p-3 border text-left">NAMA</th>
+                            <th class="p-3 border text-left">NAMA PENSYARAH</th>
                             <th class="p-3 border">SESI</th>
-                            <th class="p-3 border font-bold">JUMLAH</th>
-                            <th class="p-3 border no-print text-center">TINDAKAN</th>
+                            <th class="p-3 border">JUMLAH ATP</th>
+                            <th class="p-3 border no-print">TINDAKAN</th>
                         </tr>
                     </thead>
                     <tbody id="report-body"></tbody>
                 </table>
             </div>
-            <button onclick="backToMain()" class="mt-6 text-blue-400 underline text-sm no-print italic uppercase font-bold tracking-widest"> Kembali ke Borang </button>
+            <button onclick="backToMain()" class="mt-6 text-blue-400 underline text-sm no-print italic">Kembali ke Borang</button>
         </div>
 
         <div id="individual-slip" class="hidden bg-white text-black p-4">
-            <div class="text-center mb-8">
+            <div class="text-center mb-6">
                 <h1 class="text-xl font-bold underline uppercase">SLIP AMANAH TUGAS PENSYARAH (ATP)</h1>
                 <p class="font-bold">KOLEJ VOKASIONAL KULIM, KEDAH</p>
             </div>
-            <div id="slip-meta" class="grid grid-cols-2 gap-x-10 gap-y-2 text-[10pt] mb-6 border p-4 font-bold"></div>
-            <div id="slip-tables"></div>
-            <div class="sig-container">
-                <div class="sig-box"><p>Disediakan oleh:</p><div class="sig-line" id="sig-name"></div><p>Pensyarah</p></div>
-                <div class="sig-box"><p>Disahkan oleh:</p><div class="sig-line">&nbsp;</div><p>Ketua Jaminan Kualiti / Pengarah</p></div>
+            <div id="slip-meta" class="grid grid-cols-2 gap-y-2 text-[10pt] mb-6 border p-4 font-bold uppercase"></div>
+            <div id="slip-content"></div>
+            <div class="signature-container">
+                <div class="sig-block"><p>Disediakan oleh:</p><div class="sig-line" id="sig-name"></div><p>Pensyarah</p></div>
+                <div class="sig-block"><p>Disahkan oleh:</p><div class="sig-line">&nbsp;</div><p>Ketua Jaminan Kualiti / Pengarah</p></div>
             </div>
             <div class="no-print mt-10 flex gap-4 justify-center">
-                <button onclick="window.print()" class="bg-blue-600 text-white px-8 py-2 rounded-lg font-bold">TEKAN UNTUK CETAK</button>
+                <button onclick="window.print()" class="bg-blue-600 text-white px-8 py-2 rounded-lg font-bold">CETAK SLIP</button>
                 <button onclick="showMainReport()" class="bg-slate-800 text-white px-8 py-2 rounded-lg font-bold">KEMBALI</button>
             </div>
         </div>
@@ -150,37 +155,36 @@
     <script>
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzFN1ECpQwXb1dREw8zVfaK8R5G5ayJFLwyDLkHbp6-uHl9ctzS8kNcOgMw-9hUmoUG/exec";
 
+        // Lists (Data anda dikekalkan)
         const senaraiNama = ["AINUN BADARIAH BINTI MOHD ISA", "ALIANA BINTI AZIZAN", "ALLIRANI A/P CHANDRAKESAN", "ALYANI NAZIRAH BINTI ABD RASHID", "AMALINA ZAWANI BINTI AHMAD SHABRI", "AMIR FAKHRI BIN ABDUL JAMIL", "AMRINA BINTI ABU BAKAR", "ANIS IZWANI BINTI MD RADZI", "ANIZAH BINTI AHMAD", "ARUNA A/P MUNIANDY", "AZHAR B AHMAD", "AZRUL BIN AHMAD", "FAIZA BINTI AHMAD PHUAT", "FAIZAH BINTI HASSAN", "FARIZA BINTI HUSSIN @ YUSOF", "FATIN FARHANA BT NORDIN", "HAKIMAH BINTI MHD YUSUF", "HALIMATON SADIAH BINTI MOHD ROSLI", "HALIMATULSAADIAH BINTI CHE ANI", "HAZIRA BT ABDUL LATIF", "HURAIAH BINTI YAHAYA", "INTAN ROHAIZAN BINTI AHMAD", "IZATUL ANIS BINTI MD RODI", "KAMESWARY A/P S.RAMASAMY", "KHAIRUL AZHAR BIN SHAMSULDIN", "KU NOR ATIKAH BINTI KU SHUIB", "LIM HUI KEAN", "MAZURA BINTI MAMAT", "MIOR MUHAMMAD MAHADHIR BIN ZAHARI", "MOHAMAD AMIR BIN MOHAMAD KHIR", "MOHAMAD RIDZUAN BIN SAAID", "MOHAMAD SHAHRUL AMRI BIN RAMLI", "MOHD HUZAIRIE BIN SUHAIMI", "MOHD ABI ALKAM BIN BAHARUDIN", "MOHD ASRI BIN TAHA", "MOHD FAKRUL HAKIMI BIN ZAINAL ABIDIN", "MOHD FIKRI BIN HAJI AHMAD", "MOHD HAFIZ BIN FAKHRURAZI", "MOHD HAFIZ BIN SALLEH", "MOHD HANIF BIN ISMAIL", "MOHD IKHWAN BIN MOHD GHAZALI", "MOHD ILMI BIN IBRAHIM", "MOHD ISHAK BIN ABU BAKAR", "MOHD KHIDIR RUSTAM BIN ABDUL RAHMAN", "MOHD NASIR BIN MOHAMAD NORDIN", "MOHD NIZWAN BIN ABDULLAH", "MOHD SUHAIRI BIN MOHD ISA", "MOHD YUSUF BIN HASSAN", "MOHD ZULFAHMI BIN MOHD BADARUDIN", "MUHAMAD FAIZAL BIN DAHLAN", "MUHAMAD NAZDAN BIN ALI", "MUHAMAD SHAHRIL BIN MUHAMAD SAUPI", "MUHAMAD ZAKI BIN ABDULLAH", "MUHAMAD ZAMBRI BIN ZAINOL", "MUHAMMAD AFIQ BIN MOHD ALLIMI", "MUHAMMAD FAIZ BIN ROSLAN", "MUHAMMAD FARIZ BIN CHE NOH", "MUHAMMAD SYAUQI ASYRAF BIN AHMAD TAJUDIN", "MUHAMMAD TAKIYUDIN BIN SUKERI", "MUNIR BIN MOHAMAD NOOR", "NADZIRAH BINTI MOHD JAUAH", "NADZRIAH BINTI LONG @ ABDUL SAMAH", "NASHOBUDIN BIN BAKAR", "NAZATUN ISMANIZA BINTI NAYAN", "NOOR 'AINI BINTI KHALID", "NOOR AZIRA BINTI HAMZAH", "NOOR AZIZAH BINTI MOHD ARSHAD", "NOOR AZLIZA BINTI AHMAD", "NOOR FATIN BT JAAFAR", "NOOR HISHAM BIN MOHD YUSOFF", "NOOR SARAH BINTI ABD RAHIM", "NOORAMERA BINTI ABU HASAN", "NOORZAIMAH BT MD ISA", "NOR AISHA BT. ALIAS", "NOR ASYITAH BINTI MOHAMAD NASROL", "NOR AZIZA BT OTHMAN", "NORA BINTI AB RAHMAN", "NORADAWIYAH BINTI AZMAN", "NORASHIDA BINTI KHALID", "NORFARAHIYAH BINTI ABDULLAH", "NORFATIMAH BINTI DOLLAH", "NORHAYATI BINTI ISHAK", "NORZIANA BT OTHMAN", "NUR AIESYAH BINTI ABDUL HALIM", "NUR AINAA AMIRAH BINTI MOHD YATIM", "NUR AMINAH BINTI ISMAIL", "NUR AZIZAH BINTI NOZORI", "NUR FAZLIYAH BINTI MOHD KHOZAM", "NUR MAHFUZAH BINTI AHMAD TAJUDDIN", "NUR ROSLINA BINTI RAMLI", "NURALIA BINTI KHALID", "NUR'ASHIKIN BT AHMAD", "NURHIYAH BINTI ABU BAKAR", "NURUL AMIRA BINTI YAAKOB", "NURUL FARRAHIN BINTI ABU", "NURUL IZATI BINTI MOHAMAD KHAIRI", "NURWAHIDAH BINTI MEOR AKIL JULNASIR", "PARAMASIVAN A/L MUNUSAMY", "PARTHIBEN A/L CHINNAN", "PUTERI FATEN NADIA BINTI ROZIZI", "ROHAIZAD BIN REZUAN", "ROZANA BT JAMALUDIN", "ROZILA BT NAWANG", "ROZIYATON BIDAYAH BT IBRAHIM", "SALLEH BIN ISMAIL", "SAZALI BIN SAID", "SHAHRUL BIN SHAMSUDDIN", "SHAIFOL AZLI BIN ZAKARIA", "SHIR MOHD BIN NOORDIN", "SITI AISHAH BINTI ABDULLAH", "SITI 'AMIRAH BINTI BASIRUN", "SITI HAJA BINTI KASIM", "SITI HAJAR BT MAT", "SITI MUNIRAH BINTI ABDUL MALIK", "SITI NUR MADEEHAH BINTI ISMAWI", "SITI SALWA BINTI ABDULLAH", "SITI ZAINI BINTI ZAINOL ABIDIN", "SUZANA BINTI AHMAD", "SYAZWANI BINTI MOHD ZUKI", "SYUHADA BINTI MAN", "TARUDIN BIN ABDUL HAMID", "TENGKU ZAINALABIDIN BIN TENGKU AHMAD", "VIKNESHWERY A/P VELOO GOPAL", "WAN NI HALIMATUN SAADIAH BINTI MOHD NAZIN", "WAN SAMSUHAIMI BIN MUSA", "YA'AKUB BIN ISMAIL", "ZAINOL AKBAR BIN ZAINOL ABIDIN", "ZARANI BIN WAHAB"];
         const senaraiJabatan = ["JABATAN PENDIDIKAN UMUM", "JABATAN MEKANIKAL", "JABATAN KEJURUTERAAN AWAM", "JABATAN ELEKTRIK & ELEKTRONIK", "JABATAN TEKNOLOGI MAKLUMAT", "JABATAN PERNIAGAAN"];
         const senaraiUnit = ["BAHASA", "KEMANUSIAAN", "SAINS & MATEMATIK", "TERAS UMUM", "PENGURUSAN PERNIAGAAN", "TEKNOLOGI AUTOMATIF", "TEKNOLOGI PENYEJUKAN & PENYAMANAN UDARA", "TEKNOLOGI KIMPALAN", "TEKNOLOGI PEMESINAN INDUSTRI", "TEKNOLOGI ELEKTRIK", "TEKNOLOGI ELEKTRONIK", "TEKNOLOGI PEMBINAAN", "TEKNOLOGI KOMPUTERAN"];
-        const mataJawatan = {"Ketua Jabatan":9, "Ketua Unit (V)":7, "Ketua Warden":7, "Ketua Unit (A)":5, "Warden":5, "Ketua Bengkel":4, "Mentor":4, "Setiausaha":3, "AJK":1};
+        const mataJawatan = {"Ketua Jabatan":9, "Ketua Unit (V)":7, "Ketua Warden":7, "Guru Data":5, "Ketua Unit (A)":5, "Warden":5, "Ketua Bengkel":4, "Mentor":4, "Setiausaha":3, "AJK":1};
 
         window.onload = () => { 
-            populate('nama', senaraiNama); 
-            populate('jabatan', senaraiJabatan); 
-            populate('unit', senaraiUnit); 
+            populate('nama', senaraiNama); populate('jabatan', senaraiJabatan); populate('unit', senaraiUnit); 
             addRowHakiki(); addRowRutin(); addRowAdhoc();
         };
 
         function populate(id, list) { document.getElementById(id).innerHTML = list.map(v => `<option value="${v}">${v}</option>`).join(''); }
 
+        function renum(cid) { document.querySelectorAll(`#${cid} tr`).forEach((r, i) => r.cells[0].innerText = i + 1); }
+
         function addRowHakiki() {
-            const html = `<tr><td class="text-center font-bold text-slate-500"></td><td><input type="text" class="input-box w-full h-nama" placeholder="Kod & Kursus"></td><td><input type="number" class="input-box w-full t-jam" oninput="calc()" value="0"></td><td><input type="number" class="input-box w-full a-jam" oninput="calc()" value="0"></td><td><input type="number" class="input-box w-full c-jam" oninput="calc()" value="0"></td><td class="text-right font-bold h-atp">0.0</td><td class="text-center no-print"><button onclick="this.closest('tr').remove(); renum('rows-hakiki'); calc();" class="text-red-500 font-bold">✖</button></td></tr>`;
+            const html = `<tr><td class="text-center font-bold text-slate-500"></td><td><input type="text" class="input-box w-full kod" placeholder="Kod"></td><td><input type="text" class="input-box w-full kursus" placeholder="Nama Kursus"></td><td><input type="number" class="input-box w-full t-jam text-center" oninput="calc()" value="0"></td><td><input type="number" class="input-box w-full a-jam text-center" oninput="calc()" value="0"></td><td><input type="number" class="input-box w-full c-jam text-center" oninput="calc()" value="0"></td><td class="text-right font-bold h-atp">0.0</td><td class="no-print text-center"><button onclick="this.closest('tr').remove(); renum('rows-hakiki'); calc();" class="text-red-500">✖</button></td></tr>`;
             document.getElementById('rows-hakiki').insertAdjacentHTML('beforeend', html); renum('rows-hakiki');
         }
 
         function addRowRutin() {
             let opts = Object.entries(mataJawatan).map(([k,v]) => `<option value="${v}">${k}</option>`).join('');
-            const html = `<tr><td class="text-center font-bold text-slate-500"></td><td><input type="text" class="input-box w-full r-nama" placeholder="Unit/JK"></td><td class="flex items-center gap-2"><select class="input-box w-full r-val" onchange="calc()">${opts}</select><span class="font-bold r-atp w-10 text-right">0.0</span></td><td class="text-center no-print"><button onclick="this.closest('tr').remove(); renum('rows-rutin'); calc();" class="text-red-500 font-bold">✖</button></td></tr>`;
+            const html = `<tr><td class="text-center font-bold text-slate-500"></td><td><input type="text" class="input-box w-full r-nama" placeholder="Unit/JK"></td><td><select class="input-box w-full r-val" onchange="calc()">${opts}</select></td><td class="text-right font-bold r-atp">0.0</td><td class="no-print text-center"><button onclick="this.closest('tr').remove(); renum('rows-rutin'); calc();" class="text-red-500">✖</button></td></tr>`;
             document.getElementById('rows-rutin').insertAdjacentHTML('beforeend', html); renum('rows-rutin'); calc();
         }
 
         function addRowAdhoc() {
-            const html = `<tr><td class="text-center font-bold text-slate-500"></td><td><input type="text" class="input-box w-full ad-nama" placeholder="Nama Program"></td><td class="text-center no-print"><button onclick="this.closest('tr').remove(); renum('rows-adhoc');" class="text-red-500 font-bold">✖</button></td></tr>`;
+            const html = `<tr><td class="text-center font-bold text-slate-500"></td><td><input type="text" class="input-box w-full ad-name" placeholder="Program"></td><td><input type="text" class="input-box w-full ad-task" placeholder="Peranan"></td><td class="no-print text-center"><button onclick="this.closest('tr').remove(); renum('rows-adhoc');" class="text-red-500">✖</button></td></tr>`;
             document.getElementById('rows-adhoc').insertAdjacentHTML('beforeend', html); renum('rows-adhoc');
         }
-
-        function renum(id) { document.querySelectorAll(`#${id} tr`).forEach((r, i) => r.cells[0].innerText = i + 1); }
 
         function calc() {
             let hT = 0, rT = 0;
@@ -206,76 +210,71 @@
                 hTotal: Array.from(document.querySelectorAll('.h-atp')).reduce((s, e) => s + parseFloat(e.innerText), 0).toFixed(1),
                 rTotal: Array.from(document.querySelectorAll('.r-atp')).reduce((s, e) => s + parseFloat(e.innerText), 0).toFixed(1),
                 adCount: document.querySelectorAll('#rows-adhoc tr').length,
-                total: document.getElementById('grand-total').innerText
+                total: document.getElementById('grand-total').innerText,
+                // Data terperinci untuk cetakan slip
+                hakiki: Array.from(document.querySelectorAll('#rows-hakiki tr')).map(r => ({ kod: r.querySelector('.kod').value, nama: r.querySelector('.kursus').value, t: r.querySelector('.t-jam').value, a: r.querySelector('.a-jam').value, c: r.querySelector('.c-jam').value, atp: r.querySelector('.h-atp').innerText })),
+                rutin: Array.from(document.querySelectorAll('#rows-rutin tr')).map(r => ({ nama: r.querySelector('.r-nama').value, bidang: r.querySelector('.r-val').options[r.querySelector('.r-val').selectedIndex].text, atp: r.querySelector('.r-atp').innerText })),
+                adhoc: Array.from(document.querySelectorAll('#rows-adhoc tr')).map(r => ({ nama: r.querySelector('.ad-name').value, task: r.querySelector('.ad-task').value }))
             };
 
             try {
                 await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(entry) });
-                alert("✅ Berjaya Simpan ke Cloud!");
-                btn.innerText = "💾 SIMPAN REKOD CLOUD"; btn.disabled = false;
-            } catch (e) { alert("❌ Ralat."); btn.disabled = false; }
+                alert("✅ Berjaya Simpan!");
+            } catch (e) { alert("❌ Ralat Simpan."); }
+            btn.innerText = "💾 SIMPAN KE CLOUD"; btn.disabled = false;
         }
 
         async function showMainReport() {
             document.getElementById('main-content').classList.add('hidden');
-            document.getElementById('individual-slip').classList.add('hidden');
             document.getElementById('report-section').classList.remove('hidden');
+            document.getElementById('individual-slip').classList.add('hidden');
+            
             const tbody = document.getElementById('report-body');
-            tbody.innerHTML = '<tr><td colspan="5" class="p-6 text-center">⏳ Memproses Laporan...</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center">Memuatkan data...</td></tr>';
 
             try {
                 const res = await fetch(SCRIPT_URL);
                 const data = await res.json();
-                tbody.innerHTML = '';
-                data.forEach((r, i) => {
-                    let sesi = r.bulan || r.timestamp || "-";
-                    tbody.innerHTML += `<tr>
+                tbody.innerHTML = data.map((r, i) => `
+                    <tr>
                         <td class="p-3 border text-center">${i+1}</td>
-                        <td class="p-3 border uppercase font-bold text-xs">${r.nama}</td>
-                        <td class="p-3 border text-center text-[10px]">${sesi}</td>
-                        <td class="p-3 border text-center font-bold text-blue-800">${r.total}</td>
+                        <td class="p-3 border font-bold uppercase">${r.nama}</td>
+                        <td class="p-3 border text-center">${r.bulan}</td>
+                        <td class="p-3 border text-center font-bold text-blue-600">${r.total}</td>
                         <td class="p-3 border text-center no-print">
-                            <button onclick="printSlip('${r.nama}', '${r.jabatan}', '${r.unit}', '${sesi}', '${r.hTotal}', '${r.rTotal}', '${r.adCount}', '${r.total}')" class="bg-emerald-600 text-white px-4 py-1 rounded text-[10px] font-bold">CETAK SLIP</button>
+                            <button onclick='viewSlip(${JSON.stringify(r)})' class="bg-emerald-600 text-white px-3 py-1 rounded text-xs">SLIP</button>
                         </td>
-                    </tr>`;
-                });
-            } catch (e) { tbody.innerHTML = '<tr><td colspan="5" class="p-6 text-center text-red-500">Ralat tarik data cloud.</td></tr>'; }
+                    </tr>
+                `).join('');
+            } catch (e) { tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-red-500">Ralat tarik data.</td></tr>'; }
         }
 
-        function printSlip(n, j, u, s, h, r, ad, t) {
+        function viewSlip(r) {
             document.getElementById('report-section').classList.add('hidden');
             document.getElementById('individual-slip').classList.remove('hidden');
             
-            // Atasi masalah undefined jika data kosong
-            const jab = (j && j !== 'undefined') ? j : "-";
-            const uni = (u && u !== 'undefined') ? u : "-";
-
             document.getElementById('slip-meta').innerHTML = `
-                <div>NAMA: ${n}</div>
-                <div>SESI/TAHUN: ${s}</div>
-                <div>JABATAN: ${jab}</div>
-                <div>UNIT: ${uni}</div>
+                <div>NAMA: ${r.nama}</div><div>SESI: ${r.bulan}</div>
+                <div>JABATAN: ${r.jabatan}</div><div>UNIT: ${r.unit}</div>
             `;
 
-            document.getElementById('slip-tables').innerHTML = `
+            let content = `
                 <table class="w-full">
-                    <thead><tr><th colspan="2" class="report-sub-header">1. AMANAH TUGAS SYARAHAN (HAKIKI)</th></tr></thead>
-                    <tbody><tr><td class="p-2">Jumlah ATP Hakiki</td><td class="p-2 text-right font-bold w-24">${h}</td></tr></tbody>
+                    <thead><tr><th colspan="7" class="report-sub-header">1. AMANAH TUGAS SYARAHAN (HAKIKI)</th></tr><tr><th>BIL</th><th>KOD</th><th>KURSUS</th><th>T</th><th>A</th><th>C</th><th>ATP</th></tr></thead>
+                    <tbody>${r.hakiki.map((h,i) => `<tr><td class="text-center">${i+1}</td><td>${h.kod}</td><td>${h.nama}</td><td class="text-center">${h.t}</td><td class="text-center">${h.a}</td><td class="text-center">${h.c}</td><td class="text-right">${h.atp}</td></tr>`).join('')}</tbody>
                 </table>
-                <table class="w-full">
-                    <thead><tr><th colspan="2" class="report-sub-header">2. TUGAS RUTIN (BERMATA)</th></tr></thead>
-                    <tbody><tr><td class="p-2">Jumlah ATP Rutin</td><td class="p-2 text-right font-bold w-24">${r}</td></tr></tbody>
+                <table class="w-full mt-4">
+                    <thead><tr><th colspan="4" class="report-sub-header">2. TUGAS-TUGAS RUTIN (BERMATA)</th></tr><tr><th>BIL</th><th>UNIT/JK</th><th>BIDANG</th><th>ATP</th></tr></thead>
+                    <tbody>${r.rutin.map((rt,i) => `<tr><td class="text-center">${i+1}</td><td>${rt.nama}</td><td>${rt.bidang}</td><td class="text-right">${rt.atp}</td></tr>`).join('')}</tbody>
                 </table>
-                <table class="w-full">
-                    <thead><tr><th colspan="2" class="report-sub-header">3. TUGAS AD-HOC (BUKAN RUTIN)</th></tr></thead>
-                    <tbody><tr><td class="p-2">Bilangan Program Disertai</td><td class="p-2 text-right font-bold w-24">${ad}</td></tr></tbody>
+                <table class="w-full mt-4">
+                    <thead><tr><th colspan="3" class="report-sub-header">3. TUGAS-TUGAS BUKAN RUTIN (AD-HOC)</th></tr><tr><th>BIL</th><th>PROGRAM</th><th>PERANAN</th></tr></thead>
+                    <tbody>${r.adhoc.length > 0 ? r.adhoc.map((ad,i) => `<tr><td class="text-center">${i+1}</td><td>${ad.nama}</td><td>${ad.task}</td></tr>`).join('') : '<tr><td colspan="3" class="text-center italic">Tiada Rekod</td></tr>'}</tbody>
                 </table>
-                <div class="mt-4 border-2 border-black p-4 text-right">
-                    <span class="text-sm font-bold">JUMLAH ATP KESELURUHAN:</span>
-                    <span class="text-3xl font-black ml-4 underline">${t} JAM</span>
-                </div>
+                <div class="mt-4 text-right font-black text-xl border-t-2 border-black pt-2">JUMLAH KESELURUHAN: ${r.total} JAM</div>
             `;
-            document.getElementById('sig-name').innerText = n;
+            document.getElementById('slip-content').innerHTML = content;
+            document.getElementById('sig-name').innerText = r.nama;
             window.scrollTo(0,0);
         }
 
