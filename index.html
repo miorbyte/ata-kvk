@@ -7,22 +7,58 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; color: #1e293b; }
-        .premium-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-radius: 20px; }
-        .input-large { font-size: 1rem; padding: 12px 16px; border-radius: 12px; border: 2px solid #e2e8f0; width: 100%; transition: all 0.2s; font-weight: 600; }
-        .input-large:focus { border-color: #f59e0b; outline: none; background: #fffbeb; }
-        .ata-badge { background: #fef3c7; color: #92400e; padding: 4px 12px; border-radius: 20px; font-weight: 800; font-size: 0.85rem; border: 1px solid #fcd34d; }
         
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: #f1f5f9; 
+            color: #1e293b; 
+        }
+
+        /* Gaya Input Besar & Premium */
+        .input-premium {
+            width: 100%;
+            background-color: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .input-premium:focus {
+            border-color: #f59e0b;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+            background-color: #fffbeb;
+        }
+
+        .card-premium {
+            background: white;
+            border-radius: 24px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        .ata-badge {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-weight: 800;
+            border: 1px solid #fcd34d;
+        }
+
         @media print {
             .no-print { display: none !important; }
-            body { background: white !important; }
-            .print-area { display: block !important; width: 100%; padding: 0; }
+            body { background: white !important; padding: 0; }
+            .print-area { display: block !important; width: 100%; }
             table { width: 100%; border-collapse: collapse; margin-top: 15px; }
             th, td { border: 1px solid black !important; padding: 8px; font-size: 10pt; color: black !important; }
-            th { background-color: #f3f4f6 !important; }
-            .section-header { background-color: #e5e7eb !important; font-weight: bold; text-align: left; }
-            .sig-area { display: flex; justify-content: space-between; margin-top: 50px; page-break-inside: avoid; }
-            .sig-box { width: 45%; border-top: 1px solid black; padding-top: 8px; font-weight: bold; font-size: 10pt; }
+            th { background-color: #f3f4f6 !important; text-align: center; }
+            .section-header { background-color: #e5e7eb !important; font-weight: bold; text-align: left; text-transform: uppercase; }
+            .sig-area { display: flex; justify-content: space-between; margin-top: 60px; page-break-inside: avoid; }
+            .sig-box { width: 45%; border-top: 1px solid black; padding-top: 8px; font-weight: bold; }
         }
     </style>
 </head>
@@ -31,125 +67,130 @@
     <div class="max-w-6xl mx-auto">
         <div class="no-print flex justify-between items-center mb-8">
             <div>
-                <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">EZI-<span class="text-amber-500">ATP</span> <span class="text-sm font-medium text-slate-400 italic">v2.0</span></h1>
-                <p class="text-slate-500 font-semibold">Kolej Vokasional Kulim</p>
+                <h1 class="text-4xl font-black text-slate-900 tracking-tight">EZI-<span class="text-amber-500">ATP</span></h1>
+                <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">Kolej Vokasional Kulim</p>
             </div>
-            <button onclick="showReport()" class="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-slate-800 shadow-lg transition">LIHAT LAPORAN</button>
+            <button onclick="location.reload()" class="bg-white border border-slate-200 px-6 py-3 rounded-2xl font-bold hover:bg-slate-50 transition shadow-sm">RESET</button>
         </div>
 
         <div id="input-view" class="no-print space-y-6">
-            <div class="premium-card p-8 border-t-8 border-amber-500">
-                <h3 class="text-xs font-black text-amber-600 uppercase tracking-widest mb-6">Profil Pengguna</h3>
+            
+            <div class="card-premium p-8 border-t-8 border-amber-500">
+                <h3 class="text-xs font-black text-amber-600 uppercase tracking-widest mb-6">Maklumat Profil Pensyarah</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div>
-                        <label class="block text-xs font-bold text-slate-400 mb-2 uppercase">Nama Pensyarah</label>
-                        <select id="nama" class="input-large bg-slate-50"></select>
+                        <label class="block text-[10px] font-bold text-slate-400 mb-2 uppercase">Nama Pensyarah</label>
+                        <select id="nama" class="input-premium"></select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-400 mb-2 uppercase">Jabatan</label>
-                        <select id="jabatan" class="input-large bg-slate-50"></select>
+                        <label class="block text-[10px] font-bold text-slate-400 mb-2 uppercase">Jabatan</label>
+                        <select id="jabatan" class="input-premium"></select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-400 mb-2 uppercase">Unit</label>
-                        <select id="unit" class="input-large bg-slate-50"></select>
+                        <label class="block text-[10px] font-bold text-slate-400 mb-2 uppercase">Unit</label>
+                        <select id="unit" class="input-premium"></select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-400 mb-2 uppercase">Sesi</label>
-                        <input type="text" id="sesi" class="input-large" value="JAN-DISEMBER 2026">
+                        <label class="block text-[10px] font-bold text-slate-400 mb-2 uppercase">Sesi</label>
+                        <input type="text" id="sesi" class="input-premium" value="JAN-DISEMBER 2026">
                     </div>
                 </div>
             </div>
 
-            <div class="premium-card p-8">
+            <div class="card-premium p-8">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-black text-slate-800 uppercase text-sm">1. Amanah Tugas Syarahan (Hakiki)</h3>
-                    <button onclick="addHakiki()" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-lg font-bold text-xs hover:bg-amber-200">+ BARIS BARU</button>
+                    <button onclick="addHakiki()" class="bg-amber-100 text-amber-700 px-5 py-2 rounded-xl font-bold text-xs hover:bg-amber-200 transition">+ TAMBAH KURSUS</button>
                 </div>
                 <div id="list-hakiki" class="space-y-4"></div>
             </div>
 
-            <div class="premium-card p-8">
+            <div class="card-premium p-8">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-black text-slate-800 uppercase text-sm">2. Tugas-Tugas Rutin (Bermata)</h3>
-                    <button onclick="addRutin()" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-lg font-bold text-xs hover:bg-amber-200">+ BARIS BARU</button>
+                    <button onclick="addRutin()" class="bg-amber-100 text-amber-700 px-5 py-2 rounded-xl font-bold text-xs hover:bg-amber-200 transition">+ TAMBAH TUGASAN</button>
                 </div>
                 <div id="list-rutin" class="space-y-4"></div>
             </div>
 
-            <div class="premium-card p-8">
+            <div class="card-premium p-8">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-black text-slate-800 uppercase text-sm">3. Tugas Bukan Rutin (Ad-Hoc)</h3>
-                    <button onclick="addAdhoc()" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-lg font-bold text-xs hover:bg-amber-200">+ BARIS BARU</button>
+                    <button onclick="addAdhoc()" class="bg-amber-100 text-amber-700 px-5 py-2 rounded-xl font-bold text-xs hover:bg-amber-200 transition">+ TAMBAH PROGRAM</button>
                 </div>
                 <div id="list-adhoc" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
             </div>
 
-            <div class="bg-amber-500 p-8 rounded-[32px] flex flex-col md:flex-row justify-between items-center shadow-2xl">
-                <div class="text-white">
-                    <p class="text-xs font-bold opacity-80 uppercase tracking-widest">Jumlah Keseluruhan ATA</p>
-                    <h2 class="text-6xl font-black" id="total-display">0.0</h2>
+            <div class="bg-slate-900 p-10 rounded-[40px] flex flex-col md:flex-row justify-between items-center shadow-2xl border-4 border-amber-500/20">
+                <div class="text-white mb-6 md:mb-0">
+                    <p class="text-xs font-bold text-amber-400 uppercase tracking-widest mb-1">Jumlah Keseluruhan ATA</p>
+                    <h2 class="text-7xl font-black" id="total-display">0.0</h2>
                 </div>
-                <button onclick="generateAndSave()" class="mt-6 md:mt-0 bg-white text-slate-900 px-12 py-5 rounded-2xl font-black text-lg hover:scale-105 transition shadow-xl">JANA SLIP & SIMPAN</button>
+                <button onclick="generateAndSave()" id="btnSave" class="bg-amber-500 text-white px-16 py-6 rounded-3xl font-black text-xl hover:scale-105 transition-all shadow-xl shadow-amber-500/20">SIMPAN & JANA SLIP</button>
             </div>
         </div>
 
-        <div id="slip-view" class="hidden print-area bg-white p-4">
+        <div id="slip-view" class="hidden print-area bg-white text-black p-4">
             <div class="text-center font-bold text-xl underline uppercase">Slip Amanah Tugas Pensyarah (ATP)</div>
-            <div class="text-center font-bold text-lg mb-6">KOLEJ VOKASIONAL KULIM</div>
+            <div class="text-center font-bold text-lg mb-8">KOLEJ VOKASIONAL KULIM</div>
             
             <div id="slip-meta" class="font-bold text-[10pt] uppercase mb-4 leading-relaxed"></div>
             <div id="slip-content"></div>
             
-            <div class="text-right font-bold text-[11pt] border-t-2 border-black pt-2 mt-4" id="slip-total-final"></div>
+            <div class="text-right font-bold text-[12pt] border-t-2 border-black pt-2 mt-4" id="slip-total-final"></div>
 
-            <div class="text-[10pt] mt-8 text-justify leading-relaxed">
+            <div class="text-[10pt] mt-10 text-justify leading-relaxed">
                 Berhubung amanah tugas dan jumlah jam ATP di atas, dengan ini saya mengesahkan akan melaksanakan tugas dan tanggungjawab yang diberikan bermula 1 Januari tahun semasa dengan penuh dedikasi, integriti dan komitmen.
                 <br><br>Sekian, terima kasih.
             </div>
 
             <div class="sig-area">
-                <div class="sig-box">Disediakan oleh:<br><br><br><br><span id="sig-nama"></span><br>Pensyarah KV Kulim</div>
-                <div class="sig-box">Disahkan oleh:<br><br><br><br>Ketua Jaminan Kualiti / Pengarah</div>
+                <div class="sig-box">
+                    Disediakan oleh:<br><br><br><br><br>
+                    <span id="sig-nama"></span><br>
+                    Pensyarah KV Kulim
+                </div>
+                <div class="sig-box">
+                    Disahkan oleh:<br><br><br><br><br>
+                    Ketua Jaminan Kualiti / Pengarah
+                </div>
             </div>
 
-            <div class="no-print mt-10 flex gap-4 justify-center">
-                <button onclick="window.print()" class="bg-slate-900 text-white px-10 py-3 rounded-xl font-bold">CETAK SEKARANG</button>
-                <button onclick="location.reload()" class="bg-slate-200 px-10 py-3 rounded-xl font-bold">KEMBALI</button>
+            <div class="no-print mt-20 flex gap-4 justify-center">
+                <button onclick="window.print()" class="bg-slate-900 text-white px-12 py-4 rounded-2xl font-bold shadow-lg hover:bg-slate-800 transition">CETAK SLIP (PDF)</button>
+                <button onclick="location.reload()" class="bg-slate-100 text-slate-600 px-12 py-4 rounded-2xl font-bold">KEMBALI KE BORANG</button>
             </div>
         </div>
     </div>
 
     <script>
-        // DATA DROPDOWN (Sila kemas kini jika perlu)
+        // DATA SENARAI (Gantikan dengan data sebenar anda)
         const NAMA_LIST = ["MIOR MUHAMMAD MAHADHIR BIN ZAHARI", "AINUN BADARIAH BINTI MOHD ISA", "ALIANA BINTI AZIZAN", "AZHAR B AHMAD", "MOHD ASRI BIN TAHA"];
         const JABATAN_LIST = ["JABATAN PERNIAGAAN", "JABATAN MEKANIKAL", "JABATAN ELEKTRIK", "JABATAN AWAM", "JABATAN UMUM"];
         const UNIT_LIST = ["PENGURUSAN PERNIAGAAN", "TEKNOLOGI AUTOMATIF", "TEKNOLOGI ELEKTRIK", "TEKNOLOGI PEMBINAAN", "BAHASA", "SAINS & MATEMATIK"];
-        const ADHOC_EXAMPLES = ["Pertandingan KV Skill", "Pertandingan PTA", "Pertandingan BMC", "Program Ihya Ramadhan", "Program Kemerdekaan", "Karnival Keusahawanan", "Larian Merentas Desa", "Hari Sukan"];
+        const ADHOC_SUGGESTIONS = ["Pertandingan KV Skill", "Pertandingan PTA", "Pertandingan BMC", "Program Ihya Ramadhan", "Program Kemerdekaan", "Karnival Keusahawanan", "Larian Merentas Desa", "Hari Sukan", "Majlis Graduasi"];
 
         window.onload = () => {
-            populate('nama', NAMA_LIST);
-            populate('jabatan', JABATAN_LIST);
-            populate('unit', UNIT_LIST);
+            pop('nama', NAMA_LIST); pop('jabatan', JABATAN_LIST); pop('unit', UNIT_LIST);
             addHakiki(); addRutin(); addAdhoc();
         };
 
-        function populate(id, list) {
-            const el = document.getElementById(id);
-            el.innerHTML = list.map(i => `<option value="${i}">${i}</option>`).join('');
+        function pop(id, list) {
+            document.getElementById(id).innerHTML = list.map(i => `<option value="${i}">${i}</option>`).join('');
         }
 
         function addHakiki() {
             const container = document.getElementById('list-hakiki');
             const div = document.createElement('div');
-            div.className = "grid grid-cols-12 gap-3 items-center bg-slate-50 p-4 rounded-xl border border-slate-200";
+            div.className = "grid grid-cols-12 gap-3 items-end bg-slate-50 p-5 rounded-2xl border border-slate-100";
             div.innerHTML = `
-                <div class="col-span-2"><input type="text" placeholder="KOD" class="input-large h-kod"></div>
-                <div class="col-span-4"><input type="text" placeholder="KURSUS" class="input-large h-kursus"></div>
-                <div class="col-span-1 text-center"><label class="text-[9px] font-bold">T</label><input type="number" value="0" class="input-large text-center h-t" oninput="calc()"></div>
-                <div class="col-span-1 text-center"><label class="text-[9px] font-bold">A</label><input type="number" value="0" class="input-large text-center h-a" oninput="calc()"></div>
-                <div class="col-span-1 text-center"><label class="text-[9px] font-bold">C</label><input type="number" value="0" class="input-large text-center h-c" oninput="calc()"></div>
-                <div class="col-span-2 text-right"><span class="ata-badge h-ata">0.0</span></div>
-                <div class="col-span-1 text-center"><button onclick="this.closest('div.grid').remove();calc()" class="text-red-500 font-bold">×</button></div>
+                <div class="col-span-2"><label class="text-[9px] font-bold mb-1 block uppercase">Kod</label><input type="text" placeholder="UBF2113" class="input-premium h-kod"></div>
+                <div class="col-span-4"><label class="text-[9px] font-bold mb-1 block uppercase">Nama Kursus</label><input type="text" placeholder="Prinsip Ekonomi" class="input-premium h-kursus"></div>
+                <div class="col-span-1 text-center"><label class="text-[9px] font-bold mb-1 block uppercase">T</label><input type="number" value="0" class="input-premium text-center h-t" oninput="calc()"></div>
+                <div class="col-span-1 text-center"><label class="text-[9px] font-bold mb-1 block uppercase">A</label><input type="number" value="0" class="input-premium text-center h-a" oninput="calc()"></div>
+                <div class="col-span-1 text-center"><label class="text-[9px] font-bold mb-1 block uppercase">C</label><input type="number" value="0" class="input-premium text-center h-c" oninput="calc()"></div>
+                <div class="col-span-2 text-right"><label class="text-[9px] font-bold mb-1 block uppercase">Mata ATA</label><span class="ata-badge h-ata inline-block w-full text-center">0.0</span></div>
+                <div class="col-span-1 text-center"><button onclick="this.closest('div.grid').remove();calc()" class="text-red-400 font-bold hover:text-red-600">×</button></div>
             `;
             container.appendChild(div);
         }
@@ -157,12 +198,12 @@
         function addRutin() {
             const container = document.getElementById('list-rutin');
             const div = document.createElement('div');
-            div.className = "grid grid-cols-12 gap-3 items-center bg-slate-50 p-4 rounded-xl border border-slate-200";
+            div.className = "grid grid-cols-12 gap-3 items-end bg-slate-50 p-5 rounded-2xl border border-slate-100";
             div.innerHTML = `
-                <div class="col-span-6"><input type="text" placeholder="UNIT / JAWATANKUASA / BIDANG" class="input-large r-unit"></div>
-                <div class="col-span-3"><input type="text" placeholder="BIDANG TUGAS" class="input-large r-bidang"></div>
-                <div class="col-span-2 text-right"><label class="text-[9px] font-bold block">MATA ATA</label><input type="number" value="1.0" class="input-large text-center r-atp" oninput="calc()"></div>
-                <div class="col-span-1 text-center mt-4"><button onclick="this.closest('div.grid').remove();calc()" class="text-red-500 font-bold">×</button></div>
+                <div class="col-span-6"><label class="text-[9px] font-bold mb-1 block uppercase">Unit / Jawatankuasa</label><input type="text" placeholder="JK Sebut Harga" class="input-premium r-unit"></div>
+                <div class="col-span-3"><label class="text-[9px] font-bold mb-1 block uppercase">Peranan</label><input type="text" placeholder="Ahli, AJK" class="input-premium r-bidang"></div>
+                <div class="col-span-2"><label class="text-[9px] font-bold mb-1 block uppercase text-right">Mata ATA</label><input type="number" value="1.0" class="input-premium text-center r-atp" oninput="calc()"></div>
+                <div class="col-span-1 text-center"><button onclick="this.closest('div.grid').remove();calc()" class="text-red-400 font-bold hover:text-red-600">×</button></div>
             `;
             container.appendChild(div);
             calc();
@@ -171,12 +212,12 @@
         function addAdhoc() {
             const container = document.getElementById('list-adhoc');
             const div = document.createElement('div');
-            div.className = "flex flex-col gap-2 bg-slate-50 p-4 rounded-xl border border-slate-200";
+            div.className = "flex flex-col gap-3 bg-slate-50 p-5 rounded-2xl border border-slate-100";
             div.innerHTML = `
-                <input list="adhoc-suggestions" placeholder="NAMA PROGRAM (Contoh: KV Skill)" class="input-large a-nama">
-                <input type="text" placeholder="PERANAN" class="input-large a-peran">
-                <datalist id="adhoc-suggestions">${ADHOC_EXAMPLES.map(ex => `<option value="${ex}">`).join('')}</datalist>
-                <button onclick="this.parentElement.remove()" class="text-red-400 text-xs font-bold text-right hover:text-red-600 uppercase">Hapus Tugasan</button>
+                <input list="adhoc-list" placeholder="Nama Program (Contoh: KV Skill)" class="input-premium a-nama">
+                <input type="text" placeholder="Peranan dalam Program" class="input-premium a-peran">
+                <datalist id="adhoc-list">${ADHOC_SUGGESTIONS.map(s => `<option value="${s}">`).join('')}</datalist>
+                <button onclick="this.parentElement.remove()" class="text-red-400 text-[10px] font-bold text-right uppercase">Hapus Rekod</button>
             `;
             container.appendChild(div);
         }
@@ -192,13 +233,15 @@
                 total += res;
             });
             document.querySelectorAll('#list-rutin > div').forEach(row => {
-                let r = parseFloat(row.querySelector('.r-atp').value) || 0;
-                total += r;
+                total += parseFloat(row.querySelector('.r-atp').value) || 0;
             });
             document.getElementById('total-display').innerText = total.toFixed(1);
         }
 
         function generateAndSave() {
+            const btn = document.getElementById('btnSave');
+            btn.innerText = "SEDANG MENYIMPAN..."; btn.disabled = true;
+
             const data = {
                 nama: document.getElementById('nama').value,
                 jabatan: document.getElementById('jabatan').value,
@@ -222,13 +265,26 @@
                 }))
             };
 
-            // Papar Slip Cetak
+            // Hantar ke Apps Script (Code.gs)
+            google.script.run
+                .withSuccessHandler(() => {
+                    btn.innerText = "BERJAYA DISIMPAN!";
+                    renderSlip(data);
+                })
+                .withFailureHandler((err) => {
+                    alert("Ralat: " + err);
+                    btn.innerText = "SIMPAN & JANA SLIP"; btn.disabled = false;
+                })
+                .doPostManual(data);
+        }
+
+        function renderSlip(data) {
             document.getElementById('input-view').classList.add('hidden');
             document.getElementById('slip-view').classList.remove('hidden');
             
             document.getElementById('slip-meta').innerHTML = `NAMA: ${data.nama}<br>SESI: ${data.sesi}<br>JABATAN: ${data.jabatan}<br>UNIT: ${data.unit}`;
             
-            let tables = `
+            let html = `
                 <table>
                     <thead>
                         <tr><th colspan="7" class="section-header">1. AMANAH TUGAS SYARAHAN (HAKIKI)</th></tr>
@@ -238,7 +294,7 @@
                         ${data.hakiki.map((h,i) => `<tr><td align="center">${i+1}</td><td>${h.kod}</td><td>${h.nama}</td><td align="center">${h.t}</td><td align="center">${h.a}</td><td align="center">${h.c}</td><td align="right">${h.atp}</td></tr>`).join('')}
                     </tbody>
                 </table>
-                <table>
+                <table style="margin-top:10px">
                     <thead>
                         <tr><th colspan="4" class="section-header">2. TUGAS-TUGAS RUTIN (BERMATA)</th></tr>
                         <tr><th>BIL</th><th>UNIT/JK</th><th>BIDANG</th><th>ATP</th></tr>
@@ -247,7 +303,7 @@
                         ${data.rutin.map((r,i) => `<tr><td align="center">${i+1}</td><td>${r.unit}</td><td>${r.bidang}</td><td align="right">${parseFloat(r.atp).toFixed(1)}</td></tr>`).join('')}
                     </tbody>
                 </table>
-                <table>
+                <table style="margin-top:10px">
                     <thead>
                         <tr><th colspan="3" class="section-header">3. TUGAS-TUGAS BUKAN RUTIN (AD-HOC)</th></tr>
                         <tr><th>BIL</th><th>PROGRAM AD-HOC</th><th>PERANAN</th></tr>
@@ -258,9 +314,10 @@
                 </table>
             `;
             
-            document.getElementById('slip-content').innerHTML = tables;
+            document.getElementById('slip-content').innerHTML = html;
             document.getElementById('slip-total-final').innerText = `JUMLAH KESELURUHAN ATP: ${data.total} JAM`;
             document.getElementById('sig-nama').innerText = data.nama;
+            window.scrollTo(0,0);
         }
     </script>
 </body>
