@@ -1,324 +1,407 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EZI-ATP Premium v2 | KV KULIM</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
-        
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #f1f5f9; 
-            color: #1e293b; 
-        }
-
-        /* Gaya Input Besar & Premium */
-        .input-premium {
-            width: 100%;
-            background-color: #ffffff;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 12px 16px;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .input-premium:focus {
-            border-color: #f59e0b;
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
-            background-color: #fffbeb;
-        }
-
-        .card-premium {
-            background: white;
-            border-radius: 24px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-        }
-
-        .ata-badge {
-            background: #fef3c7;
-            color: #92400e;
-            padding: 6px 14px;
-            border-radius: 12px;
-            font-weight: 800;
-            border: 1px solid #fcd34d;
-        }
-
-        @media print {
-            .no-print { display: none !important; }
-            body { background: white !important; padding: 0; }
-            .print-area { display: block !important; width: 100%; }
-            table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-            th, td { border: 1px solid black !important; padding: 8px; font-size: 10pt; color: black !important; }
-            th { background-color: #f3f4f6 !important; text-align: center; }
-            .section-header { background-color: #e5e7eb !important; font-weight: bold; text-align: left; text-transform: uppercase; }
-            .sig-area { display: flex; justify-content: space-between; margin-top: 60px; page-break-inside: avoid; }
-            .sig-box { width: 45%; border-top: 1px solid black; padding-top: 8px; font-weight: bold; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EZI-ATP KV KULIM</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f1f5f9; color: #1e293b; }
+    .input-premium { width:100%; background:#fff; border:2px solid #e2e8f0; border-radius:12px; padding:10px 14px; font-size:.95rem; font-weight:600; transition:all .2s; }
+    .input-premium:focus { border-color:#f59e0b; outline:none; box-shadow:0 0 0 4px rgba(245,158,11,.1); background:#fffbeb; }
+    .card-premium { background:white; border-radius:24px; border:1px solid #e2e8f0; box-shadow:0 10px 25px -5px rgba(0,0,0,.05); }
+    .ata-badge { background:#fef3c7; color:#92400e; padding:6px 14px; border-radius:12px; font-weight:800; border:1px solid #fcd34d; display:inline-block; width:100%; text-align:center; }
+    .tab-btn { padding:10px 22px; border-radius:14px; font-weight:700; font-size:.8rem; transition:all .2s; cursor:pointer; }
+    .tab-btn.active { background:#1e293b; color:white; }
+    .tab-btn:not(.active) { background:#f1f5f9; color:#64748b; }
+    .tab-btn:not(.active):hover { background:#e2e8f0; }
+    .rekod-card { background:white; border-radius:16px; border:1px solid #e2e8f0; padding:1.2rem 1.5rem; transition:all .2s; }
+    .rekod-card:hover { border-color:#f59e0b; box-shadow:0 4px 15px rgba(245,158,11,.1); }
+    @media print {
+      .no-print { display:none !important; }
+      body { background:white !important; padding:0; font-family:Arial,sans-serif; }
+      .print-slip { display:block !important; }
+      table { width:100%; border-collapse:collapse; margin-top:12px; }
+      th,td { border:1px solid #000 !important; padding:6px 8px; font-size:9.5pt; }
+      th { background:#f3f4f6 !important; text-align:center; font-weight:bold; }
+      .sec-hdr { background:#e5e7eb !important; font-weight:bold; text-align:left; text-transform:uppercase; letter-spacing:.05em; }
+      .sig-area { display:flex; justify-content:space-between; margin-top:60px; }
+      .sig-box { width:44%; border-top:1px solid black; padding-top:6px; font-weight:bold; font-size:10pt; }
+    }
+  </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="p-4 md:p-6">
+<div class="max-w-5xl mx-auto">
 
-    <div class="max-w-6xl mx-auto">
-        <div class="no-print flex justify-between items-center mb-8">
-            <div>
-                <h1 class="text-4xl font-black text-slate-900 tracking-tight">EZI-<span class="text-amber-500">ATP</span></h1>
-                <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">Kolej Vokasional Kulim</p>
-            </div>
-            <button onclick="location.reload()" class="bg-white border border-slate-200 px-6 py-3 rounded-2xl font-bold hover:bg-slate-50 transition shadow-sm">RESET</button>
+  <!-- HEADER -->
+  <div class="no-print flex justify-between items-center mb-6">
+    <div>
+      <h1 class="text-3xl font-black text-slate-900 tracking-tight">EZI-<span class="text-amber-500">ATP</span></h1>
+      <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Kolej Vokasional Kulim</p>
+    </div>
+    <div class="flex gap-2">
+      <button onclick="switchTab('input')" id="tab-input" class="tab-btn active">+ BORANG BARU</button>
+      <button onclick="switchTab('senarai')" id="tab-senarai" class="tab-btn">SENARAI REKOD</button>
+    </div>
+  </div>
+
+  <!-- ======================== TAB: BORANG INPUT ======================== -->
+  <div id="view-input" class="space-y-5">
+
+    <div class="card-premium p-7 border-t-8 border-amber-500">
+      <h3 class="text-[10px] font-black text-amber-600 uppercase tracking-widest mb-5">Maklumat Profil Pensyarah</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div>
+          <label class="block text-[9px] font-bold text-slate-400 mb-1.5 uppercase">Nama Pensyarah</label>
+          <select id="nama" class="input-premium"></select>
         </div>
-
-        <div id="input-view" class="no-print space-y-6">
-            
-            <div class="card-premium p-8 border-t-8 border-amber-500">
-                <h3 class="text-xs font-black text-amber-600 uppercase tracking-widest mb-6">Maklumat Profil Pensyarah</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 mb-2 uppercase">Nama Pensyarah</label>
-                        <select id="nama" class="input-premium"></select>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 mb-2 uppercase">Jabatan</label>
-                        <select id="jabatan" class="input-premium"></select>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 mb-2 uppercase">Unit</label>
-                        <select id="unit" class="input-premium"></select>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 mb-2 uppercase">Sesi</label>
-                        <input type="text" id="sesi" class="input-premium" value="JAN-DISEMBER 2026">
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-premium p-8">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="font-black text-slate-800 uppercase text-sm">1. Amanah Tugas Syarahan (Hakiki)</h3>
-                    <button onclick="addHakiki()" class="bg-amber-100 text-amber-700 px-5 py-2 rounded-xl font-bold text-xs hover:bg-amber-200 transition">+ TAMBAH KURSUS</button>
-                </div>
-                <div id="list-hakiki" class="space-y-4"></div>
-            </div>
-
-            <div class="card-premium p-8">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="font-black text-slate-800 uppercase text-sm">2. Tugas-Tugas Rutin (Bermata)</h3>
-                    <button onclick="addRutin()" class="bg-amber-100 text-amber-700 px-5 py-2 rounded-xl font-bold text-xs hover:bg-amber-200 transition">+ TAMBAH TUGASAN</button>
-                </div>
-                <div id="list-rutin" class="space-y-4"></div>
-            </div>
-
-            <div class="card-premium p-8">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="font-black text-slate-800 uppercase text-sm">3. Tugas Bukan Rutin (Ad-Hoc)</h3>
-                    <button onclick="addAdhoc()" class="bg-amber-100 text-amber-700 px-5 py-2 rounded-xl font-bold text-xs hover:bg-amber-200 transition">+ TAMBAH PROGRAM</button>
-                </div>
-                <div id="list-adhoc" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-            </div>
-
-            <div class="bg-slate-900 p-10 rounded-[40px] flex flex-col md:flex-row justify-between items-center shadow-2xl border-4 border-amber-500/20">
-                <div class="text-white mb-6 md:mb-0">
-                    <p class="text-xs font-bold text-amber-400 uppercase tracking-widest mb-1">Jumlah Keseluruhan ATA</p>
-                    <h2 class="text-7xl font-black" id="total-display">0.0</h2>
-                </div>
-                <button onclick="generateAndSave()" id="btnSave" class="bg-amber-500 text-white px-16 py-6 rounded-3xl font-black text-xl hover:scale-105 transition-all shadow-xl shadow-amber-500/20">SIMPAN & JANA SLIP</button>
-            </div>
+        <div>
+          <label class="block text-[9px] font-bold text-slate-400 mb-1.5 uppercase">Jabatan</label>
+          <select id="jabatan" class="input-premium"></select>
         </div>
-
-        <div id="slip-view" class="hidden print-area bg-white text-black p-4">
-            <div class="text-center font-bold text-xl underline uppercase">Slip Amanah Tugas Pensyarah (ATP)</div>
-            <div class="text-center font-bold text-lg mb-8">KOLEJ VOKASIONAL KULIM</div>
-            
-            <div id="slip-meta" class="font-bold text-[10pt] uppercase mb-4 leading-relaxed"></div>
-            <div id="slip-content"></div>
-            
-            <div class="text-right font-bold text-[12pt] border-t-2 border-black pt-2 mt-4" id="slip-total-final"></div>
-
-            <div class="text-[10pt] mt-10 text-justify leading-relaxed">
-                Berhubung amanah tugas dan jumlah jam ATP di atas, dengan ini saya mengesahkan akan melaksanakan tugas dan tanggungjawab yang diberikan bermula 1 Januari tahun semasa dengan penuh dedikasi, integriti dan komitmen.
-                <br><br>Sekian, terima kasih.
-            </div>
-
-            <div class="sig-area">
-                <div class="sig-box">
-                    Disediakan oleh:<br><br><br><br><br>
-                    <span id="sig-nama"></span><br>
-                    Pensyarah KV Kulim
-                </div>
-                <div class="sig-box">
-                    Disahkan oleh:<br><br><br><br><br>
-                    Ketua Jaminan Kualiti / Pengarah
-                </div>
-            </div>
-
-            <div class="no-print mt-20 flex gap-4 justify-center">
-                <button onclick="window.print()" class="bg-slate-900 text-white px-12 py-4 rounded-2xl font-bold shadow-lg hover:bg-slate-800 transition">CETAK SLIP (PDF)</button>
-                <button onclick="location.reload()" class="bg-slate-100 text-slate-600 px-12 py-4 rounded-2xl font-bold">KEMBALI KE BORANG</button>
-            </div>
+        <div>
+          <label class="block text-[9px] font-bold text-slate-400 mb-1.5 uppercase">Unit</label>
+          <select id="unit" class="input-premium"></select>
         </div>
+        <div>
+          <label class="block text-[9px] font-bold text-slate-400 mb-1.5 uppercase">Sesi</label>
+          <input type="text" id="sesi" class="input-premium" value="JAN-DISEMBER 2026">
+        </div>
+      </div>
     </div>
 
-    <script>
-        // DATA SENARAI (Gantikan dengan data sebenar anda)
-        const NAMA_LIST = ["MIOR MUHAMMAD MAHADHIR BIN ZAHARI", "AINUN BADARIAH BINTI MOHD ISA", "ALIANA BINTI AZIZAN", "AZHAR B AHMAD", "MOHD ASRI BIN TAHA"];
-        const JABATAN_LIST = ["JABATAN PERNIAGAAN", "JABATAN MEKANIKAL", "JABATAN ELEKTRIK", "JABATAN AWAM", "JABATAN UMUM"];
-        const UNIT_LIST = ["PENGURUSAN PERNIAGAAN", "TEKNOLOGI AUTOMATIF", "TEKNOLOGI ELEKTRIK", "TEKNOLOGI PEMBINAAN", "BAHASA", "SAINS & MATEMATIK"];
-        const ADHOC_SUGGESTIONS = ["Pertandingan KV Skill", "Pertandingan PTA", "Pertandingan BMC", "Program Ihya Ramadhan", "Program Kemerdekaan", "Karnival Keusahawanan", "Larian Merentas Desa", "Hari Sukan", "Majlis Graduasi"];
+    <!-- HAKIKI -->
+    <div class="card-premium p-7">
+      <div class="flex justify-between items-center mb-5">
+        <div>
+          <h3 class="font-black text-slate-800 uppercase text-sm">1. Amanah Tugas Syarahan (Hakiki)</h3>
+          <p class="text-[10px] text-slate-400 mt-1">Formula: ATP = (Teori + Amali) × 1.5 + Klinikal</p>
+        </div>
+        <button onclick="addHakiki()" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-xl font-bold text-xs hover:bg-amber-200 transition">+ TAMBAH</button>
+      </div>
+      <div id="list-hakiki" class="space-y-3"></div>
+    </div>
 
-        window.onload = () => {
-            pop('nama', NAMA_LIST); pop('jabatan', JABATAN_LIST); pop('unit', UNIT_LIST);
-            addHakiki(); addRutin(); addAdhoc();
-        };
+    <!-- RUTIN -->
+    <div class="card-premium p-7">
+      <div class="flex justify-between items-center mb-5">
+        <div>
+          <h3 class="font-black text-slate-800 uppercase text-sm">2. Tugas-Tugas Rutin (Bermata)</h3>
+          <p class="text-[10px] text-slate-400 mt-1">Pilih jawatan & masukkan jam ATP mengikut jadual rasmi</p>
+        </div>
+        <button onclick="addRutin()" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-xl font-bold text-xs hover:bg-amber-200 transition">+ TAMBAH</button>
+      </div>
+      <div id="list-rutin" class="space-y-3"></div>
+    </div>
 
-        function pop(id, list) {
-            document.getElementById(id).innerHTML = list.map(i => `<option value="${i}">${i}</option>`).join('');
-        }
+    <!-- ADHOC -->
+    <div class="card-premium p-7">
+      <div class="flex justify-between items-center mb-5">
+        <h3 class="font-black text-slate-800 uppercase text-sm">3. Tugas Bukan Rutin (Ad-Hoc)</h3>
+        <button onclick="addAdhoc()" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-xl font-bold text-xs hover:bg-amber-200 transition">+ TAMBAH</button>
+      </div>
+      <div id="list-adhoc" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    </div>
 
-        function addHakiki() {
-            const container = document.getElementById('list-hakiki');
-            const div = document.createElement('div');
-            div.className = "grid grid-cols-12 gap-3 items-end bg-slate-50 p-5 rounded-2xl border border-slate-100";
-            div.innerHTML = `
-                <div class="col-span-2"><label class="text-[9px] font-bold mb-1 block uppercase">Kod</label><input type="text" placeholder="UBF2113" class="input-premium h-kod"></div>
-                <div class="col-span-4"><label class="text-[9px] font-bold mb-1 block uppercase">Nama Kursus</label><input type="text" placeholder="Prinsip Ekonomi" class="input-premium h-kursus"></div>
-                <div class="col-span-1 text-center"><label class="text-[9px] font-bold mb-1 block uppercase">T</label><input type="number" value="0" class="input-premium text-center h-t" oninput="calc()"></div>
-                <div class="col-span-1 text-center"><label class="text-[9px] font-bold mb-1 block uppercase">A</label><input type="number" value="0" class="input-premium text-center h-a" oninput="calc()"></div>
-                <div class="col-span-1 text-center"><label class="text-[9px] font-bold mb-1 block uppercase">C</label><input type="number" value="0" class="input-premium text-center h-c" oninput="calc()"></div>
-                <div class="col-span-2 text-right"><label class="text-[9px] font-bold mb-1 block uppercase">Mata ATA</label><span class="ata-badge h-ata inline-block w-full text-center">0.0</span></div>
-                <div class="col-span-1 text-center"><button onclick="this.closest('div.grid').remove();calc()" class="text-red-400 font-bold hover:text-red-600">×</button></div>
-            `;
-            container.appendChild(div);
-        }
+    <!-- JUMLAH & SIMPAN -->
+    <div class="bg-slate-900 p-8 rounded-[36px] flex flex-col md:flex-row justify-between items-center gap-6 border-4 border-amber-500/20">
+      <div class="text-white">
+        <p class="text-[10px] font-bold text-amber-400 uppercase tracking-widest mb-1">Jumlah Keseluruhan ATA</p>
+        <h2 class="text-6xl font-black" id="total-display">0.0</h2>
+        <p class="text-slate-400 text-xs mt-1">jam seminggu</p>
+      </div>
+      <button onclick="generateAndSave()" id="btnSave" class="bg-amber-500 text-white px-12 py-5 rounded-3xl font-black text-lg hover:scale-105 transition-all shadow-xl shadow-amber-500/20">SIMPAN & JANA SLIP</button>
+    </div>
 
-        function addRutin() {
-            const container = document.getElementById('list-rutin');
-            const div = document.createElement('div');
-            div.className = "grid grid-cols-12 gap-3 items-end bg-slate-50 p-5 rounded-2xl border border-slate-100";
-            div.innerHTML = `
-                <div class="col-span-6"><label class="text-[9px] font-bold mb-1 block uppercase">Unit / Jawatankuasa</label><input type="text" placeholder="JK Sebut Harga" class="input-premium r-unit"></div>
-                <div class="col-span-3"><label class="text-[9px] font-bold mb-1 block uppercase">Peranan</label><input type="text" placeholder="Ahli, AJK" class="input-premium r-bidang"></div>
-                <div class="col-span-2"><label class="text-[9px] font-bold mb-1 block uppercase text-right">Mata ATA</label><input type="number" value="1.0" class="input-premium text-center r-atp" oninput="calc()"></div>
-                <div class="col-span-1 text-center"><button onclick="this.closest('div.grid').remove();calc()" class="text-red-400 font-bold hover:text-red-600">×</button></div>
-            `;
-            container.appendChild(div);
-            calc();
-        }
+  </div>
 
-        function addAdhoc() {
-            const container = document.getElementById('list-adhoc');
-            const div = document.createElement('div');
-            div.className = "flex flex-col gap-3 bg-slate-50 p-5 rounded-2xl border border-slate-100";
-            div.innerHTML = `
-                <input list="adhoc-list" placeholder="Nama Program (Contoh: KV Skill)" class="input-premium a-nama">
-                <input type="text" placeholder="Peranan dalam Program" class="input-premium a-peran">
-                <datalist id="adhoc-list">${ADHOC_SUGGESTIONS.map(s => `<option value="${s}">`).join('')}</datalist>
-                <button onclick="this.parentElement.remove()" class="text-red-400 text-[10px] font-bold text-right uppercase">Hapus Rekod</button>
-            `;
-            container.appendChild(div);
-        }
+  <!-- ======================== TAB: SENARAI REKOD ======================== -->
+  <div id="view-senarai" class="hidden space-y-4">
+    <div class="flex justify-between items-center">
+      <p class="text-slate-500 font-bold text-sm" id="info-senarai">Memuatkan rekod...</p>
+      <button onclick="loadSenarai()" class="text-xs font-bold text-amber-600 hover:underline">↺ MUAT SEMULA</button>
+    </div>
+    <div id="list-rekod" class="space-y-3"></div>
+  </div>
 
-        function calc() {
-            let total = 0;
-            document.querySelectorAll('#list-hakiki > div').forEach(row => {
-                let t = parseFloat(row.querySelector('.h-t').value) || 0;
-                let a = parseFloat(row.querySelector('.h-a').value) || 0;
-                let c = parseFloat(row.querySelector('.h-c').value) || 0;
-                let res = ((t + a) * 1.5) + c;
-                row.querySelector('.h-ata').innerText = res.toFixed(1);
-                total += res;
-            });
-            document.querySelectorAll('#list-rutin > div').forEach(row => {
-                total += parseFloat(row.querySelector('.r-atp').value) || 0;
-            });
-            document.getElementById('total-display').innerText = total.toFixed(1);
-        }
+  <!-- ======================== SLIP (PRINT VIEW) ======================== -->
+  <div id="view-slip" class="hidden print-slip bg-white text-black p-4">
+    <div class="text-center font-bold text-xl underline uppercase mb-1">Slip Amanah Tugas Pensyarah (ATP)</div>
+    <div class="text-center font-bold text-base mb-6">KOLEJ VOKASIONAL KULIM</div>
+    <div id="slip-meta" class="font-bold text-[10pt] uppercase mb-4 leading-loose"></div>
+    <div id="slip-content"></div>
+    <div class="text-right font-bold text-[12pt] border-t-2 border-black pt-2 mt-4" id="slip-total-final"></div>
+    <div class="text-[10pt] mt-10 text-justify leading-loose">
+      Berhubung amanah tugas dan jumlah jam ATP di atas, dengan ini saya mengesahkan akan melaksanakan tugas dan tanggungjawab yang diberikan bermula 1 Januari tahun semasa dengan penuh dedikasi, integriti dan komitmen.<br><br>Sekian, terima kasih.
+    </div>
+    <div class="sig-area">
+      <div class="sig-box">Disediakan oleh:<br><br><br><br><br><span id="sig-nama"></span><br>Pensyarah KV Kulim</div>
+      <div class="sig-box">Disahkan oleh:<br><br><br><br><br>Ketua Jaminan Kualiti / Pengarah</div>
+    </div>
+    <div class="no-print mt-16 flex gap-4 justify-center flex-wrap">
+      <button onclick="window.print()" class="bg-slate-900 text-white px-10 py-4 rounded-2xl font-bold hover:bg-slate-800 transition">CETAK / SIMPAN PDF</button>
+      <button onclick="switchTab('senarai'); loadSenarai()" class="bg-amber-500 text-white px-10 py-4 rounded-2xl font-bold hover:bg-amber-600 transition">LIHAT SENARAI REKOD</button>
+      <button onclick="switchTab('input')" class="bg-slate-100 text-slate-600 px-10 py-4 rounded-2xl font-bold hover:bg-slate-200 transition">BORANG BARU</button>
+    </div>
+  </div>
 
-        function generateAndSave() {
-            const btn = document.getElementById('btnSave');
-            btn.innerText = "SEDANG MENYIMPAN..."; btn.disabled = true;
+</div>
 
-            const data = {
-                nama: document.getElementById('nama').value,
-                jabatan: document.getElementById('jabatan').value,
-                unit: document.getElementById('unit').value,
-                sesi: document.getElementById('sesi').value,
-                total: document.getElementById('total-display').innerText,
-                hakiki: Array.from(document.querySelectorAll('#list-hakiki > div')).map(r => ({
-                    kod: r.querySelector('.h-kod').value,
-                    nama: r.querySelector('.h-kursus').value,
-                    t: r.querySelector('.h-t').value, a: r.querySelector('.h-a').value, c: r.querySelector('.h-c').value,
-                    atp: r.querySelector('.h-ata').innerText
-                })),
-                rutin: Array.from(document.querySelectorAll('#list-rutin > div')).map(r => ({
-                    unit: r.querySelector('.r-unit').value,
-                    bidang: r.querySelector('.r-bidang').value,
-                    atp: r.querySelector('.r-atp').value
-                })),
-                adhoc: Array.from(document.querySelectorAll('#list-adhoc > div')).map(r => ({
-                    nama: r.querySelector('.a-nama').value,
-                    peran: r.querySelector('.a-peran').value
-                }))
-            };
+<script>
+const NAMA_LIST = ["AINUN BADARIAH BINTI MOHD ISA","ALIANA BINTI AZIZAN","ALLIRANI A/P CHANDRAKESAN","ALYANI NAZIRAH BINTI ABD RASHID","AMALINA ZAWANI BINTI AHMAD SHABRI","AMIR FAKHRI BIN ABDUL JAMIL","AMRINA BINTI ABU BAKAR","ANIS IZWANI BINTI MD RADZI","ANIZAH BINTI AHMAD","ARUNA A/P MUNIANDY","AZHAR B AHMAD","AZRUL BIN AHMAD","FAIZA BINTI AHMAD PHUAT","FAIZAH BINTI HASSAN","FARIZA BINTI HUSSIN @ YUSOF","FATIN FARHANA BT NORDIN","HAKIMAH BINTI MHD YUSUF","HALIMATON SADIAH BINTI MOHD ROSLI","HALIMATULSAADIAH BINTI CHE ANI","HAZIRA BT ABDUL LATIF","HURAIAH BINTI YAHAYA","INTAN ROHAIZAN BINTI AHMAD","IZATUL ANIS BINTI MD RODI","KAMESWARY A/P S.RAMASAMY","KHAIRUL AZHAR BIN SHAMSULDIN","KU NOR ATIKAH BINTI KU SHUIB","LIM HUI KEAN","MAZURA BINTI MAMAT","MIOR MUHAMMAD MAHADHIR BIN ZAHARI","MOHAMAD AMIR BIN MOHAMAD KHIR","MOHAMAD RIDZUAN BIN SAAID","MOHAMAD SHAHRUL AMRI BIN RAMLI","MOHAMMAD HUZAIRIE BIN SUHAIMI","MOHD ABI ALKAM BIN BAHARUDIN","MOHD ASRI BIN TAHA","MOHD FAKRUL HAKIMI BIN ZAINAL ABIDIN","MOHD FIKRI BIN HAJI AHMAD","MOHD HAFIZ BIN FAKHRURAZI","MOHD HAFIZ BIN SALLEH","MOHD HANIF BIN ISMAIL","MOHD IKHWAN BIN MOHD GHAZALI","MOHD ILMI BIN IBRAHIM","MOHD ISHAK BIN ABU BAKAR","MOHD KHIDIR RUSTAM BIN ABDUL RAHMAN","MOHD NASIR BIN MOHAMAD NORDIN","MOHD NIZWAN BIN ABDULLAH","MOHD SUHAIRI BIN MOHD ISA","MOHD YUSUF BIN HASSAN","MOHD ZULFAHMI BIN MOHD BADARUDIN","MUHAMAD FAIZAL BIN DAHLAN","MUHAMAD NAZDAN BIN ALI","MUHAMAD SHAHRIL BIN MUHAMAD SAUPI","MUHAMAD ZAKI BIN ABDULLAH","MUHAMAD ZAMBRI BIN ZAINOL","MUHAMMAD AFIQ BIN MOHD ALLIMI","MUHAMMAD FAIZ BIN ROSLAN","MUHAMMAD FARIZ BIN CHE NOH","MUHAMMAD SYAUQI ASYRAF BIN AHMAD TAJUDIN","MUHAMMAD TAKIYUDIN BIN SUKERI","MUNIR BIN MOHAMAD NOOR","NADZIRAH BINTI MOHD JAUAH","NADZRIAH BINTI LONG @ ABDUL SAMAH","NASHOBUDIN BIN BAKAR","NAZATUN ISMANIZA BINTI NAYAN","NOOR 'AINI BINTI KHALID","NOOR AZIRA BINTI HAMZAH","NOOR AZIZAH BINTI MOHD ARSHAD","NOOR AZLIZA BINTI AHMAD","NOOR FATIN BT JAAFAR","NOOR HISHAM BIN MOHD YUSOFF","NOOR SARAH BINTI ABD RAHIM","NOORAMERA BINTI ABU HASAN","NOORZAIMAH BT MD ISA","NOR AISHA BT. ALIAS","NOR ASYITAH BINTI MOHAMAD NASROL","NOR AZIZA BT OTHMAN","NORA BINTI AB RAHMAN","NORADAWIYAH BINTI AZMAN","NORASHIDA BINTI KHALID","NORFARAHIYAH BINTI ABDULLAH","NORFATIMAH BINTI DOLLAH","NORHAYATI BINTI ISHAK","NORZIANA BT OTHMAN","NUR AIESYAH BINTI ABDUL HALIM","NUR AINAA AMIRAH BINTI MOHD YATIM","NUR AMINAH BINTI ISMAIL","NUR AZIZAH BINTI NOZORI","NUR FAZLIYAH BINTI MOHD KHOZAM","NUR MAHFUZAH BINTI AHMAD TAJUDDIN","NUR ROSLINA BINTI RAMLI","NURALIA BINTI KHALID","NUR'ASHIKIN BT AHMAD","NURHIYAH BINTI ABU BAKAR","NURUL AMIRA BINTI YAAKOB","NURUL FARRAHIN BINTI ABU","NURUL IZATI BINTI MOHAMAD KHAIRI","NURWAHIDAH BINTI MEOR AKIL JULNASIR","PARAMASIVAN A/L MUNUSAMY","PARTHIBEN A/L CHINNAN","PUTERI FATEN NADIA BINTI ROZIZI","ROHAIZAD BIN REZUAN","ROZANA BT JAMALUDIN","ROZILA BT NAWANG","ROZIYATON BIDAYAH BT IBRAHIM","SALLEH BIN ISMAIL","SAZALI BIN SAID","SHAHRUL BIN SHAMSUDDIN","SHAIFOL AZLI BIN ZAKARIA","SHIR MOHD BIN NOORDIN","SITI AISHAH BINTI ABDULLAH","SITI 'AMIRAH BINTI BASIRUN","SITI HAJA BINTI KASIM","SITI HAJAR BT MAT","SITI MUNIRAH BINTI ABDUL MALIK","SITI NUR MADEEHAH BINTI ISMAWI","SITI SALWA BINTI ABDULLAH","SITI ZAINI BINTI ZAINOL ABIDIN","SUZANA BINTI AHMAD","SYAZWANI BINTI MOHD ZUKI","SYUHADA BINTI MAN","TARUDIN BIN ABDUL HAMID","TENGKU ZAINALABIDIN BIN TENGKU AHMAD","VIKNESHWERY A/P VELOO GOPAL","WAN NI HALIMATUN SAADIAH BINTI MOHD NAZIN","WAN SAMSUHAIMI BIN MUSA","YA'AKUB BIN ISMAIL","ZAINOL AKBAR BIN ZAINOL ABIDIN","ZARANI BIN WAHAB"];
 
-            // Hantar ke Apps Script (Code.gs)
-            google.script.run
-                .withSuccessHandler(() => {
-                    btn.innerText = "BERJAYA DISIMPAN!";
-                    renderSlip(data);
-                })
-                .withFailureHandler((err) => {
-                    alert("Ralat: " + err);
-                    btn.innerText = "SIMPAN & JANA SLIP"; btn.disabled = false;
-                })
-                .doPostManual(data);
-        }
+const JABATAN_LIST = ["JABATAN PENDIDIKAN UMUM","JABATAN MEKANIKAL","JABATAN KEJURUTERAAN AWAM","JABATAN ELEKTRIK & ELEKTRONIK","JABATAN TEKNOLOGI MAKLUMAT","JABATAN PERNIAGAAN"];
 
-        function renderSlip(data) {
-            document.getElementById('input-view').classList.add('hidden');
-            document.getElementById('slip-view').classList.remove('hidden');
-            
-            document.getElementById('slip-meta').innerHTML = `NAMA: ${data.nama}<br>SESI: ${data.sesi}<br>JABATAN: ${data.jabatan}<br>UNIT: ${data.unit}`;
-            
-            let html = `
-                <table>
-                    <thead>
-                        <tr><th colspan="7" class="section-header">1. AMANAH TUGAS SYARAHAN (HAKIKI)</th></tr>
-                        <tr><th>BIL</th><th>KOD</th><th>KURSUS</th><th>TEORI</th><th>AMALI</th><th>KELAS</th><th>ATP</th></tr>
-                    </thead>
-                    <tbody>
-                        ${data.hakiki.map((h,i) => `<tr><td align="center">${i+1}</td><td>${h.kod}</td><td>${h.nama}</td><td align="center">${h.t}</td><td align="center">${h.a}</td><td align="center">${h.c}</td><td align="right">${h.atp}</td></tr>`).join('')}
-                    </tbody>
-                </table>
-                <table style="margin-top:10px">
-                    <thead>
-                        <tr><th colspan="4" class="section-header">2. TUGAS-TUGAS RUTIN (BERMATA)</th></tr>
-                        <tr><th>BIL</th><th>UNIT/JK</th><th>BIDANG</th><th>ATP</th></tr>
-                    </thead>
-                    <tbody>
-                        ${data.rutin.map((r,i) => `<tr><td align="center">${i+1}</td><td>${r.unit}</td><td>${r.bidang}</td><td align="right">${parseFloat(r.atp).toFixed(1)}</td></tr>`).join('')}
-                    </tbody>
-                </table>
-                <table style="margin-top:10px">
-                    <thead>
-                        <tr><th colspan="3" class="section-header">3. TUGAS-TUGAS BUKAN RUTIN (AD-HOC)</th></tr>
-                        <tr><th>BIL</th><th>PROGRAM AD-HOC</th><th>PERANAN</th></tr>
-                    </thead>
-                    <tbody>
-                        ${data.adhoc.length > 0 ? data.adhoc.map((a,i) => `<tr><td align="center">${i+1}</td><td>${a.nama}</td><td>${a.peran}</td></tr>`).join('') : '<tr><td colspan="3" align="center">Tiada rekod</td></tr>'}
-                    </tbody>
-                </table>
-            `;
-            
-            document.getElementById('slip-content').innerHTML = html;
-            document.getElementById('slip-total-final').innerText = `JUMLAH KESELURUHAN ATP: ${data.total} JAM`;
-            document.getElementById('sig-nama').innerText = data.nama;
-            window.scrollTo(0,0);
-        }
-    </script>
+const UNIT_LIST = ["BAHASA","KEMANUSIAAN","SAINS & MATEMATIK","TERAS UMUM","PENGURUSAN PERNIAGAAN","TEKNOLOGI AUTOMATIF","TEKNOLOGI PENYEJUKAN & PENYAMANAN UDARA","TEKNOLOGI KIMPALAN","TEKNOLOGI PEMESINAN INDUSTRI","TEKNOLOGI ELEKTRIK","TEKNOLOGI ELEKTRONIK","TEKNOLOGI PEMBINAAN","TEKNOLOGI KOMPUTERAN"];
+
+// Jawatan ATP mengikut jadual rasmi
+const ATP_JAWATAN = [
+  {j:"Ketua Jabatan", atp:9}, {j:"Ketua Unit (Vokasional)", atp:7}, {j:"Ketua Warden", atp:7},
+  {j:"Guru Data", atp:5}, {j:"Ketua Unit (Akademik/Insaniah)", atp:5}, {j:"Ketua Unit HEP", atp:5},
+  {j:"Ketua Unit Pembangunan", atp:5}, {j:"Ketua Unit Perhubungan Awam", atp:5},
+  {j:"Ketua Unit Psikologi & Kerjaya", atp:5}, {j:"Ketua Unit Pusat Sumber", atp:5},
+  {j:"Ketua Unit Sukan & KoKurikulum", atp:5}, {j:"Ketua Unit Teknologi Maklumat", atp:5},
+  {j:"Pegawai Aset", atp:5}, {j:"Warden", atp:5}, {j:"Ketua Bengkel", atp:4},
+  {j:"Ketua Unit Pasukan Uniform", atp:4}, {j:"Mentor", atp:4}, {j:"Pengerusi KKSK", atp:4},
+  {j:"Penyelaras Jawatankuasa Jaminan Kualiti/Khas", atp:4}, {j:"Penyelaras Kursus / Unit (Akademik)", atp:4},
+  {j:"Penyelaras Unit Sokongan Akademik / Biro", atp:4}, {j:"Penyelia OJT (PPO)", atp:4},
+  {j:"Ketua Unit Sukan & Permainan", atp:3}, {j:"Penolong Warden", atp:3},
+  {j:"Penolong Ketua", atp:3}, {j:"Setiausaha", atp:3}, {j:"Bendahari", atp:2},
+  {j:"Ketua Unit Kelab Dan Persatuan", atp:2}, {j:"Penolong Setiausaha", atp:2},
+  {j:"Ahli, AJK", atp:1}
+];
+
+const ADHOC_SUGGESTIONS = ["Pertandingan KV Skill","Pertandingan PTA","Pertandingan BMC","Program Ihya Ramadhan","Program Kemerdekaan","Karnival Keusahawanan","Larian Merentas Desa","Hari Sukan","Majlis Graduasi","Hari Terbuka","Pertandingan Futsal","Program STEM","Lawatan Industri","Minggu Kerjaya"];
+
+function pop(id, list) {
+  document.getElementById(id).innerHTML = list.map(i => `<option value="${i}">${i}</option>`).join('');
+}
+
+window.onload = () => {
+  pop('nama', NAMA_LIST);
+  pop('jabatan', JABATAN_LIST);
+  pop('unit', UNIT_LIST);
+  addHakiki();
+  addRutin();
+};
+
+function switchTab(tab) {
+  ['input','senarai','slip'].forEach(t => {
+    document.getElementById('view-' + t).classList.add('hidden');
+    const btn = document.getElementById('tab-' + t);
+    if (btn) btn.classList.remove('active');
+  });
+  document.getElementById('view-' + tab).classList.remove('hidden');
+  const active = document.getElementById('tab-' + tab);
+  if (active) active.classList.add('active');
+  if (tab === 'senarai') loadSenarai();
+}
+
+function addHakiki() {
+  const c = document.getElementById('list-hakiki');
+  const d = document.createElement('div');
+  d.className = "grid gap-3 items-end bg-slate-50 p-4 rounded-2xl border border-slate-100";
+  d.style.gridTemplateColumns = "2fr 4fr 1fr 1fr 1fr 2fr 0.5fr";
+  d.innerHTML = `
+    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400">Kod</label><input type="text" placeholder="UBF2113" class="input-premium h-kod"></div>
+    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400">Nama Kursus</label><input type="text" placeholder="Prinsip Ekonomi" class="input-premium h-kursus"></div>
+    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400 text-center">Teori</label><input type="number" value="0" min="0" class="input-premium text-center h-t" oninput="calc()"></div>
+    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400 text-center">Amali</label><input type="number" value="0" min="0" class="input-premium text-center h-a" oninput="calc()"></div>
+    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400 text-center">Klinikal</label><input type="number" value="0" min="0" class="input-premium text-center h-c" oninput="calc()"></div>
+    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400 text-right">Mata ATA</label><span class="ata-badge h-ata">0.0</span></div>
+    <div class="text-center pt-6"><button onclick="this.closest('div.grid').remove();calc()" class="text-red-400 font-black text-xl hover:text-red-600">×</button></div>
+  `;
+  c.appendChild(d);
+  calc();
+}
+
+function addRutin() {
+  const c = document.getElementById('list-rutin');
+  const d = document.createElement('div');
+  d.className = "grid gap-3 items-end bg-slate-50 p-4 rounded-2xl border border-slate-100";
+  d.style.gridTemplateColumns = "5fr 3fr 2fr 0.5fr";
+  // Bina select jawatan dengan nilai ATP auto-isi
+  const opts = ATP_JAWATAN.map(x => `<option value="${x.j}" data-atp="${x.atp}">${x.j} (${x.atp} jam)</option>`).join('');
+  d.innerHTML = `
+    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400">Unit / Jawatankuasa</label><input type="text" placeholder="JK Sebut Harga / Nama Unit" class="input-premium r-unit"></div>
+    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400">Jawatan / Peranan</label>
+      <select class="input-premium r-bidang" onchange="autoFillAtp(this)">${opts}</select>
+    </div>
+    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400 text-right">Jam ATP</label><input type="number" value="1" min="0" step="0.5" class="input-premium text-center r-atp" oninput="calc()"></div>
+    <div class="text-center pt-6"><button onclick="this.closest('div.grid').remove();calc()" class="text-red-400 font-black text-xl hover:text-red-600">×</button></div>
+  `;
+  c.appendChild(d);
+  // Auto-set nilai ATP untuk pilihan pertama
+  const sel = d.querySelector('.r-bidang');
+  const atpInp = d.querySelector('.r-atp');
+  atpInp.value = ATP_JAWATAN[0].atp;
+  calc();
+}
+
+function autoFillAtp(sel) {
+  const opt = sel.options[sel.selectedIndex];
+  const atp = opt.getAttribute('data-atp');
+  sel.closest('div.grid').querySelector('.r-atp').value = atp || 1;
+  calc();
+}
+
+function addAdhoc() {
+  const c = document.getElementById('list-adhoc');
+  const d = document.createElement('div');
+  d.className = "flex flex-col gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-100";
+  const opts = ADHOC_SUGGESTIONS.map(s => `<option value="${s}">`).join('');
+  d.innerHTML = `
+    <datalist id="adhoc-dlist">${opts}</datalist>
+    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400">Nama Program</label><input list="adhoc-dlist" placeholder="Cth: KV Skill / Hari Sukan" class="input-premium a-nama"></div>
+    <div><label class="text-[9px] font-bold mb-1 block uppercase text-slate-400">Peranan</label><input type="text" placeholder="AJK / Pengerusi / Jurulatih" class="input-premium a-peran"></div>
+    <button onclick="this.parentElement.remove()" class="text-red-400 text-[10px] font-bold text-right uppercase hover:text-red-600">Hapus</button>
+  `;
+  c.appendChild(d);
+}
+
+function calc() {
+  let total = 0;
+  document.querySelectorAll('#list-hakiki > div').forEach(row => {
+    const t = parseFloat(row.querySelector('.h-t').value) || 0;
+    const a = parseFloat(row.querySelector('.h-a').value) || 0;
+    const c = parseFloat(row.querySelector('.h-c').value) || 0;
+    const res = ((t + a) * 1.5) + c;
+    row.querySelector('.h-ata').innerText = res.toFixed(1);
+    total += res;
+  });
+  document.querySelectorAll('#list-rutin > div').forEach(row => {
+    total += parseFloat(row.querySelector('.r-atp').value) || 0;
+  });
+  document.getElementById('total-display').innerText = total.toFixed(1);
+}
+
+function generateAndSave() {
+  const btn = document.getElementById('btnSave');
+  btn.innerText = "SEDANG MENYIMPAN...";
+  btn.disabled = true;
+
+  const data = {
+    nama: document.getElementById('nama').value,
+    jabatan: document.getElementById('jabatan').value,
+    unit: document.getElementById('unit').value,
+    sesi: document.getElementById('sesi').value,
+    total: document.getElementById('total-display').innerText,
+    hakiki: Array.from(document.querySelectorAll('#list-hakiki > div')).map(r => ({
+      kod: r.querySelector('.h-kod').value,
+      nama: r.querySelector('.h-kursus').value,
+      t: r.querySelector('.h-t').value,
+      a: r.querySelector('.h-a').value,
+      c: r.querySelector('.h-c').value,
+      atp: r.querySelector('.h-ata').innerText
+    })),
+    rutin: Array.from(document.querySelectorAll('#list-rutin > div')).map(r => ({
+      unit: r.querySelector('.r-unit').value,
+      bidang: r.querySelector('.r-bidang').value,
+      atp: r.querySelector('.r-atp').value
+    })),
+    adhoc: Array.from(document.querySelectorAll('#list-adhoc > div')).map(r => ({
+      nama: r.querySelector('.a-nama').value,
+      peran: r.querySelector('.a-peran').value
+    }))
+  };
+
+  google.script.run
+    .withSuccessHandler(() => {
+      btn.innerText = "BERJAYA DISIMPAN!";
+      btn.disabled = false;
+      renderSlip(data);
+    })
+    .withFailureHandler(err => {
+      alert("Ralat semasa menyimpan: " + err);
+      btn.innerText = "SIMPAN & JANA SLIP";
+      btn.disabled = false;
+    })
+    .doPostManual(data);
+}
+
+function renderSlip(data) {
+  switchTab('slip');
+  document.getElementById('slip-meta').innerHTML =
+    `NAMA: ${data.nama}<br>SESI: ${data.sesi}<br>JABATAN: ${data.jabatan}<br>UNIT: ${data.unit}`;
+
+  const trHakiki = data.hakiki.map((h, i) =>
+    `<tr><td align="center">${i+1}</td><td>${h.kod}</td><td>${h.nama}</td><td align="center">${h.t}</td><td align="center">${h.a}</td><td align="center">${h.c}</td><td align="right">${h.atp}</td></tr>`
+  ).join('');
+
+  const trRutin = data.rutin.map((r, i) =>
+    `<tr><td align="center">${i+1}</td><td>${r.unit}</td><td>${r.bidang}</td><td align="right">${parseFloat(r.atp).toFixed(1)}</td></tr>`
+  ).join('');
+
+  const trAdhoc = data.adhoc.length
+    ? data.adhoc.map((a, i) => `<tr><td align="center">${i+1}</td><td>${a.nama}</td><td>${a.peran}</td></tr>`).join('')
+    : '<tr><td colspan="3" align="center" style="font-style:italic;color:#888">Tiada rekod</td></tr>';
+
+  document.getElementById('slip-content').innerHTML = `
+    <table>
+      <thead>
+        <tr><th colspan="7" class="sec-hdr">1. Amanah Tugas Syarahan (Hakiki)</th></tr>
+        <tr><th>Bil</th><th>Kod</th><th>Kursus</th><th>Teori</th><th>Amali</th><th>Klinikal</th><th>ATP</th></tr>
+      </thead>
+      <tbody>${trHakiki || '<tr><td colspan="7" align="center" style="font-style:italic;color:#888">Tiada rekod</td></tr>'}</tbody>
+    </table>
+    <table style="margin-top:10px">
+      <thead>
+        <tr><th colspan="4" class="sec-hdr">2. Tugas-Tugas Rutin (Bermata)</th></tr>
+        <tr><th>Bil</th><th>Unit / JK</th><th>Jawatan / Peranan</th><th>ATP</th></tr>
+      </thead>
+      <tbody>${trRutin || '<tr><td colspan="4" align="center" style="font-style:italic;color:#888">Tiada rekod</td></tr>'}</tbody>
+    </table>
+    <table style="margin-top:10px">
+      <thead>
+        <tr><th colspan="3" class="sec-hdr">3. Tugas Bukan Rutin (Ad-Hoc)</th></tr>
+        <tr><th>Bil</th><th>Program Ad-Hoc</th><th>Peranan</th></tr>
+      </thead>
+      <tbody>${trAdhoc}</tbody>
+    </table>
+  `;
+  document.getElementById('slip-total-final').innerText = `JUMLAH KESELURUHAN ATP: ${data.total} JAM`;
+  document.getElementById('sig-nama').innerText = data.nama;
+  window.scrollTo(0, 0);
+}
+
+function loadSenarai() {
+  document.getElementById('list-rekod').innerHTML = '<p class="text-slate-400 text-sm font-bold py-4 text-center">Memuatkan...</p>';
+  google.script.run
+    .withSuccessHandler(rekodList => {
+      const el = document.getElementById('list-rekod');
+      const info = document.getElementById('info-senarai');
+      if (!rekodList || rekodList.length === 0) {
+        el.innerHTML = '<p class="text-slate-400 text-sm text-center py-8">Tiada rekod dalam pangkalan data.</p>';
+        info.innerText = '0 rekod dijumpai';
+        return;
+      }
+      info.innerText = `${rekodList.length} rekod dijumpai`;
+      el.innerHTML = rekodList.map(r => `
+        <div class="rekod-card cursor-pointer" onclick="showDetailRekod(${JSON.stringify(r).replace(/"/g,'&quot;')})">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="font-black text-slate-800 text-sm">${r.nama}</p>
+              <p class="text-[11px] text-slate-400 font-bold uppercase mt-0.5">${r.jabatan} &bull; ${r.unit}</p>
+            </div>
+            <div class="text-right">
+              <span class="ata-badge text-sm">${parseFloat(r.total).toFixed(1)} jam</span>
+              <p class="text-[10px] text-slate-400 mt-1">${r.sesi}</p>
+            </div>
+          </div>
+          <p class="text-[10px] text-slate-300 mt-2">${r.tarikh}</p>
+        </div>
+      `).join('');
+    })
+    .withFailureHandler(err => {
+      document.getElementById('list-rekod').innerHTML = `<p class="text-red-400 text-sm text-center py-4">Ralat: ${err}</p>`;
+    })
+    .getAllRecords();
+}
+
+function showDetailRekod(r) {
+  renderSlip(r);
+}
+</script>
 </body>
 </html>
